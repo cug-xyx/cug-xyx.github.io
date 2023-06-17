@@ -21,6 +21,104 @@
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n\ncug_logo\n\n\n\n\n\n Back to top"
   },
   {
+    "objectID": "posts/clim_sim_notes.html",
+    "href": "posts/clim_sim_notes.html",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "首先创建一个新的case：\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n拷贝指定Macros文件：\n\ncp -r ~/xiangyu/Macros ./\n\n\n\nsetup：\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean\n\n\n\n\n以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\nco2vmr = 280.0e-6\n\n\n\n./&lt;case_name&gt;.build\n\n\n\n\n\n\n在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\nqsub ./&lt;case_name&gt;.run\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\nqdel\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#create_newcase",
+    "href": "posts/clim_sim_notes.html#create_newcase",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "首先创建一个新的case：\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n拷贝指定Macros文件：\n\ncp -r ~/xiangyu/Macros ./"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#setup",
+    "href": "posts/clim_sim_notes.html#setup",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "setup：\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#修改参数",
+    "href": "posts/clim_sim_notes.html#修改参数",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\nco2vmr = 280.0e-6"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#build",
+    "href": "posts/clim_sim_notes.html#build",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "./&lt;case_name&gt;.build"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#run",
+    "href": "posts/clim_sim_notes.html#run",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "",
+    "text": "在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\nqsub ./&lt;case_name&gt;.run\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\nqdel\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#aatm_in大气输入参数文件",
+    "href": "posts/clim_sim_notes.html#aatm_in大气输入参数文件",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "aatm_in大气输入参数文件",
+    "text": "aatm_in大气输入参数文件\n\n&cam_inparm\n\nbnd_topo：地形文件\n\n\n\n&chem_surfvals_nl\n\n修改CO2浓度co2vmr加倍\n\n自己的case里的user_nl_cam文件"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#lnd_in陆面输入参数文件",
+    "href": "posts/clim_sim_notes.html#lnd_in陆面输入参数文件",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "lnd_in陆面输入参数文件",
+    "text": "lnd_in陆面输入参数文件"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#查看nc文件输出变量",
+    "href": "posts/clim_sim_notes.html#查看nc文件输出变量",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "查看nc文件输出变量",
+    "text": "查看nc文件输出变量\nncdump -h output.nc"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#偏心率倾角与岁差",
+    "href": "posts/clim_sim_notes.html#偏心率倾角与岁差",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "偏心率，倾角与岁差",
+    "text": "偏心率，倾角与岁差\n\n岁差：摆动周期，影响冬季与夏季的热量分布\n倾角：影响纬向热量分布\n偏心率：调制地球距太阳的距离"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#cesm中的地球轨道参数",
+    "href": "posts/clim_sim_notes.html#cesm中的地球轨道参数",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "CESM中的地球轨道参数",
+    "text": "CESM中的地球轨道参数\n在每个case中的output文件中可以找到（输入coupler）：\ncd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/\nvi cpl.log.230509-192856.gz\n在100行左右，可以看到轨道参数：\n(seq_infodata_print) orb_mode                 = fixed_year\n(seq_infodata_print) orb_iyear                = 1990\n(seq_infodata_print) orb_eccen                = 0.16707719799281E-01\n(seq_infodata_print) orb_obliq                = 23.441068451147"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#更改case中的轨道参数",
+    "href": "posts/clim_sim_notes.html#更改case中的轨道参数",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "更改case中的轨道参数",
+    "text": "更改case中的轨道参数\n新建case后，在user_nl_cpl中对参数进行修改：\norb_iyear       = 1950\norb_iyear_algin = 1950\norb_mode        = 'fixed_year'\n或者，直接给定轨道情景：\norb_eccen = 0.016724\norb_obliq = 23.446\norb_mvelp = 102.04\norb_mode  = 'fixed_parameters'"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#设置restart文件",
+    "href": "posts/clim_sim_notes.html#设置restart文件",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "设置restart文件",
+    "text": "设置restart文件\nvi env_run.xml\n大约70行左右\n\nSTOP_OPTION：nyears，每年\nSTOP_N：10，从10年停止\nREST_N：2，每2年保留一次文件\nCONTINUE_RUN：TRUE，继续运行\nRESUBMIT：1or2，如果大于0，则在停止实验后继续运行"
+  },
+  {
+    "objectID": "posts/clim_sim_notes.html#结课报告6.1718日",
+    "href": "posts/clim_sim_notes.html#结课报告6.1718日",
+    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "section": "2023-06-18 结课报告（6.17~18日）",
+    "text": "2023-06-18 结课报告（6.17~18日）\n\n你的实验，相对参照实验，表现出什么样的气候效应？\n\n\n一般运行5-10年，前2年为预热期\n\n温度场，风场，降水场，环流场等。。\n围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？"
+  },
+  {
     "objectID": "posts/test_posts.html",
     "href": "posts/test_posts.html",
     "title": "post测试",

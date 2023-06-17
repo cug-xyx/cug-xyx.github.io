@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cug-xyx.github.io/articles/about.html</loc>
-    <lastmod>2023-06-17T14:58:15.544Z</lastmod>
+    <lastmod>2023-06-17T15:19:19.362Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/articles/ET_evaluation.html</loc>
-    <lastmod>2023-06-17T14:58:15.873Z</lastmod>
+    <lastmod>2023-06-17T15:19:19.696Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/index.html</loc>
-    <lastmod>2023-06-17T14:58:16.199Z</lastmod>
+    <lastmod>2023-06-17T15:19:20.033Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cug-xyx.github.io/posts/clim_sim_notes.html</loc>
+    <lastmod>2023-06-17T15:19:21.464Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/posts/test_posts.html</loc>
-    <lastmod>2023-06-17T14:58:16.548Z</lastmod>
+    <lastmod>2023-06-17T15:19:21.812Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/posts/test_posts2.html</loc>
-    <lastmod>2023-06-17T14:58:17.672Z</lastmod>
+    <lastmod>2023-06-17T15:19:22.471Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/posts/test_posts3.html</loc>
-    <lastmod>2023-06-17T14:58:18.158Z</lastmod>
+    <lastmod>2023-06-17T15:19:22.955Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/self_introduction.html</loc>
-    <lastmod>2023-06-17T14:58:18.680Z</lastmod>
+    <lastmod>2023-06-17T15:19:23.541Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/tools/hydroET.html</loc>
-    <lastmod>2023-06-17T14:58:19.023Z</lastmod>
+    <lastmod>2023-06-17T15:19:23.886Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/tools/SMSpy.html</loc>
-    <lastmod>2023-06-17T14:58:19.336Z</lastmod>
+    <lastmod>2023-06-17T15:19:24.195Z</lastmod>
   </url>
 </urlset>
