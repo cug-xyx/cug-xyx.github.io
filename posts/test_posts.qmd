@@ -1,0 +1,11 @@
+---
+title: "post测试"
+author: 'Yuxuan Xie'
+description: 'this is a description of the post'
+categories: [ET, R]
+date: "2023-6-17"
+---
+
+这是一个posts中内容的测试
+
+![CUG logo](./../image/cug_logo.png)

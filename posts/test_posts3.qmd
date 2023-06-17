@@ -1,0 +1,13 @@
+---
+title: "post测试3"
+author: 'Yuxuan Xie'
+description: 'this is a description of the post'
+date: "2023-6-14"
+---
+
+这是第三个posts中内容的测试
+
+```{r}
+library(leaflet)
+leaflet() %>% addTiles() %>% setView(-93.65, 42.0285, zoom = 17)
+```

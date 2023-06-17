@@ -1,0 +1,9 @@
+---
+title: "cug-xyx"
+---
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+![cug_logo](image/cug_logo.png)

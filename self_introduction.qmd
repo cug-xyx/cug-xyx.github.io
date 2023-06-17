@@ -1,0 +1,52 @@
+---
+title: "个人简介"
+image: "./image/self_image.png"
+description: "一个学生"
+author: "Yuxuan Xie"
+date: "2023-6-17"
+date-modified: "2023-6-17"
+categories:
+  - eco-hydrology
+  - R
+  - Python
+listing:
+  contents: posts
+  sort-ui: [title, date]
+  filter-ui: [title, date]
+  page-size: 5
+  sort: 
+    - "date desc"
+    - "title desc"
+  max-items: 5
+  image-align: left
+  type: default
+  categories: true
+  feed: true
+about:
+  template: solana
+#   image-width: 10em
+#   image-shape: round
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com
+    # (additional links excluded for brevity)
+---
+
+## About this blog
+
+Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending  time unicycling and playing with her pet iguana.
+
+## Education
+
+University of California, San Diego | San Diego, CA
+PhD in Mathematics | Sept 2011 - June 2015
+
+Macalester College | St. Paul MA
+B.A in Economics | Sept 2007 - June 2011
+
+## Experience
+
+Wengo Analytics | Head Data Scientist | April 2018 - present
+
+GeoScynce | Chief Analyst | Spet 2012 - April 2018

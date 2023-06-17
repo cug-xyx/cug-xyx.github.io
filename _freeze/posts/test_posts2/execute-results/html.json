@@ -1,0 +1,11 @@
+{
+  "hash": "adb96da5d53bdf8a897ae504240aeb9e",
+  "result": {
+    "markdown": "---\ntitle: \"post测试2\"\ndate: \"2023-6-15\"\n---\n\n这是另一个posts中内容的测试\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](test_posts2_files/figure-html/cell-2-output-1.png){width=558 height=404}\n:::\n:::\n\n\n",
+    "supporting": [
+      "test_posts2_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

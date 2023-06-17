@@ -1,0 +1,4 @@
+```
+quarto publish gh-pages
+```
+

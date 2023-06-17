@@ -1,0 +1,86 @@
+project:
+  type: website
+
+theme:
+  light: flatly
+  dark: darkly
+
+website:
+  title: "cug-xyx"
+
+  open-graph: true
+  favicon: image/cug_logo.png
+  # twitter-card:
+  #   creator: "@dragonstyle"
+  #   site: "@rstudio"
+  margin-header: subscribe.html
+  # margin-footer: |
+  #   ![CUG](image/cug_logo.png)
+
+  repo-url: https://github.com/cug-xyx/cug-xyx.github.io
+  repo-actions: [edit, issue]
+
+  back-to-top-navigation: true
+
+  page-footer: 
+    background: light
+    left: "Copyright 2023, Yuxuan Xie" 
+    right: 
+      - icon: github
+        href: https://github.com/cug-xyx
+
+  navbar:
+    background: secondary # 顶端栏的背景色转为蓝色？
+    search: true
+    left:
+      - href: self_introduction.qmd
+        text: "self-intro"
+      - text: 'Tools'
+        menu: 
+          - "tools/SMSpy.qmd"
+          - "tools/hydroET.qmd"
+      - text: "Articles"
+        menu:
+          - "./articles/about.qmd"
+          - "./articles/ET_evaluation.qmd"
+
+    # logo: "./image/cug_logo.png"
+    # logo-alt: "CUG logo"
+
+    tools:
+      - icon: twitter
+        href: https://twitter.com
+      - icon: github
+        menu:
+          - text: "github home"
+            url:  https://github.com/cug-xyx
+          - text: "Source Code"
+            url:  https://github.com/cug-xyx/cug-xyx.github.io
+
+  # ----------------- 侧边栏 ------------------------
+  sidebar:
+    - title: "Articles"
+      background: light
+      style: "docked" # floating
+      contents:
+        - "./articles/about.qmd"
+        - "./articles/ET_evaluation.qmd"
+    - title: "Tools"
+      background: light
+      style: "docked" # floating
+      contents:
+        - tools/SMSpy.qmd
+        - "tools/hydroET.qmd"
+
+execute:
+  freeze: auto
+
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
