@@ -1,11 +1,11 @@
 [
   {
-    "listing": "/self_introduction.html",
+    "listing": "/index.html",
     "items": [
+      "/posts/use_bookdown.html",
       "/posts/clim_sim_notes.html",
-      "/posts/test_posts.html",
-      "/posts/test_posts2.html",
-      "/posts/test_posts3.html"
+      "/posts/Python_test.html",
+      "/posts/R_test.html"
     ]
   }
 ]

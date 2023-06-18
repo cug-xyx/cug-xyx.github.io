@@ -1,178 +1,241 @@
 [
   {
-    "objectID": "articles/about.html",
-    "href": "articles/about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n\n\n Back to top"
-  },
-  {
     "objectID": "articles/ET_evaluation.html",
     "href": "articles/ET_evaluation.html",
-    "title": "PET评估",
+    "title": "目前0产出",
     "section": "",
-    "text": "不同再分析资料模拟PET的能力以及其模拟ET的能力评估。\n\n\n\n Back to top"
+    "text": "目前还是菜鸟一个 :)\n\n\n\n Back to top"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "cug-xyx",
+    "title": "Profile",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\n\ncug_logo\n\n\n\n\n\n Back to top"
+    "text": "I’m Yuxuan Xie, and I am currently a postgraduate student at China University of Geosciences (Wuhan). I conduct research in the field of evapotranspiration (ET). I am interested in R, Python programming."
+  },
+  {
+    "objectID": "index.html#about-this-blog",
+    "href": "index.html#about-this-blog",
+    "title": "Profile",
+    "section": "",
+    "text": "I’m Yuxuan Xie, and I am currently a postgraduate student at China University of Geosciences (Wuhan). I conduct research in the field of evapotranspiration (ET). I am interested in R, Python programming."
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Profile",
+    "section": "Education",
+    "text": "Education\nChina University of Geosciences (Wuhan), China | M.S in Atmospheric Science | Sept 2022 - Now\nChina University of Geosciences (Wuhan), China | B.A in Hydrology and Water Resources Engineering | Sept 2018 - June 2022"
+  },
+  {
+    "objectID": "index.html#blog-posts",
+    "href": "index.html#blog-posts",
+    "title": "Profile",
+    "section": "Blog posts",
+    "text": "Blog posts"
   },
   {
     "objectID": "posts/clim_sim_notes.html",
     "href": "posts/clim_sim_notes.html",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
-    "text": "首先创建一个新的case：\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n拷贝指定Macros文件：\n\ncp -r ~/xiangyu/Macros ./\n\n\n\nsetup：\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean\n\n\n\n\n以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\nco2vmr = 280.0e-6\n\n\n\n./&lt;case_name&gt;.build\n\n\n\n\n\n\n在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\nqsub ./&lt;case_name&gt;.run\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\nqdel\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./\n\n\n\n\nsetup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean\n\n\n\n\n\n以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6\n\n\n\n\n\n./&lt;case_name&gt;.build\n\n\n\n\n\n\n\n在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
   },
   {
     "objectID": "posts/clim_sim_notes.html#create_newcase",
     "href": "posts/clim_sim_notes.html#create_newcase",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
-    "text": "首先创建一个新的case：\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n拷贝指定Macros文件：\n\ncp -r ~/xiangyu/Macros ./"
+    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./"
   },
   {
     "objectID": "posts/clim_sim_notes.html#setup",
     "href": "posts/clim_sim_notes.html#setup",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
-    "text": "setup：\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean"
+    "text": "setup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean"
   },
   {
     "objectID": "posts/clim_sim_notes.html#修改参数",
     "href": "posts/clim_sim_notes.html#修改参数",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
-    "text": "以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\nco2vmr = 280.0e-6"
+    "text": "以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6"
   },
   {
     "objectID": "posts/clim_sim_notes.html#build",
     "href": "posts/clim_sim_notes.html#build",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
     "text": "./&lt;case_name&gt;.build"
   },
   {
     "objectID": "posts/clim_sim_notes.html#run",
     "href": "posts/clim_sim_notes.html#run",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
+    "title": "Numerical Climate Simulation Notes",
     "section": "",
-    "text": "在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\nqsub ./&lt;case_name&gt;.run\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\nqdel\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+    "text": "在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
   },
   {
     "objectID": "posts/clim_sim_notes.html#aatm_in大气输入参数文件",
     "href": "posts/clim_sim_notes.html#aatm_in大气输入参数文件",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "aatm_in大气输入参数文件",
-    "text": "aatm_in大气输入参数文件\n\n&cam_inparm\n\nbnd_topo：地形文件\n\n\n\n&chem_surfvals_nl\n\n修改CO2浓度co2vmr加倍\n\n自己的case里的user_nl_cam文件"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "2.1 aatm_in大气输入参数文件",
+    "text": "2.1 aatm_in大气输入参数文件\n\n2.1.1 &cam_inparm\n\nbnd_topo：地形文件\n\n\n\n2.1.2 &chem_surfvals_nl\n\n修改CO2浓度co2vmr加倍\n\n自己的case里的user_nl_cam文件"
   },
   {
     "objectID": "posts/clim_sim_notes.html#lnd_in陆面输入参数文件",
     "href": "posts/clim_sim_notes.html#lnd_in陆面输入参数文件",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "lnd_in陆面输入参数文件",
-    "text": "lnd_in陆面输入参数文件"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "2.2 lnd_in陆面输入参数文件",
+    "text": "2.2 lnd_in陆面输入参数文件"
   },
   {
     "objectID": "posts/clim_sim_notes.html#查看nc文件输出变量",
     "href": "posts/clim_sim_notes.html#查看nc文件输出变量",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "查看nc文件输出变量",
-    "text": "查看nc文件输出变量\nncdump -h output.nc"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "3.1 查看nc文件输出变量",
+    "text": "3.1 查看nc文件输出变量\n\nncdump -h output.nc"
   },
   {
     "objectID": "posts/clim_sim_notes.html#偏心率倾角与岁差",
     "href": "posts/clim_sim_notes.html#偏心率倾角与岁差",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "偏心率，倾角与岁差",
-    "text": "偏心率，倾角与岁差\n\n岁差：摆动周期，影响冬季与夏季的热量分布\n倾角：影响纬向热量分布\n偏心率：调制地球距太阳的距离"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.1 偏心率，倾角与岁差",
+    "text": "6.1 偏心率，倾角与岁差\n\n岁差：摆动周期，影响冬季与夏季的热量分布\n倾角：影响纬向热量分布\n偏心率：调制地球距太阳的距离"
   },
   {
     "objectID": "posts/clim_sim_notes.html#cesm中的地球轨道参数",
     "href": "posts/clim_sim_notes.html#cesm中的地球轨道参数",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "CESM中的地球轨道参数",
-    "text": "CESM中的地球轨道参数\n在每个case中的output文件中可以找到（输入coupler）：\ncd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/\nvi cpl.log.230509-192856.gz\n在100行左右，可以看到轨道参数：\n(seq_infodata_print) orb_mode                 = fixed_year\n(seq_infodata_print) orb_iyear                = 1990\n(seq_infodata_print) orb_eccen                = 0.16707719799281E-01\n(seq_infodata_print) orb_obliq                = 23.441068451147"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.2 CESM中的地球轨道参数",
+    "text": "6.2 CESM中的地球轨道参数\n在每个case中的output文件中可以找到（输入coupler）：\n\ncd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/\nvi cpl.log.230509-192856.gz\n\n在100行左右，可以看到轨道参数：\n\n(seq_infodata_print) orb_mode                 = fixed_year\n(seq_infodata_print) orb_iyear                = 1990\n(seq_infodata_print) orb_eccen                = 0.16707719799281E-01\n(seq_infodata_print) orb_obliq                = 23.441068451147"
   },
   {
     "objectID": "posts/clim_sim_notes.html#更改case中的轨道参数",
     "href": "posts/clim_sim_notes.html#更改case中的轨道参数",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "更改case中的轨道参数",
-    "text": "更改case中的轨道参数\n新建case后，在user_nl_cpl中对参数进行修改：\norb_iyear       = 1950\norb_iyear_algin = 1950\norb_mode        = 'fixed_year'\n或者，直接给定轨道情景：\norb_eccen = 0.016724\norb_obliq = 23.446\norb_mvelp = 102.04\norb_mode  = 'fixed_parameters'"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.3 更改case中的轨道参数",
+    "text": "6.3 更改case中的轨道参数\n新建case后，在user_nl_cpl中对参数进行修改：\n\norb_iyear       = 1950\norb_iyear_algin = 1950\norb_mode        = 'fixed_year'\n\n或者，直接给定轨道情景：\n\norb_eccen = 0.016724\norb_obliq = 23.446\norb_mvelp = 102.04\norb_mode  = 'fixed_parameters'"
   },
   {
     "objectID": "posts/clim_sim_notes.html#设置restart文件",
     "href": "posts/clim_sim_notes.html#设置restart文件",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "设置restart文件",
-    "text": "设置restart文件\nvi env_run.xml\n大约70行左右\n\nSTOP_OPTION：nyears，每年\nSTOP_N：10，从10年停止\nREST_N：2，每2年保留一次文件\nCONTINUE_RUN：TRUE，继续运行\nRESUBMIT：1or2，如果大于0，则在停止实验后继续运行"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "9.1 设置restart文件",
+    "text": "9.1 设置restart文件\n\nvi env_run.xml\n\n大约70行左右\n\nSTOP_OPTION：nyears，每年\nSTOP_N：10，从10年停止\nREST_N：2，每2年保留一次文件\nCONTINUE_RUN：TRUE，继续运行\nRESUBMIT：1or2，如果大于0，则在停止实验后继续运行"
   },
   {
     "objectID": "posts/clim_sim_notes.html#结课报告6.1718日",
     "href": "posts/clim_sim_notes.html#结课报告6.1718日",
-    "title": "《中国地质大学（武汉）》气候数值模拟笔记",
-    "section": "2023-06-18 结课报告（6.17~18日）",
-    "text": "2023-06-18 结课报告（6.17~18日）\n\n你的实验，相对参照实验，表现出什么样的气候效应？\n\n\n一般运行5-10年，前2年为预热期\n\n温度场，风场，降水场，环流场等。。\n围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？"
+    "title": "Numerical Climate Simulation Notes",
+    "section": "11.1 2023-06-18 结课报告（6.17~18日）",
+    "text": "11.1 2023-06-18 结课报告（6.17~18日）\n\n你的实验，相对参照实验，表现出什么样的气候效应？\n\n\n一般运行5-10年，前2年为预热期\n\n温度场，风场，降水场，环流场等。。\n围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？"
   },
   {
-    "objectID": "posts/test_posts.html",
-    "href": "posts/test_posts.html",
-    "title": "post测试",
-    "section": "",
-    "text": "这是一个posts中内容的测试\n\n\n\nCUG logo\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "posts/test_posts2.html",
-    "href": "posts/test_posts2.html",
-    "title": "post测试2",
+    "objectID": "posts/Python_test.html",
+    "href": "posts/Python_test.html",
+    "title": "Python test in Quarto",
     "section": "",
     "text": "这是另一个posts中内容的测试\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "posts/test_posts3.html",
-    "href": "posts/test_posts3.html",
-    "title": "post测试3",
+    "objectID": "posts/R_test.html",
+    "href": "posts/R_test.html",
+    "title": "R code test in Quarto",
     "section": "",
     "text": "这是第三个posts中内容的测试\n\nlibrary(leaflet)\n\nWarning: 程辑包'leaflet'是用R版本4.1.3 来建造的\n\nleaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "self_introduction.html",
-    "href": "self_introduction.html",
-    "title": "个人简介",
+    "objectID": "posts/use_bookdown.html",
+    "href": "posts/use_bookdown.html",
+    "title": "Use bookdown to build your notes",
     "section": "",
-    "text": "Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana."
+    "text": "问题由来： 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。\n\n本文将手把手教你如何使用Rmarkdown以及R包bookdown写“书”，并通过github轻松部署到自己的Github pages上！ 首先摆出我自己的简单案例：气候数值模拟笔记。他在网站上长这样：\n\n\n\n图1 案例笔记在网站中的呈现情况\n\n\n\n\n在开始之前，需要确认已经安装好R1 、Git2 以及Rstudio3。 此外，需要安装本文的核心R包bookdown，可以通过在R中运行以下代码进行安装：\ninstall.packages('bookdown')\n\n# 如果想使用开发版本\n# install.packages('pak')\npak::pak('rstudio/bookdown')\n\n\n\n\n\n在Rstudio中点击File-&gt;New Project-&gt;New Directory-&gt;Bookproject using bookdown-&gt;Create Project\n   \n在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：\n\n\n\n图6 生成的文件\n\n\n\n\n\n在生成的文件中，index.Rmd是笔记的首页，而其它如01-intro.Rmd的文件是笔记的其它部分。预览笔记的方式有两种：\n\n点击index.Rmd脚本上方的Knit按钮 \n点击Build-&gt;bookdown::gitbook \n\n我们选择第二种预览方式，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。\n\n\n\n图9 示例笔记预览情况\n\n\n可以看出，除index.Rmd中的内容出现在第一页外，笔记其它部分按照笔记文件排序出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程4。\n\n\n\n\n\n\n为了将笔记放置在网上，我们首先在github上新建一个空仓库：\n\n\n\n图10 新建仓库\n\n\n\n\n\n首先，我们需要在_bookdown.yml文件中添加一行参数\noutput_dir: \"docs\"\n在添加完这行参数后，重新Build一下我们的笔记，在项目中就会生成一个docs文件夹，里面是我们笔记相关的文件。\n\n\n\n在生成我们需要的文件后，我们需要将这个项目上传至我们在github上新建的项目中。 1. 在本地初始化git环境。在项目文件夹路径下右键Git Bash Here，输入以下代码： shell    git init 2. 链接远程github仓库。输入以下代码： shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git 3. 上传项目文件。分别输入一下三行代码： shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！\n\n\n\n最后一步，我们需要在仓库中修改一些设置。 在仓库中点击Settings-&gt;Pages修改branch为docs文件夹：\n\n\n\n图11 修改分支\n\n\n然后回到仓库code页面，点击右侧About右方的设置按钮，链接网页：\n\n\n\n图12 链接网页\n\n\n当保存这些更改后，等待一段时间，进入About中显示的网页，就可以看到我们的笔记了。\n\n\n\n\n如果这篇文章对你有帮助，那就点个赞吧~"
   },
   {
-    "objectID": "self_introduction.html#about-this-blog",
-    "href": "self_introduction.html#about-this-blog",
-    "title": "个人简介",
+    "objectID": "posts/use_bookdown.html#准备工作",
+    "href": "posts/use_bookdown.html#准备工作",
+    "title": "Use bookdown to build your notes",
     "section": "",
-    "text": "Finley Malloc is the Chief Data Scientist at Wengo Analytics. When not innovating on data platforms, Finley enjoys spending time unicycling and playing with her pet iguana."
+    "text": "在开始之前，需要确认已经安装好R1 、Git2 以及Rstudio3。 此外，需要安装本文的核心R包bookdown，可以通过在R中运行以下代码进行安装：\ninstall.packages('bookdown')\n\n# 如果想使用开发版本\n# install.packages('pak')\npak::pak('rstudio/bookdown')"
   },
   {
-    "objectID": "self_introduction.html#education",
-    "href": "self_introduction.html#education",
-    "title": "个人简介",
-    "section": "Education",
-    "text": "Education\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul MA B.A in Economics | Sept 2007 - June 2011"
+    "objectID": "posts/use_bookdown.html#创建笔记",
+    "href": "posts/use_bookdown.html#创建笔记",
+    "title": "Use bookdown to build your notes",
+    "section": "",
+    "text": "在Rstudio中点击File-&gt;New Project-&gt;New Directory-&gt;Bookproject using bookdown-&gt;Create Project\n   \n在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：\n\n\n\n图6 生成的文件\n\n\n\n\n\n在生成的文件中，index.Rmd是笔记的首页，而其它如01-intro.Rmd的文件是笔记的其它部分。预览笔记的方式有两种：\n\n点击index.Rmd脚本上方的Knit按钮 \n点击Build-&gt;bookdown::gitbook \n\n我们选择第二种预览方式，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。\n\n\n\n图9 示例笔记预览情况\n\n\n可以看出，除index.Rmd中的内容出现在第一页外，笔记其它部分按照笔记文件排序出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程4。"
   },
   {
-    "objectID": "self_introduction.html#experience",
-    "href": "self_introduction.html#experience",
-    "title": "个人简介",
-    "section": "Experience",
-    "text": "Experience\nWengo Analytics | Head Data Scientist | April 2018 - present\nGeoScynce | Chief Analyst | Spet 2012 - April 2018"
+    "objectID": "posts/use_bookdown.html#部署到github-pages",
+    "href": "posts/use_bookdown.html#部署到github-pages",
+    "title": "Use bookdown to build your notes",
+    "section": "",
+    "text": "为了将笔记放置在网上，我们首先在github上新建一个空仓库：\n\n\n\n图10 新建仓库\n\n\n\n\n\n首先，我们需要在_bookdown.yml文件中添加一行参数\noutput_dir: \"docs\"\n在添加完这行参数后，重新Build一下我们的笔记，在项目中就会生成一个docs文件夹，里面是我们笔记相关的文件。\n\n\n\n在生成我们需要的文件后，我们需要将这个项目上传至我们在github上新建的项目中。 1. 在本地初始化git环境。在项目文件夹路径下右键Git Bash Here，输入以下代码： shell    git init 2. 链接远程github仓库。输入以下代码： shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git 3. 上传项目文件。分别输入一下三行代码： shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！\n\n\n\n最后一步，我们需要在仓库中修改一些设置。 在仓库中点击Settings-&gt;Pages修改branch为docs文件夹：\n\n\n\n图11 修改分支\n\n\n然后回到仓库code页面，点击右侧About右方的设置按钮，链接网页：\n\n\n\n图12 链接网页\n\n\n当保存这些更改后，等待一段时间，进入About中显示的网页，就可以看到我们的笔记了。"
+  },
+  {
+    "objectID": "posts/use_bookdown.html#最后",
+    "href": "posts/use_bookdown.html#最后",
+    "title": "Use bookdown to build your notes",
+    "section": "",
+    "text": "如果这篇文章对你有帮助，那就点个赞吧~"
+  },
+  {
+    "objectID": "posts/use_bookdown.html#footnotes",
+    "href": "posts/use_bookdown.html#footnotes",
+    "title": "Use bookdown to build your notes",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nR语言下载链接↩︎\nGit下载链接↩︎\nRstudio下载链接↩︎\nRmarkdown官方教程↩︎"
   },
   {
     "objectID": "tools/hydroET.html",
     "href": "tools/hydroET.html",
     "title": "hydroET",
     "section": "",
-    "text": "乱七八糟的工具。 。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n。\n\n\n\n Back to top"
+    "text": "👉🏻https://github.com/cug-xyx/hydroET/\nAn R package related to evapotranspiration research"
+  },
+  {
+    "objectID": "tools/hydroET.html#installation",
+    "href": "tools/hydroET.html#installation",
+    "title": "hydroET",
+    "section": "Installation",
+    "text": "Installation\nYou can install the hydroET from github:\nremotes::install_github('cug-xyx/hydroET')"
+  },
+  {
+    "objectID": "tools/hydroET.html#potential-evapotranspiration-model",
+    "href": "tools/hydroET.html#potential-evapotranspiration-model",
+    "title": "hydroET",
+    "section": "(Potential) evapotranspiration model",
+    "text": "(Potential) evapotranspiration model\n\n\n\n\n\n\n\n\nFunction name\nModel name\nType\n\n\n\n\nET_CR_Ma\nCalibration-free complementary relationship (CR) model\nET\n\n\nET_Penman1948\nPenman 1948 model\nPET\n\n\nET_PT1972\nPriestley-Taylor model\nPET\n\n\nET_summary\nA tibble containing various types of evapotranspiration results"
+  },
+  {
+    "objectID": "tools/hydroET.html#others-functions",
+    "href": "tools/hydroET.html#others-functions",
+    "title": "hydroET",
+    "section": "Others functions",
+    "text": "Others functions\n\n\n\n\n\n\n\nFunction name\nDescription\n\n\n\n\nTM4TIF\nAdd time attribute to raster object (personal function)\n\n\nggRunoff\nDrawing rainfall runoff hydrograph based on ggplot2\n\n\nexact_separate\nEnhanced tidyr::separate function\n\n\nbind_array_layer\nMerge layers of the same shape array\n\n\nprevious_value_interp\nInterpolate with the previous value\n\n\nseparate2\nEnhanced tidyr::separate function by data.table\n\n\nfacet_subgraphs\nadd subgraphs to ggplot2 facet object"
+  },
+  {
+    "objectID": "tools/hydroET.html#crawlertools",
+    "href": "tools/hydroET.html#crawlertools",
+    "title": "hydroET",
+    "section": "crawlerTools",
+    "text": "crawlerTools\n\n\n\n\n\n\n\n\nFunction name\nDescription\nUrl\n\n\n\n\nGETZQData\nget hydrological data (water level and runoff) from Hubei by station code\nhttp://113.57.190.228:8001/\n\n\nget_NCBI_info\nget NCBI sample information\nhttps://www.ncbi.nlm.nih.gov/\n\n\nget_protein_homologs\nget protein homologs from JGI Phytozome\nhttps://phytozome-next.jgi.doe.gov/\n\n\nget_plantintron_data\nget data from Plant Intron Splicing Efficiency Database\nhttps://plantintron.cn/arabidopsis/\n\n\ndownGsaExcel\nget ngdc gsa metadata information excel file\nhttps://ngdc.cncb.ac.cn/gsa/browse/"
+  },
+  {
+    "objectID": "tools/hydroET.html#to-do",
+    "href": "tools/hydroET.html#to-do",
+    "title": "hydroET",
+    "section": "TO DO",
+    "text": "TO DO\n\nAccuracy of inverse function to derive TwsandTwb\nCalibration of alpha (Appendix B in Ma and Szilagyi, 2019)\nLink to Rstudio server\nMaximum Evaporation Theory (Yang)\nfacet_wrap+geom_son_bar"
+  },
+  {
+    "objectID": "tools/hydroET.html#references",
+    "href": "tools/hydroET.html#references",
+    "title": "hydroET",
+    "section": "References",
+    "text": "References\nNing Ma, 2021, Calibration-Free Complementary Relationship Estimates Terrestrial Evapotranspiration Globally"
   },
   {
     "objectID": "tools/SMSpy.html",

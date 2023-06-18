@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>xyx-Lab</title>
+<link>https://cug-xyx.github.io/index.html</link>
+<atom:link href="https://cug-xyx.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<description>An entry-level programming enthusiast</description>
+<image>
+<url>https://cug-xyx.github.io/./image/self_image.png</url>
+<title>xyx-Lab</title>
+<link>https://cug-xyx.github.io/index.html</link>
+<height>170</height>
+<width>144</width>
+</image>
+<generator>quarto-1.3.361</generator>
+<lastBuildDate>Sat, 17 Jun 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>Use bookdown to build your notes</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/use_bookdown.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="利用bookdown轻松将笔记部署到自己的网站" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 利用bookdown轻松将笔记部署到自己的网站</h1>
+<blockquote class="blockquote">
+<p><strong>问题由来：</strong> 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。</p>
+</blockquote>
+<p>本文将手把手教你如何使用<code>Rmarkdown</code>以及R包<code>bookdown</code>写“书”，并通过<code>github</code>轻松部署到自己的<strong>Github pages</strong>上！ 首先摆出我自己的简单案例：<a href="https://cug-xyx.github.io/Climate-Numerical-Simulation/">气候数值模拟笔记</a>。他在网站上长这样：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/profile.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图1 案例笔记在网站中的呈现情况</figcaption>
+</figure>
+</div>
+<section id="准备工作" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="准备工作"><span class="header-section-number">1.1</span> 准备工作</h2>
+<p>在开始之前，需要确认已经安装好<strong>R</strong><sup>1</sup> 、<strong>Git</strong><sup>2</sup> 以及<strong>Rstudio</strong><sup>3</sup>。 此外，需要安装本文的核心R包<code>bookdown</code>，可以通过在R中运行以下代码进行安装：</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bookdown'</span>)</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 如果想使用开发版本</span></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># install.packages('pak')</span></span>
+<span id="cb1-5">pak<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pak</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
+</section>
+<section id="创建笔记" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="创建笔记"><span class="header-section-number">1.2</span> 创建笔记</h2>
+<section id="创建project" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="创建project"><span class="header-section-number">1.2.1</span> 创建project</h3>
+<p>在Rstudio中点击<code>File</code>-&gt;<code>New Project</code>-&gt;<code>New Directory</code>-&gt;<code>Bookproject using bookdown</code>-&gt;<code>Create Project</code></p>
+<p><img src="https://cug-xyx.github.io/image/new_proj.png" class="img-fluid" alt="图2 创建新的项目"> <img src="https://cug-xyx.github.io/image/new_dir.png" class="img-fluid" alt="图3 新的文件夹"> <img src="https://cug-xyx.github.io/image/new_book.png" class="img-fluid" alt="图4 创建book项目"> <img src="https://cug-xyx.github.io/image/dir_name.png" class="img-fluid" alt="图5 创建文件夹"></p>
+<p>在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/files.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图6 生成的文件</figcaption>
+</figure>
+</div>
+</section>
+<section id="修改和预览笔记" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="修改和预览笔记"><span class="header-section-number">1.2.2</span> 修改和预览笔记</h3>
+<p>在生成的文件中，<code>index.Rmd</code>是笔记的<strong>首页</strong>，而其它如<code>01-intro.Rmd</code>的文件是笔记的<strong>其它部分</strong>。预览笔记的方式有两种：</p>
+<ul>
+<li>点击<code>index.Rmd</code>脚本上方的<code>Knit</code>按钮 <img src="https://cug-xyx.github.io/image/knit.png" class="img-fluid" alt="图7 第一种预览方式"></li>
+<li>点击<code>Build</code>-&gt;<code>bookdown::gitbook</code> <img src="https://cug-xyx.github.io/image/build.png" class="img-fluid" alt="图8 第二种预览方式"></li>
+</ul>
+<p>我们选择第<strong>二种预览方式</strong>，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/preview.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图9 示例笔记预览情况</figcaption>
+</figure>
+</div>
+<p>可以看出，除<code>index.Rmd</code>中的内容出现在第一页外，笔记其它部分按照<strong>笔记文件排序</strong>出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程<sup>4</sup>。</p>
+</section>
+</section>
+<section id="部署到github-pages" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="部署到github-pages"><span class="header-section-number">1.3</span> 部署到Github pages</h2>
+<section id="创建仓库" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="创建仓库"><span class="header-section-number">1.3.1</span> 创建仓库</h3>
+<p>为了将笔记放置在网上，我们首先在github上新建一个<strong>空仓库</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/new_repo.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图10 新建仓库</figcaption>
+</figure>
+</div>
+</section>
+<section id="生成文件" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="生成文件"><span class="header-section-number">1.3.2</span> 生成文件</h3>
+<p>首先，我们需要在<code>_bookdown.yml</code>文件中添加一行参数</p>
+<pre><code>output_dir: "docs"</code></pre>
+<p>在添加完这行参数后，重新<strong>Build</strong>一下我们的笔记，在项目中就会生成一个<code>docs</code>文件夹，里面是我们笔记相关的文件。</p>
+</section>
+<section id="上传文件" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="上传文件"><span class="header-section-number">1.3.3</span> 上传文件</h3>
+<p>在生成我们需要的文件后，我们需要将这个项目上传至我们在github上<strong>新建的项目</strong>中。 1. 在本地初始化git环境。在项目文件夹路径下右键<code>Git Bash Here</code>，输入以下代码： <code>shell    git init</code> 2. 链接远程github仓库。输入以下代码： <code>shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git</code> 3. 上传项目文件。分别输入一下三行代码： <code>shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master</code> 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！</p>
+</section>
+<section id="部署网页" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="部署网页"><span class="header-section-number">1.3.4</span> 部署网页</h3>
+<p>最后一步，我们需要在仓库中修改一些设置。 在仓库中点击<code>Settings</code>-&gt;<code>Pages</code>修改branch为<strong>docs文件夹</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/settings.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图11 修改分支</figcaption>
+</figure>
+</div>
+<p>然后回到仓库<strong>code</strong>页面，点击右侧About右方的<strong>设置按钮</strong>，链接网页：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/website.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图12 链接网页</figcaption>
+</figure>
+</div>
+<p>当保存这些更改后，等待一段时间，<strong>进入About中显示的网页</strong>，就可以看到我们的笔记了。</p>
+</section>
+</section>
+<section id="最后" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="最后"><span class="header-section-number">1.4</span> 最后</h2>
+<p>如果这篇文章对你有帮助，那就点个赞吧~</p>
+
+
+</section>
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.r-project.org/">R语言下载链接</a>↩︎</p></li>
+<li id="fn2"><p><a href="https://git-scm.com/downloads">Git下载链接</a>↩︎</p></li>
+<li id="fn3"><p><a href="https://rstudio.com/products/rstudio/download/">Rstudio下载链接</a>↩︎</p></li>
+<li id="fn4"><p><a href="https://bookdown.org/yihui/rmarkdown/">Rmarkdown官方教程</a>↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Bookdown</category>
+  <category>R</category>
+  <guid>https://cug-xyx.github.io/posts/use_bookdown.html</guid>
+  <pubDate>Sat, 17 Jun 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://cug-xyx.github.io/image/bookdown_logo.png" medium="image" type="image/png" height="166" width="144"/>
+</item>
+<item>
+  <title>Numerical Climate Simulation Notes</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/clim_sim_notes.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="cesm运行案例的流程" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> CESM运行案例的流程</h1>
+<section id="create_newcase" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="create_newcase"><span class="header-section-number">1.1</span> create_newcase</h2>
+<ul>
+<li>首先创建一个新的case：</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">cd <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~/</span>cesm1_2_2<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>scripts<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span>
+<span id="cb1-2">.<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>create_newcase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>case <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~/</span>xieyx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>cases<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>res f19_g16 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>compset F1850 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>mach sparkle </span></code></pre></div>
+</div>
+<p>修改<code>env_mach_pes.xml</code>文件中<strong>180</strong>改为<strong>140</strong>（因为28核*5节点=140）</p>
+<ul>
+<li>使用<strong>预先设定的文件</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">cp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~/</span>xiangyu<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>env_mach_pes.xml .<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span></code></pre></div>
+</div>
+<ul>
+<li>拷贝指定<code>Macros</code>文件：</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~/</span>xiangyu<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>Macros .<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span></code></pre></div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.2</span> setup</h2>
+<p>setup：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 第一次进行setup</span></span>
+<span id="cb4-2">.<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>cesm_setup</span>
+<span id="cb4-3"></span>
+<span id="cb4-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 清除setup的方法</span></span>
+<span id="cb4-5">.<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>cesm_setup <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>clean</span></code></pre></div>
+</div>
+</section>
+<section id="修改参数" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="修改参数"><span class="header-section-number">1.3</span> 修改参数</h2>
+<blockquote class="blockquote">
+<p>以修改CO2浓度参数为例</p>
+</blockquote>
+<p>进入<code>user_nl_cam</code>文件，添加参数，如：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">co2vmr <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">280.0e-6</span></span></code></pre></div>
+</div>
+</section>
+<section id="build" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="build"><span class="header-section-number">1.4</span> build</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">.<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span>.build</span></code></pre></div>
+</div>
+</section>
+<section id="run" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="run"><span class="header-section-number">1.5</span> run</h2>
+<section id="修改运行时间的参数" class="level4" data-number="1.5.0.1">
+<h4 data-number="1.5.0.1" class="anchored" data-anchor-id="修改运行时间的参数"><span class="header-section-number">1.5.0.1</span> 修改运行时间的参数</h4>
+<ul>
+<li>在<code>env_run.xml</code>文件中修改<code>ndays</code>、<code>5</code></li>
+<li>PS：若第二此运行，修改<code>continue_run</code>参数为<code>TRUE</code></li>
+<li>修改<code>&lt;case_name&gt;.run</code>的运行时长不超过168</li>
+</ul>
+</section>
+<section id="提交任务" class="level4" data-number="1.5.0.2">
+<h4 data-number="1.5.0.2" class="anchored" data-anchor-id="提交任务"><span class="header-section-number">1.5.0.2</span> 提交任务</h4>
+<p>使用<code>qsub</code>提交任务</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">qsub .<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span>.run</span></code></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>可以使用<code>qstat</code>查看当前任务提交统计情况</p>
+</blockquote>
+</section>
+<section id="停止任务" class="level4" data-number="1.5.0.3">
+<h4 data-number="1.5.0.3" class="anchored" data-anchor-id="停止任务"><span class="header-section-number">1.5.0.3</span> 停止任务</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">qdel</span></code></pre></div>
+</div>
+</section>
+<section id="查看当前任务" class="level4" data-number="1.5.0.4">
+<h4 data-number="1.5.0.4" class="anchored" data-anchor-id="查看当前任务"><span class="header-section-number">1.5.0.4</span> 查看当前任务</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">qstat <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 查看任务排队情况</span></span>
+<span id="cb9-2">showq <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 啥看计算效率问题</span></span></code></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="in文件" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> <code>*_in</code>文件</h1>
+<section id="aatm_in大气输入参数文件" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="aatm_in大气输入参数文件"><span class="header-section-number">2.1</span> <code>aatm_in</code>大气输入参数文件</h2>
+<section id="cam_inparm" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="cam_inparm"><span class="header-section-number">2.1.1</span> &amp;cam_inparm</h3>
+<ul>
+<li>bnd_topo：地形文件</li>
+</ul>
+</section>
+<section id="chem_surfvals_nl" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="chem_surfvals_nl"><span class="header-section-number">2.1.2</span> &amp;chem_surfvals_nl</h3>
+<ul>
+<li><p>修改CO2浓度<code>co2vmr</code><strong>加倍</strong></p>
+<blockquote class="blockquote">
+<p>自己的case里的user_nl_cam文件</p>
+</blockquote></li>
+</ul>
+</section>
+</section>
+<section id="lnd_in陆面输入参数文件" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="lnd_in陆面输入参数文件"><span class="header-section-number">2.2</span> <code>lnd_in</code>陆面输入参数文件</h2>
+</section>
+</section>
+<section id="输出文件" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 输出文件</h1>
+<blockquote class="blockquote">
+<p>路径：/work/Benkeke1/output/<case_name>/</case_name></p>
+<p>注：<strong>使用h0数据</strong></p>
+</blockquote>
+<section id="查看nc文件输出变量" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="查看nc文件输出变量"><span class="header-section-number">3.1</span> 查看nc文件输出变量</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">ncdump <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>h output.nc</span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="clone复制案例" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Clone复制案例</h1>
+<p>当想在一种案例情况下的一个时期复制当前状态，并叠加一个新的变化</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">cd <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~/</span>cesm_1_2_2<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>scripts<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span>
+<span id="cb11-2">.<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>create_clone <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>case <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>refer_case<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>clone<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>clone <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>refer_case<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
+</div>
+</section>
+<section id="修改边界场文件文件" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 修改边界场文件文件</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 进入case的配置文件夹</span></span>
+<span id="cb12-2">cd BuildConfig<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span>
+<span id="cb12-3"></span>
+<span id="cb12-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 浏览海温输入数据列表</span></span>
+<span id="cb12-5">vi docn.input_data_list</span></code></pre></div>
+</div>
+<p>内部有<strong>海温</strong>相关文件的绝对路径.</p>
+<ul>
+<li>对边界文件作出修改后，进入<code>BuildConfig</code>文件夹中修改数据绝对路径❌</li>
+<li>在<code>user_nl_ocn</code>或<code>env_run.xml</code>中更改输入文件</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># new path</span></span>
+<span id="cb13-2"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>public<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>home<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>Benkeke1<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>xieyx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>ocn_data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>new_sst.nc</span></code></pre></div>
+</div>
+</section>
+<section id="地球轨道参数" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 地球轨道参数</h1>
+<section id="偏心率倾角与岁差" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="偏心率倾角与岁差"><span class="header-section-number">6.1</span> 偏心率，倾角与岁差</h2>
+<ul>
+<li>岁差：摆动周期，影响冬季与夏季的热量分布</li>
+<li>倾角：影响纬向热量分布</li>
+<li>偏心率：调制地球距太阳的距离</li>
+</ul>
+</section>
+<section id="cesm中的地球轨道参数" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="cesm中的地球轨道参数"><span class="header-section-number">6.2</span> CESM中的地球轨道参数</h2>
+<p>在每个case中的<code>output</code>文件中可以找到（输入<strong>coupler</strong>）：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">cd <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>work<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>Benkeke1<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>output<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>T1CO2<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>xieyx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>cpl<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>logs<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span></span>
+<span id="cb14-2">vi cpl.log<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.230509</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">192856.</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">gz</span></span></code></pre></div>
+</div>
+<p>在100行左右，可以看到<strong>轨道参数</strong>：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">(seq_infodata_print) orb_mode                 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> fixed_year</span>
+<span id="cb15-2">(seq_infodata_print) orb_iyear                <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1990</span></span>
+<span id="cb15-3">(seq_infodata_print) orb_eccen                <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.16707719799281E-01</span></span>
+<span id="cb15-4">(seq_infodata_print) orb_obliq                <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">23.441068451147</span></span></code></pre></div>
+</div>
+</section>
+<section id="更改case中的轨道参数" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="更改case中的轨道参数"><span class="header-section-number">6.3</span> 更改case中的轨道参数</h2>
+<p>新建case后，在<code>user_nl_cpl</code>中对参数进行修改：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">orb_iyear       <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1950</span></span>
+<span id="cb16-2">orb_iyear_algin <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1950</span></span>
+<span id="cb16-3">orb_mode        <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'fixed_year'</span></span></code></pre></div>
+</div>
+<p>或者，直接给定<strong>轨道情景</strong>：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">orb_eccen <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.016724</span></span>
+<span id="cb17-2">orb_obliq <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">23.446</span></span>
+<span id="cb17-3">orb_mvelp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">102.04</span></span>
+<span id="cb17-4">orb_mode  <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'fixed_parameters'</span></span></code></pre></div>
+</div>
+</section>
+</section>
+<section id="地形文件" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 地形文件</h1>
+<p>进入case文件夹下的<strong>CaseDocs/</strong>文件夹，在<strong>atm_in</strong>文件中可以看到</p>
+<p>在user_nl_cam中替换地形文件：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>public<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>home<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>Benkeke1<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>xieyx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>lnd_data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>new_lnd.nc</span></code></pre></div>
+</div>
+</section>
+<section id="植被文件" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 植被文件</h1>
+<p>植被文件包括：</p>
+<ul>
+<li>地表覆盖</li>
+<li>植被组成分布</li>
+</ul>
+<p>进入<strong>CaseDocs</strong>文件夹下的<strong>lnd_in</strong>文件</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">fsurdat <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>public<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>share_data<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>cesm_inputdata<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>lnd<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>clm2<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>surfdata<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>surfdata_1<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.9</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">x2</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">.5</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">_simyr1850_c091108</span>.nc</span></code></pre></div>
+</div>
+<p>16种植被类型如下：</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Plant functional type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>desert, ice and ocean</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>needleleaf evergreeen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>needleleaf evergreen boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>needleleaf deeiduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>broadleaf evergreen tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>broadleaf evergreen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>broadleaf deciduous tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>broadleaf deciduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>broadleaf deciduous boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>broadleaf evergreen shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>broadleaf deciduous temperate shrub</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>broadleaf deciduous boreal shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_3"> arctic grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_3"> non-arctic grass</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_4"> grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>corn</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>wheat</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>每个格点所有植被类型比率加和为常数，当更改一个植被类型时，应相应得将其它类型的比率进行调整。</p>
+</blockquote>
+<p>在完成文件修改后，进入case中的<code>user_nl_clm</code>，添加文件：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">fsurdat <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'new_file.nc'</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># CaseDOcs文件夹下的lnd_in文件中可以找到该路径</span></span>
+<span id="cb20-2">finidat <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">''</span></span></code></pre></div>
+</div>
+</section>
+<section id="其它设置" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 其它设置</h1>
+<section id="设置restart文件" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="设置restart文件"><span class="header-section-number">9.1</span> 设置restart文件</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">vi env_run.xml</span></code></pre></div>
+</div>
+<p>大约70行左右</p>
+<ul>
+<li>STOP_OPTION：nyears，每年</li>
+<li>STOP_N：10，从10年停止</li>
+<li>REST_N：2，每2年保留一次文件</li>
+<li>CONTINUE_RUN：TRUE，继续运行</li>
+<li>RESUBMIT：1or2，如果大于0，则在停止实验后继续运行</li>
+</ul>
+</section>
+</section>
+<section id="其它工具" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> 其它工具</h1>
+<ul>
+<li><p>合并文件</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">cdo mergetime</span></code></pre></div>
+</div></li>
+<li><p>计算气候平均（<strong>气候态</strong>）</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">cdo ymonmean</span></code></pre></div>
+</div></li>
+<li><p>nc文件做差（<strong>气候效应</strong>）</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">ncdiff fileA fileB</span></code></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="作业" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 作业</h1>
+<section id="结课报告6.1718日" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="结课报告6.1718日"><span class="header-section-number">11.1</span> 2023-06-18 结课报告（6.17~18日）</h2>
+<blockquote class="blockquote">
+<p>你的实验，相对参照实验，表现出什么样的气候效应？</p>
+</blockquote>
+<ul>
+<li>一般运行5-10年，前2年为预热期</li>
+</ul>
+<p>温度场，风场，降水场，环流场等。。</p>
+<p>围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>CESM</category>
+  <guid>https://cug-xyx.github.io/posts/clim_sim_notes.html</guid>
+  <pubDate>Sat, 17 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Python test in Quarto</title>
+  <link>https://cug-xyx.github.io/posts/Python_test.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>这是另一个posts中内容的测试</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">plt.scatter(x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>), y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>))</span>
+<span id="cb1-5">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="https://cug-xyx.github.io/posts/Python_test_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>Python</category>
+  <guid>https://cug-xyx.github.io/posts/Python_test.html</guid>
+  <pubDate>Wed, 14 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>R code test in Quarto</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/R_test.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>这是第三个posts中内容的测试</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(leaflet)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 程辑包'leaflet'是用R版本4.1.3 来建造的</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">leaflet</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">addTiles</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">setView</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">93.65</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42.0285</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">zoom =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-701327d4ed26c7e6c32e" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-701327d4ed26c7e6c32e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>R</category>
+  <guid>https://cug-xyx.github.io/posts/R_test.html</guid>
+  <pubDate>Tue, 13 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Yuxuan Xie">
+<meta name="dcterms.date" content="2023-06-18">
+<meta name="description" content="Bookdown入门教程">
 
-<title>xyx-Lab - hydroET</title>
+<title>xyx-Lab - Use bookdown to build your notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -97,12 +100,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="xyx-Lab - hydroET">
-<meta property="og:description" content="">
+<meta property="og:title" content="xyx-Lab - Use bookdown to build your notes">
+<meta property="og:description" content="Bookdown入门教程">
+<meta property="og:image" content="https://cug-xyx.github.io/image/bookdown_logo.png">
 <meta property="og:site-name" content="xyx-Lab">
+<meta property="og:image:height" content="230">
+<meta property="og:image:width" content="200">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -165,61 +171,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tools/hydroET.html">hydroET</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../tools/hydroET.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">hydroET</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#potential-evapotranspiration-model" id="toc-potential-evapotranspiration-model" class="nav-link" data-scroll-target="#potential-evapotranspiration-model">(Potential) evapotranspiration model</a></li>
-  <li><a href="#others-functions" id="toc-others-functions" class="nav-link" data-scroll-target="#others-functions">Others functions</a></li>
-  <li><a href="#crawlertools" id="toc-crawlertools" class="nav-link" data-scroll-target="#crawlertools">crawlerTools</a></li>
-  <li><a href="#to-do" id="toc-to-do" class="nav-link" data-scroll-target="#to-do">TO DO</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#利用bookdown轻松将笔记部署到自己的网站" id="toc-利用bookdown轻松将笔记部署到自己的网站" class="nav-link active" data-scroll-target="#利用bookdown轻松将笔记部署到自己的网站"><span class="header-section-number">1</span> 利用bookdown轻松将笔记部署到自己的网站</a>
+  <ul class="collapse">
+  <li><a href="#准备工作" id="toc-准备工作" class="nav-link" data-scroll-target="#准备工作"><span class="header-section-number">1.1</span> 准备工作</a></li>
+  <li><a href="#创建笔记" id="toc-创建笔记" class="nav-link" data-scroll-target="#创建笔记"><span class="header-section-number">1.2</span> 创建笔记</a>
+  <ul class="collapse">
+  <li><a href="#创建project" id="toc-创建project" class="nav-link" data-scroll-target="#创建project"><span class="header-section-number">1.2.1</span> 创建project</a></li>
+  <li><a href="#修改和预览笔记" id="toc-修改和预览笔记" class="nav-link" data-scroll-target="#修改和预览笔记"><span class="header-section-number">1.2.2</span> 修改和预览笔记</a></li>
+  </ul></li>
+  <li><a href="#部署到github-pages" id="toc-部署到github-pages" class="nav-link" data-scroll-target="#部署到github-pages"><span class="header-section-number">1.3</span> 部署到Github pages</a>
+  <ul class="collapse">
+  <li><a href="#创建仓库" id="toc-创建仓库" class="nav-link" data-scroll-target="#创建仓库"><span class="header-section-number">1.3.1</span> 创建仓库</a></li>
+  <li><a href="#生成文件" id="toc-生成文件" class="nav-link" data-scroll-target="#生成文件"><span class="header-section-number">1.3.2</span> 生成文件</a></li>
+  <li><a href="#上传文件" id="toc-上传文件" class="nav-link" data-scroll-target="#上传文件"><span class="header-section-number">1.3.3</span> 上传文件</a></li>
+  <li><a href="#部署网页" id="toc-部署网页" class="nav-link" data-scroll-target="#部署网页"><span class="header-section-number">1.3.4</span> 部署网页</a></li>
+  </ul></li>
+  <li><a href="#最后" id="toc-最后" class="nav-link" data-scroll-target="#最后"><span class="header-section-number">1.4</span> 最后</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/edit/main/tools/hydroET.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/edit/main/posts/use_bookdown.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">hydroET</h1>
-</div>
+<h1 class="title">Use bookdown to build your notes</h1>
+<p class="subtitle lead">使用bookdown搭建你的笔记</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Bookdown</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Bookdown入门教程
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuxuan Xie </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -227,159 +243,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>👉🏻<a href="https://github.com/cug-xyx/hydroET/">https://github.com/cug-xyx/hydroET/</a></p>
-<p>An R package related to evapotranspiration research</p>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>You can install the hydroET from github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'cug-xyx/hydroET'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="利用bookdown轻松将笔记部署到自己的网站" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 利用bookdown轻松将笔记部署到自己的网站</h1>
+<blockquote class="blockquote">
+<p><strong>问题由来：</strong> 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。</p>
+</blockquote>
+<p>本文将手把手教你如何使用<code>Rmarkdown</code>以及R包<code>bookdown</code>写“书”，并通过<code>github</code>轻松部署到自己的<strong>Github pages</strong>上！ 首先摆出我自己的简单案例：<a href="https://cug-xyx.github.io/Climate-Numerical-Simulation/">气候数值模拟笔记</a>。他在网站上长这样：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/profile.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图1 案例笔记在网站中的呈现情况</figcaption>
+</figure>
+</div>
+<section id="准备工作" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="准备工作"><span class="header-section-number">1.1</span> 准备工作</h2>
+<p>在开始之前，需要确认已经安装好<strong>R</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 、<strong>Git</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 以及<strong>Rstudio</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。 此外，需要安装本文的核心R包<code>bookdown</code>，可以通过在R中运行以下代码进行安装：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'bookdown'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果想使用开发版本</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('pak')</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">'rstudio/bookdown'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="potential-evapotranspiration-model" class="level2">
-<h2 class="anchored" data-anchor-id="potential-evapotranspiration-model">(Potential) evapotranspiration model</h2>
-<table class="table">
-<colgroup>
-<col style="width: 18%">
-<col style="width: 75%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Function name</th>
-<th>Model name</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>ET_CR_Ma</code></td>
-<td><strong>Calibration-free complementary relationship (CR) model</strong></td>
-<td>ET</td>
-</tr>
-<tr class="even">
-<td><code>ET_Penman1948</code></td>
-<td>Penman 1948 model</td>
-<td>PET</td>
-</tr>
-<tr class="odd">
-<td><code>ET_PT1972</code></td>
-<td>Priestley-Taylor model</td>
-<td>PET</td>
-</tr>
-<tr class="even">
-<td><code>ET_summary</code></td>
-<td>A <strong>tibble</strong> containing various types of evapotranspiration results</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="创建笔记" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="创建笔记"><span class="header-section-number">1.2</span> 创建笔记</h2>
+<section id="创建project" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="创建project"><span class="header-section-number">1.2.1</span> 创建project</h3>
+<p>在Rstudio中点击<code>File</code>-&gt;<code>New Project</code>-&gt;<code>New Directory</code>-&gt;<code>Bookproject using bookdown</code>-&gt;<code>Create Project</code></p>
+<p><img src="../image/new_proj.png" class="img-fluid" alt="图2 创建新的项目"> <img src="../image/new_dir.png" class="img-fluid" alt="图3 新的文件夹"> <img src="../image/new_book.png" class="img-fluid" alt="图4 创建book项目"> <img src="../image/dir_name.png" class="img-fluid" alt="图5 创建文件夹"></p>
+<p>在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/files.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图6 生成的文件</figcaption>
+</figure>
+</div>
 </section>
-<section id="others-functions" class="level2">
-<h2 class="anchored" data-anchor-id="others-functions">Others functions</h2>
-<table class="table">
-<colgroup>
-<col style="width: 27%">
-<col style="width: 72%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Function name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>TM4TIF</code></td>
-<td>Add <strong>time</strong> attribute to <strong>raster</strong> object (personal function)</td>
-</tr>
-<tr class="even">
-<td><code>ggRunoff</code></td>
-<td>Drawing <strong>rainfall runoff hydrograph</strong> based on <strong>ggplot2</strong></td>
-</tr>
-<tr class="odd">
-<td><code>exact_separate</code></td>
-<td>Enhanced <code>tidyr::separate</code> function</td>
-</tr>
-<tr class="even">
-<td><code>bind_array_layer</code></td>
-<td>Merge layers of the same shape <strong>array</strong></td>
-</tr>
-<tr class="odd">
-<td><code>previous_value_interp</code></td>
-<td>Interpolate with the <strong>previous value</strong></td>
-</tr>
-<tr class="even">
-<td><code>separate2</code></td>
-<td>Enhanced <code>tidyr::separate</code> function by <code>data.table</code></td>
-</tr>
-<tr class="odd">
-<td><code>facet_subgraphs</code></td>
-<td>add subgraphs to <code>ggplot2</code> <strong>facet object</strong></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="crawlertools" class="level2">
-<h2 class="anchored" data-anchor-id="crawlertools">crawlerTools</h2>
-<table class="table">
-<colgroup>
-<col style="width: 18%">
-<col style="width: 51%">
-<col style="width: 29%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Function name</th>
-<th>Description</th>
-<th>Url</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>GETZQData</code></td>
-<td>get <strong>hydrological data</strong> (water level and runoff) from Hubei by station code</td>
-<td>http://113.57.190.228:8001/</td>
-</tr>
-<tr class="even">
-<td><code>get_NCBI_info</code></td>
-<td>get <strong>NCBI</strong> sample information</td>
-<td>https://www.ncbi.nlm.nih.gov/</td>
-</tr>
-<tr class="odd">
-<td><code>get_protein_homologs</code></td>
-<td>get protein homologs from <strong>JGI Phytozome</strong></td>
-<td>https://phytozome-next.jgi.doe.gov/</td>
-</tr>
-<tr class="even">
-<td><code>get_plantintron_data</code></td>
-<td>get data from <strong>Plant Intron Splicing Efficiency Database</strong></td>
-<td>https://plantintron.cn/arabidopsis/</td>
-</tr>
-<tr class="odd">
-<td><code>downGsaExcel</code></td>
-<td>get <strong>ngdc gsa</strong> metadata information excel file</td>
-<td>https://ngdc.cncb.ac.cn/gsa/browse/</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="to-do" class="level2">
-<h2 class="anchored" data-anchor-id="to-do">TO DO</h2>
-<ul class="task-list">
-<li><input type="checkbox" checked="">Accuracy of inverse function to derive <code>Tws</code>and<code>Twb</code></li>
-<li><input type="checkbox" checked="">Calibration of <code>alpha</code> (Appendix B in Ma and Szilagyi, 2019)</li>
-<li><input type="checkbox" checked="">Link to Rstudio server</li>
-<li><input type="checkbox">Maximum Evaporation Theory (Yang)</li>
-<li><input type="checkbox" checked=""><code>facet_wrap</code>+<code>geom_son_bar</code></li>
+<section id="修改和预览笔记" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="修改和预览笔记"><span class="header-section-number">1.2.2</span> 修改和预览笔记</h3>
+<p>在生成的文件中，<code>index.Rmd</code>是笔记的<strong>首页</strong>，而其它如<code>01-intro.Rmd</code>的文件是笔记的<strong>其它部分</strong>。预览笔记的方式有两种：</p>
+<ul>
+<li>点击<code>index.Rmd</code>脚本上方的<code>Knit</code>按钮 <img src="../image/knit.png" class="img-fluid" alt="图7 第一种预览方式"></li>
+<li>点击<code>Build</code>-&gt;<code>bookdown::gitbook</code> <img src="../image/build.png" class="img-fluid" alt="图8 第二种预览方式"></li>
 </ul>
+<p>我们选择第<strong>二种预览方式</strong>，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/preview.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图9 示例笔记预览情况</figcaption>
+</figure>
+</div>
+<p>可以看出，除<code>index.Rmd</code>中的内容出现在第一页外，笔记其它部分按照<strong>笔记文件排序</strong>出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。</p>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<p><a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021WR029691">Ning Ma, 2021, Calibration-Free Complementary Relationship Estimates Terrestrial Evapotranspiration Globally</a></p>
+</section>
+<section id="部署到github-pages" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="部署到github-pages"><span class="header-section-number">1.3</span> 部署到Github pages</h2>
+<section id="创建仓库" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="创建仓库"><span class="header-section-number">1.3.1</span> 创建仓库</h3>
+<p>为了将笔记放置在网上，我们首先在github上新建一个<strong>空仓库</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/new_repo.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图10 新建仓库</figcaption>
+</figure>
+</div>
+</section>
+<section id="生成文件" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="生成文件"><span class="header-section-number">1.3.2</span> 生成文件</h3>
+<p>首先，我们需要在<code>_bookdown.yml</code>文件中添加一行参数</p>
+<pre><code>output_dir: "docs"</code></pre>
+<p>在添加完这行参数后，重新<strong>Build</strong>一下我们的笔记，在项目中就会生成一个<code>docs</code>文件夹，里面是我们笔记相关的文件。</p>
+</section>
+<section id="上传文件" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="上传文件"><span class="header-section-number">1.3.3</span> 上传文件</h3>
+<p>在生成我们需要的文件后，我们需要将这个项目上传至我们在github上<strong>新建的项目</strong>中。 1. 在本地初始化git环境。在项目文件夹路径下右键<code>Git Bash Here</code>，输入以下代码： <code>shell    git init</code> 2. 链接远程github仓库。输入以下代码： <code>shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git</code> 3. 上传项目文件。分别输入一下三行代码： <code>shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master</code> 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！</p>
+</section>
+<section id="部署网页" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="部署网页"><span class="header-section-number">1.3.4</span> 部署网页</h3>
+<p>最后一步，我们需要在仓库中修改一些设置。 在仓库中点击<code>Settings</code>-&gt;<code>Pages</code>修改branch为<strong>docs文件夹</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/settings.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图11 修改分支</figcaption>
+</figure>
+</div>
+<p>然后回到仓库<strong>code</strong>页面，点击右侧About右方的<strong>设置按钮</strong>，链接网页：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/website.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图12 链接网页</figcaption>
+</figure>
+</div>
+<p>当保存这些更改后，等待一段时间，<strong>进入About中显示的网页</strong>，就可以看到我们的笔记了。</p>
+</section>
+</section>
+<section id="最后" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="最后"><span class="header-section-number">1.4</span> 最后</h2>
+<p>如果这篇文章对你有帮助，那就点个赞吧~</p>
 
 
 </section>
+</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.r-project.org/">R语言下载链接</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://git-scm.com/downloads">Git下载链接</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://rstudio.com/products/rstudio/download/">Rstudio下载链接</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://bookdown.org/yihui/rmarkdown/">Rmarkdown官方教程</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
