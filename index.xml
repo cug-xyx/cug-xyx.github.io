@@ -50,7 +50,10 @@ background-color: null;
 font-style: inherit;">read</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"../data/203st_idw_interp_0.05deg.csv"</span>, DataFrame)</span>
-<span id="cb2-2">df <span class="co" style="color: #5E5E5E;
+<span id="cb2-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># df = CSV.read("I:/order_data/Xujw/203st_idw_interp_0.05deg.csv", DataFrame)</span></span>
+<span id="cb2-3">df <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># copy(df) 复制df</span></span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -1498,7 +1501,12 @@ font-style: inherit;">r"l"</span>]</span></code></pre></div>
 </section>
 <section id="转换函数" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> 转换函数</h1>
-<p>共五种方法： - combine - select - transformselect</p>
+<p>共五种方法：</p>
+<ul>
+<li><p>combine</p></li>
+<li><p>select</p></li>
+<li><p>transformselect</p></li>
+</ul>
 <p>导入分组统计所需包</p>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><span class="im" style="color: #00769E;
@@ -2325,6 +2333,486 @@ font-style: inherit;">:</span>)</span></code></pre></div>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="尝试管道符" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 尝试管道符</h1>
+<p>参考学习链接：<a href="https://bkamins.github.io/julialang/2020/07/03/dplyr-vs-df.html">Comparing dplyr vs DataFrames.jl</a></p>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">using</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">Pipe</span></span></code></pre></div>
+</div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">@time</span> <span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">@pipe</span> df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">combine</span>(_, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>V <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&gt;</span> (x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> x) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&gt;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>V_mean, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-3">  (df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">begin</span></span>
+<span id="cb23-4">    df.new_col <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> df.V</span>
+<span id="cb23-5">    df</span>
+<span id="cb23-6">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>V_mean <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=&gt;</span> v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> v <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, _) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sort</span>(_, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>new_col)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  0.973227 seconds (3.08 M allocations: 205.192 MiB, 5.03% gc time, 99.52% compilation time)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="data-frame"><p>193 rows × 9 columns</p>
+<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">V_mean</th>
+<th data-quarto-table-cell-role="th">site</th>
+<th data-quarto-table-cell-role="th">lon</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">Eh</th>
+<th data-quarto-table-cell-role="th">V</th>
+<th data-quarto-table-cell-role="th">Ni</th>
+<th data-quarto-table-cell-role="th">Ba</th>
+<th data-quarto-table-cell-role="th">new_col</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="String15">String15</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.01</td>
+<td>12JH093</td>
+<td>112.85</td>
+<td>29.94</td>
+<td>-218.5</td>
+<td>0.01</td>
+<td>2.09</td>
+<td>184.509</td>
+<td>0.01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.02</td>
+<td>18S-25G</td>
+<td>112.3</td>
+<td>29.77</td>
+<td>-88.1</td>
+<td>0.02</td>
+<td>0.22</td>
+<td>112.0</td>
+<td>0.02</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.04</td>
+<td>12JH076</td>
+<td>112.58</td>
+<td>30.29</td>
+<td>-90.0</td>
+<td>0.04</td>
+<td>2.47</td>
+<td>170.86</td>
+<td>0.04</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.04</td>
+<td>18G-05</td>
+<td>113.51</td>
+<td>29.84</td>
+<td>87.5</td>
+<td>0.04</td>
+<td>0.31</td>
+<td>59.45</td>
+<td>0.04</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">5</td>
+<td>0.05</td>
+<td>22G-86</td>
+<td>112.43</td>
+<td>29.39</td>
+<td>-7.6</td>
+<td>0.05</td>
+<td>1.47</td>
+<td>160.13</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">6</td>
+<td>0.05</td>
+<td>22G-73</td>
+<td>112.81</td>
+<td>29.42</td>
+<td>-78.5</td>
+<td>0.05</td>
+<td>3.49</td>
+<td>120.7</td>
+<td>0.05</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>0.05</td>
+<td>18G-11</td>
+<td>113.26</td>
+<td>29.61</td>
+<td>-83.2</td>
+<td>0.05</td>
+<td>0.06</td>
+<td>275.26</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>0.0558746</td>
+<td>22G-70</td>
+<td>113.56</td>
+<td>29.88</td>
+<td>-50.4</td>
+<td>0.0558746</td>
+<td>8.39</td>
+<td>58.55</td>
+<td>0.0558746</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9</td>
+<td>0.06</td>
+<td>19G21</td>
+<td>112.14</td>
+<td>28.87</td>
+<td>143.0</td>
+<td>0.06</td>
+<td>1.16</td>
+<td>5.54</td>
+<td>0.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10</td>
+<td>0.06</td>
+<td>22G-90</td>
+<td>112.2</td>
+<td>29.66</td>
+<td>-88.1</td>
+<td>0.06</td>
+<td>1.8</td>
+<td>167.24</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">11</td>
+<td>0.06</td>
+<td>19G14</td>
+<td>112.69</td>
+<td>29.15</td>
+<td>-81.0</td>
+<td>0.06</td>
+<td>0.99</td>
+<td>120.31</td>
+<td>0.06</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">12</td>
+<td>0.07</td>
+<td>18G-19</td>
+<td>112.63</td>
+<td>29.78</td>
+<td>-14.3</td>
+<td>0.07</td>
+<td>0.45</td>
+<td>510.65</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">13</td>
+<td>0.07</td>
+<td>18G-25</td>
+<td>112.64</td>
+<td>29.95</td>
+<td>-72.0</td>
+<td>0.07</td>
+<td>1.31</td>
+<td>58.46</td>
+<td>0.07</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">14</td>
+<td>0.07</td>
+<td>18G-26</td>
+<td>112.68</td>
+<td>29.97</td>
+<td>-103.0</td>
+<td>0.07</td>
+<td>0.52</td>
+<td>34.09</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">15</td>
+<td>0.07</td>
+<td>18G-28</td>
+<td>112.72</td>
+<td>29.96</td>
+<td>-104.0</td>
+<td>0.07</td>
+<td>0.8</td>
+<td>63.87</td>
+<td>0.07</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">16</td>
+<td>0.07</td>
+<td>12JH163</td>
+<td>113.02</td>
+<td>29.55</td>
+<td>-135.8</td>
+<td>0.07</td>
+<td>3.62</td>
+<td>430.359</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">17</td>
+<td>0.07</td>
+<td>18G-03</td>
+<td>113.61</td>
+<td>29.94</td>
+<td>-42.7</td>
+<td>0.07</td>
+<td>1.62</td>
+<td>289.92</td>
+<td>0.07</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">18</td>
+<td>0.07</td>
+<td>11JH183</td>
+<td>113.77</td>
+<td>30.07</td>
+<td>-54.8787</td>
+<td>0.07</td>
+<td>0.44</td>
+<td>155.31</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">19</td>
+<td>0.08</td>
+<td>19G26</td>
+<td>111.8</td>
+<td>29.07</td>
+<td>33.2</td>
+<td>0.08</td>
+<td>1.55</td>
+<td>126.99</td>
+<td>0.08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">20</td>
+<td>0.08</td>
+<td>18S-38G</td>
+<td>112.29</td>
+<td>29.07</td>
+<td>158.0</td>
+<td>0.08</td>
+<td>0.71</td>
+<td>22.6</td>
+<td>0.08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">21</td>
+<td>0.08</td>
+<td>19G18</td>
+<td>112.65</td>
+<td>28.98</td>
+<td>55.0</td>
+<td>0.08</td>
+<td>0.49</td>
+<td>70.17</td>
+<td>0.08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">22</td>
+<td>0.08</td>
+<td>22G-74</td>
+<td>112.78</td>
+<td>29.29</td>
+<td>-64.1</td>
+<td>0.08</td>
+<td>4.06</td>
+<td>412.63</td>
+<td>0.08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">23</td>
+<td>0.08</td>
+<td>11JH164</td>
+<td>113.39</td>
+<td>30.07</td>
+<td>-77.5002</td>
+<td>0.08</td>
+<td>0.59</td>
+<td>157.01</td>
+<td>0.08</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">24</td>
+<td>0.08</td>
+<td>11JH161</td>
+<td>113.69</td>
+<td>30.09</td>
+<td>-54.3</td>
+<td>0.08</td>
+<td>0.63</td>
+<td>213.16</td>
+<td>0.08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25</td>
+<td>0.09</td>
+<td>18G-27</td>
+<td>112.72</td>
+<td>29.92</td>
+<td>-75.6</td>
+<td>0.09</td>
+<td>0.09</td>
+<td>39.12</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">26</td>
+<td>0.09</td>
+<td>22G-20</td>
+<td>112.97</td>
+<td>29.52</td>
+<td>-124.0</td>
+<td>0.09</td>
+<td>7.03</td>
+<td>370.84</td>
+<td>0.09</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">27</td>
+<td>0.09</td>
+<td>22G-12</td>
+<td>113.06</td>
+<td>29.96</td>
+<td>-86.4</td>
+<td>0.09</td>
+<td>3.28</td>
+<td>180.59</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">28</td>
+<td>0.09</td>
+<td>11JH162</td>
+<td>113.64</td>
+<td>30.09</td>
+<td>-72.7851</td>
+<td>0.09</td>
+<td>0.59</td>
+<td>100.8</td>
+<td>0.09</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">29</td>
+<td>0.1</td>
+<td>22G-92</td>
+<td>112.38</td>
+<td>29.53</td>
+<td>-35.1</td>
+<td>0.1</td>
+<td>1.93</td>
+<td>111.83</td>
+<td>0.1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">30</td>
+<td>0.1</td>
+<td>19G19</td>
+<td>112.75</td>
+<td>28.91</td>
+<td>78.5</td>
+<td>0.1</td>
+<td>0.45</td>
+<td>15.27</td>
+<td>0.1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">⋮</td>
+<td>⋮</td>
 <td>⋮</td>
 <td>⋮</td>
 <td>⋮</td>
