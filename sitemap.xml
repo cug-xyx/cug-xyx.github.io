@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cug-xyx.github.io/articles/ET_evaluation.html</loc>
-    <lastmod>2023-06-18T06:36:47.404Z</lastmod>
+    <lastmod>2023-06-19T04:15:31.166Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/index.html</loc>
-    <lastmod>2023-06-18T06:36:48.067Z</lastmod>
+    <lastmod>2023-06-19T04:15:31.866Z</lastmod>
   </url>
   <url>
-    <loc>https://cug-xyx.github.io/posts/clim_sim_notes.html</loc>
-    <lastmod>2023-06-18T06:36:49.410Z</lastmod>
+    <loc>https://cug-xyx.github.io/posts/01_R_test.html</loc>
+    <lastmod>2023-06-19T04:15:32.389Z</lastmod>
   </url>
   <url>
-    <loc>https://cug-xyx.github.io/posts/Python_test.html</loc>
-    <lastmod>2023-06-18T06:36:50.062Z</lastmod>
+    <loc>https://cug-xyx.github.io/posts/02_Python_test.html</loc>
+    <lastmod>2023-06-19T04:15:33.511Z</lastmod>
   </url>
   <url>
-    <loc>https://cug-xyx.github.io/posts/R_test.html</loc>
-    <lastmod>2023-06-18T06:36:51.919Z</lastmod>
+    <loc>https://cug-xyx.github.io/posts/03_Notes_CESM.html</loc>
+    <lastmod>2023-06-19T04:15:34.366Z</lastmod>
   </url>
   <url>
-    <loc>https://cug-xyx.github.io/posts/use_bookdown.html</loc>
-    <lastmod>2023-06-18T06:36:52.409Z</lastmod>
+    <loc>https://cug-xyx.github.io/posts/04_Zhihu_bookdown.html</loc>
+    <lastmod>2023-06-19T04:15:34.838Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cug-xyx.github.io/posts/05_Julia_DataFrames.html</loc>
+    <lastmod>2023-06-19T04:15:37.043Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/tools/hydroET.html</loc>
-    <lastmod>2023-06-18T06:36:52.918Z</lastmod>
+    <lastmod>2023-06-19T04:15:37.562Z</lastmod>
   </url>
   <url>
     <loc>https://cug-xyx.github.io/tools/SMSpy.html</loc>
-    <lastmod>2023-06-18T06:36:53.221Z</lastmod>
+    <lastmod>2023-06-19T04:15:37.862Z</lastmod>
   </url>
 </urlset>

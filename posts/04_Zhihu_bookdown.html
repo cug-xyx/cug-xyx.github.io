@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuxuan Xie">
+<meta name="dcterms.date" content="2023-06-18">
+<meta name="description" content="Bookdown入门教程">
+
+<title>xyx-Lab - Use bookdown to build your notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../image/home_logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="xyx-Lab - Use bookdown to build your notes">
+<meta property="og:description" content="Bookdown入门教程">
+<meta property="og:image" content="https://cug-xyx.github.io/image/bookdown_logo.png">
+<meta property="og:site-name" content="xyx-Lab">
+<meta property="og:image:height" content="230">
+<meta property="og:image:width" content="200">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../image/home_logo.png" alt="Home" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">xyx-Lab</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="../tools/hydroET.html" rel="" target="">
+ <span class="dropdown-text">hydroET</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../articles/ET_evaluation.html" rel="" target="">
+ <span class="dropdown-text">目前0产出</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/cug-xyx">
+            github home
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/cug-xyx/cug-xyx.github.io">
+            Source Code
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#利用bookdown轻松将笔记部署到自己的网站" id="toc-利用bookdown轻松将笔记部署到自己的网站" class="nav-link active" data-scroll-target="#利用bookdown轻松将笔记部署到自己的网站"><span class="header-section-number">1</span> 利用bookdown轻松将笔记部署到自己的网站</a>
+  <ul class="collapse">
+  <li><a href="#准备工作" id="toc-准备工作" class="nav-link" data-scroll-target="#准备工作"><span class="header-section-number">1.1</span> 准备工作</a></li>
+  <li><a href="#创建笔记" id="toc-创建笔记" class="nav-link" data-scroll-target="#创建笔记"><span class="header-section-number">1.2</span> 创建笔记</a>
+  <ul class="collapse">
+  <li><a href="#创建project" id="toc-创建project" class="nav-link" data-scroll-target="#创建project"><span class="header-section-number">1.2.1</span> 创建project</a></li>
+  <li><a href="#修改和预览笔记" id="toc-修改和预览笔记" class="nav-link" data-scroll-target="#修改和预览笔记"><span class="header-section-number">1.2.2</span> 修改和预览笔记</a></li>
+  </ul></li>
+  <li><a href="#部署到github-pages" id="toc-部署到github-pages" class="nav-link" data-scroll-target="#部署到github-pages"><span class="header-section-number">1.3</span> 部署到Github pages</a>
+  <ul class="collapse">
+  <li><a href="#创建仓库" id="toc-创建仓库" class="nav-link" data-scroll-target="#创建仓库"><span class="header-section-number">1.3.1</span> 创建仓库</a></li>
+  <li><a href="#生成文件" id="toc-生成文件" class="nav-link" data-scroll-target="#生成文件"><span class="header-section-number">1.3.2</span> 生成文件</a></li>
+  <li><a href="#上传文件" id="toc-上传文件" class="nav-link" data-scroll-target="#上传文件"><span class="header-section-number">1.3.3</span> 上传文件</a></li>
+  <li><a href="#部署网页" id="toc-部署网页" class="nav-link" data-scroll-target="#部署网页"><span class="header-section-number">1.3.4</span> 部署网页</a></li>
+  </ul></li>
+  <li><a href="#最后" id="toc-最后" class="nav-link" data-scroll-target="#最后"><span class="header-section-number">1.4</span> 最后</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/edit/main/posts/04_Zhihu_bookdown.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Use bookdown to build your notes</h1>
+<p class="subtitle lead">使用bookdown搭建你的笔记</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">Bookdown</div>
+    <div class="quarto-category">R</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Bookdown入门教程
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuxuan Xie </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="利用bookdown轻松将笔记部署到自己的网站" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 利用bookdown轻松将笔记部署到自己的网站</h1>
+<blockquote class="blockquote">
+<p><strong>问题由来：</strong> 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。</p>
+</blockquote>
+<p>本文将手把手教你如何使用<code>Rmarkdown</code>以及R包<code>bookdown</code>写“书”，并通过<code>github</code>轻松部署到自己的<strong>Github pages</strong>上！ 首先摆出我自己的简单案例：<a href="https://cug-xyx.github.io/Climate-Numerical-Simulation/">气候数值模拟笔记</a>。他在网站上长这样：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/profile.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图1 案例笔记在网站中的呈现情况</figcaption>
+</figure>
+</div>
+<section id="准备工作" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="准备工作"><span class="header-section-number">1.1</span> 准备工作</h2>
+<p>在开始之前，需要确认已经安装好<strong>R</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 、<strong>Git</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> 以及<strong>Rstudio</strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。 此外，需要安装本文的核心R包<code>bookdown</code>，可以通过在R中运行以下代码进行安装：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'bookdown'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 如果想使用开发版本</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages('pak')</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">'rstudio/bookdown'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="创建笔记" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="创建笔记"><span class="header-section-number">1.2</span> 创建笔记</h2>
+<section id="创建project" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="创建project"><span class="header-section-number">1.2.1</span> 创建project</h3>
+<p>在Rstudio中点击<code>File</code>-&gt;<code>New Project</code>-&gt;<code>New Directory</code>-&gt;<code>Bookproject using bookdown</code>-&gt;<code>Create Project</code></p>
+<p><img src="../image/new_proj.png" class="img-fluid" alt="图2 创建新的项目"> <img src="../image/new_dir.png" class="img-fluid" alt="图3 新的文件夹"> <img src="../image/new_book.png" class="img-fluid" alt="图4 创建book项目"> <img src="../image/dir_name.png" class="img-fluid" alt="图5 创建文件夹"></p>
+<p>在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/files.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图6 生成的文件</figcaption>
+</figure>
+</div>
+</section>
+<section id="修改和预览笔记" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="修改和预览笔记"><span class="header-section-number">1.2.2</span> 修改和预览笔记</h3>
+<p>在生成的文件中，<code>index.Rmd</code>是笔记的<strong>首页</strong>，而其它如<code>01-intro.Rmd</code>的文件是笔记的<strong>其它部分</strong>。预览笔记的方式有两种：</p>
+<ul>
+<li>点击<code>index.Rmd</code>脚本上方的<code>Knit</code>按钮 <img src="../image/knit.png" class="img-fluid" alt="图7 第一种预览方式"></li>
+<li>点击<code>Build</code>-&gt;<code>bookdown::gitbook</code> <img src="../image/build.png" class="img-fluid" alt="图8 第二种预览方式"></li>
+</ul>
+<p>我们选择第<strong>二种预览方式</strong>，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/preview.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图9 示例笔记预览情况</figcaption>
+</figure>
+</div>
+<p>可以看出，除<code>index.Rmd</code>中的内容出现在第一页外，笔记其它部分按照<strong>笔记文件排序</strong>出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。</p>
+</section>
+</section>
+<section id="部署到github-pages" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="部署到github-pages"><span class="header-section-number">1.3</span> 部署到Github pages</h2>
+<section id="创建仓库" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="创建仓库"><span class="header-section-number">1.3.1</span> 创建仓库</h3>
+<p>为了将笔记放置在网上，我们首先在github上新建一个<strong>空仓库</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/new_repo.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图10 新建仓库</figcaption>
+</figure>
+</div>
+</section>
+<section id="生成文件" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="生成文件"><span class="header-section-number">1.3.2</span> 生成文件</h3>
+<p>首先，我们需要在<code>_bookdown.yml</code>文件中添加一行参数</p>
+<pre><code>output_dir: "docs"</code></pre>
+<p>在添加完这行参数后，重新<strong>Build</strong>一下我们的笔记，在项目中就会生成一个<code>docs</code>文件夹，里面是我们笔记相关的文件。</p>
+</section>
+<section id="上传文件" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="上传文件"><span class="header-section-number">1.3.3</span> 上传文件</h3>
+<p>在生成我们需要的文件后，我们需要将这个项目上传至我们在github上<strong>新建的项目</strong>中。 1. 在本地初始化git环境。在项目文件夹路径下右键<code>Git Bash Here</code>，输入以下代码： <code>shell    git init</code> 2. 链接远程github仓库。输入以下代码： <code>shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git</code> 3. 上传项目文件。分别输入一下三行代码： <code>shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master</code> 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！</p>
+</section>
+<section id="部署网页" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="部署网页"><span class="header-section-number">1.3.4</span> 部署网页</h3>
+<p>最后一步，我们需要在仓库中修改一些设置。 在仓库中点击<code>Settings</code>-&gt;<code>Pages</code>修改branch为<strong>docs文件夹</strong>：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/settings.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图11 修改分支</figcaption>
+</figure>
+</div>
+<p>然后回到仓库<strong>code</strong>页面，点击右侧About右方的<strong>设置按钮</strong>，链接网页：</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../image/website.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">图12 链接网页</figcaption>
+</figure>
+</div>
+<p>当保存这些更改后，等待一段时间，<strong>进入About中显示的网页</strong>，就可以看到我们的笔记了。</p>
+</section>
+</section>
+<section id="最后" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="最后"><span class="header-section-number">1.4</span> 最后</h2>
+<p>如果这篇文章对你有帮助，那就点个赞吧~</p>
+
+
+</section>
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.r-project.org/">R语言下载链接</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://git-scm.com/downloads">Git下载链接</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://rstudio.com/products/rstudio/download/">Rstudio下载链接</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://bookdown.org/yihui/rmarkdown/">Rmarkdown官方教程</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Yuxuan Xie</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cug-xyx">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
