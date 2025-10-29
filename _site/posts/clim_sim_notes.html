@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Yuxuan Xie">
+<meta name="dcterms.date" content="2023-06-18">
+<meta name="description" content="CESM入门使用教程">
+
+<title>xyx-Lab - Numerical Climate Simulation Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../image/home_logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="xyx-Lab - Numerical Climate Simulation Notes">
+<meta property="og:description" content="CESM入门使用教程">
+<meta property="og:site-name" content="xyx-Lab">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../image/home_logo.png" alt="Home" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">xyx-Lab</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tools" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Tools</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tools">    
+        <li>
+    <a class="dropdown-item" href="../tools/hydroET.html" rel="" target="">
+ <span class="dropdown-text">hydroET</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-articles" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text">Articles</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-articles">    
+        <li>
+    <a class="dropdown-item" href="../articles/ET_evaluation.html" rel="" target="">
+ <span class="dropdown-text">目前0产出</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/cug-xyx">
+            github home
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools ms-auto-item" href="https://github.com/cug-xyx/cug-xyx.github.io">
+            Source Code
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cesm运行案例的流程" id="toc-cesm运行案例的流程" class="nav-link active" data-scroll-target="#cesm运行案例的流程"><span class="header-section-number">1</span> CESM运行案例的流程</a>
+  <ul class="collapse">
+  <li><a href="#create_newcase" id="toc-create_newcase" class="nav-link" data-scroll-target="#create_newcase"><span class="header-section-number">1.1</span> create_newcase</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">1.2</span> setup</a></li>
+  <li><a href="#修改参数" id="toc-修改参数" class="nav-link" data-scroll-target="#修改参数"><span class="header-section-number">1.3</span> 修改参数</a></li>
+  <li><a href="#build" id="toc-build" class="nav-link" data-scroll-target="#build"><span class="header-section-number">1.4</span> build</a></li>
+  <li><a href="#run" id="toc-run" class="nav-link" data-scroll-target="#run"><span class="header-section-number">1.5</span> run</a></li>
+  </ul></li>
+  <li><a href="#in文件" id="toc-in文件" class="nav-link" data-scroll-target="#in文件"><span class="header-section-number">2</span> <code>*_in</code>文件</a>
+  <ul class="collapse">
+  <li><a href="#aatm_in大气输入参数文件" id="toc-aatm_in大气输入参数文件" class="nav-link" data-scroll-target="#aatm_in大气输入参数文件"><span class="header-section-number">2.1</span> <code>aatm_in</code>大气输入参数文件</a>
+  <ul class="collapse">
+  <li><a href="#cam_inparm" id="toc-cam_inparm" class="nav-link" data-scroll-target="#cam_inparm"><span class="header-section-number">2.1.1</span> &amp;cam_inparm</a></li>
+  <li><a href="#chem_surfvals_nl" id="toc-chem_surfvals_nl" class="nav-link" data-scroll-target="#chem_surfvals_nl"><span class="header-section-number">2.1.2</span> &amp;chem_surfvals_nl</a></li>
+  </ul></li>
+  <li><a href="#lnd_in陆面输入参数文件" id="toc-lnd_in陆面输入参数文件" class="nav-link" data-scroll-target="#lnd_in陆面输入参数文件"><span class="header-section-number">2.2</span> <code>lnd_in</code>陆面输入参数文件</a></li>
+  </ul></li>
+  <li><a href="#输出文件" id="toc-输出文件" class="nav-link" data-scroll-target="#输出文件"><span class="header-section-number">3</span> 输出文件</a>
+  <ul class="collapse">
+  <li><a href="#查看nc文件输出变量" id="toc-查看nc文件输出变量" class="nav-link" data-scroll-target="#查看nc文件输出变量"><span class="header-section-number">3.1</span> 查看nc文件输出变量</a></li>
+  </ul></li>
+  <li><a href="#clone复制案例" id="toc-clone复制案例" class="nav-link" data-scroll-target="#clone复制案例"><span class="header-section-number">4</span> Clone复制案例</a></li>
+  <li><a href="#修改边界场文件文件" id="toc-修改边界场文件文件" class="nav-link" data-scroll-target="#修改边界场文件文件"><span class="header-section-number">5</span> 修改边界场文件文件</a></li>
+  <li><a href="#地球轨道参数" id="toc-地球轨道参数" class="nav-link" data-scroll-target="#地球轨道参数"><span class="header-section-number">6</span> 地球轨道参数</a>
+  <ul class="collapse">
+  <li><a href="#偏心率倾角与岁差" id="toc-偏心率倾角与岁差" class="nav-link" data-scroll-target="#偏心率倾角与岁差"><span class="header-section-number">6.1</span> 偏心率，倾角与岁差</a></li>
+  <li><a href="#cesm中的地球轨道参数" id="toc-cesm中的地球轨道参数" class="nav-link" data-scroll-target="#cesm中的地球轨道参数"><span class="header-section-number">6.2</span> CESM中的地球轨道参数</a></li>
+  <li><a href="#更改case中的轨道参数" id="toc-更改case中的轨道参数" class="nav-link" data-scroll-target="#更改case中的轨道参数"><span class="header-section-number">6.3</span> 更改case中的轨道参数</a></li>
+  </ul></li>
+  <li><a href="#地形文件" id="toc-地形文件" class="nav-link" data-scroll-target="#地形文件"><span class="header-section-number">7</span> 地形文件</a></li>
+  <li><a href="#植被文件" id="toc-植被文件" class="nav-link" data-scroll-target="#植被文件"><span class="header-section-number">8</span> 植被文件</a></li>
+  <li><a href="#其它设置" id="toc-其它设置" class="nav-link" data-scroll-target="#其它设置"><span class="header-section-number">9</span> 其它设置</a>
+  <ul class="collapse">
+  <li><a href="#设置restart文件" id="toc-设置restart文件" class="nav-link" data-scroll-target="#设置restart文件"><span class="header-section-number">9.1</span> 设置restart文件</a></li>
+  </ul></li>
+  <li><a href="#其它工具" id="toc-其它工具" class="nav-link" data-scroll-target="#其它工具"><span class="header-section-number">10</span> 其它工具</a></li>
+  <li><a href="#作业" id="toc-作业" class="nav-link" data-scroll-target="#作业"><span class="header-section-number">11</span> 作业</a>
+  <ul class="collapse">
+  <li><a href="#结课报告6.1718日" id="toc-结课报告6.1718日" class="nav-link" data-scroll-target="#结课报告6.1718日"><span class="header-section-number">11.1</span> 2023-06-18 结课报告（6.17~18日）</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/edit/main/posts/clim_sim_notes.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/cug-xyx/cug-xyx.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Numerical Climate Simulation Notes</h1>
+<p class="subtitle lead">气候数值模拟笔记</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">CESM</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    CESM入门使用教程
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Yuxuan Xie </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 18, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="cesm运行案例的流程" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> CESM运行案例的流程</h1>
+<section id="create_newcase" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="create_newcase"><span class="header-section-number">1.1</span> create_newcase</h2>
+<ul>
+<li>首先创建一个新的case：</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cd <span class="op">~/</span>cesm1_2_2<span class="op">/</span>scripts<span class="op">/</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>.<span class="op">/</span>create_newcase <span class="op">-</span>case <span class="op">~/</span>xieyx<span class="op">/</span>cases<span class="op">/&lt;</span>case_name<span class="op">&gt;</span> <span class="op">-</span>res f19_g16 <span class="op">-</span>compset F1850 <span class="op">-</span>mach sparkle </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>修改<code>env_mach_pes.xml</code>文件中<strong>180</strong>改为<strong>140</strong>（因为28核*5节点=140）</p>
+<ul>
+<li>使用<strong>预先设定的文件</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cp <span class="op">-</span>r <span class="op">~/</span>xiangyu<span class="op">/</span>env_mach_pes.xml .<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>拷贝指定<code>Macros</code>文件：</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cp <span class="op">-</span>r <span class="op">~/</span>xiangyu<span class="op">/</span>Macros .<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="setup" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.2</span> setup</h2>
+<p>setup：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 第一次进行setup</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>.<span class="op">/</span>cesm_setup</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 清除setup的方法</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>.<span class="op">/</span>cesm_setup <span class="op">-</span>clean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="修改参数" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="修改参数"><span class="header-section-number">1.3</span> 修改参数</h2>
+<blockquote class="blockquote">
+<p>以修改CO2浓度参数为例</p>
+</blockquote>
+<p>进入<code>user_nl_cam</code>文件，添加参数，如：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>co2vmr <span class="op">=</span> <span class="fl">280.0e-6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="build" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="build"><span class="header-section-number">1.4</span> build</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>.<span class="op">/&lt;</span>case_name<span class="op">&gt;</span>.build</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="run"><span class="header-section-number">1.5</span> run</h2>
+<section id="修改运行时间的参数" class="level4" data-number="1.5.0.1">
+<h4 data-number="1.5.0.1" class="anchored" data-anchor-id="修改运行时间的参数"><span class="header-section-number">1.5.0.1</span> 修改运行时间的参数</h4>
+<ul>
+<li>在<code>env_run.xml</code>文件中修改<code>ndays</code>、<code>5</code></li>
+<li>PS：若第二此运行，修改<code>continue_run</code>参数为<code>TRUE</code></li>
+<li>修改<code>&lt;case_name&gt;.run</code>的运行时长不超过168</li>
+</ul>
+</section>
+<section id="提交任务" class="level4" data-number="1.5.0.2">
+<h4 data-number="1.5.0.2" class="anchored" data-anchor-id="提交任务"><span class="header-section-number">1.5.0.2</span> 提交任务</h4>
+<p>使用<code>qsub</code>提交任务</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>qsub .<span class="op">/&lt;</span>case_name<span class="op">&gt;</span>.run</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>可以使用<code>qstat</code>查看当前任务提交统计情况</p>
+</blockquote>
+</section>
+<section id="停止任务" class="level4" data-number="1.5.0.3">
+<h4 data-number="1.5.0.3" class="anchored" data-anchor-id="停止任务"><span class="header-section-number">1.5.0.3</span> 停止任务</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>qdel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="查看当前任务" class="level4" data-number="1.5.0.4">
+<h4 data-number="1.5.0.4" class="anchored" data-anchor-id="查看当前任务"><span class="header-section-number">1.5.0.4</span> 查看当前任务</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>qstat <span class="co"># 查看任务排队情况</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>showq <span class="co"># 啥看计算效率问题</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="in文件" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> <code>*_in</code>文件</h1>
+<section id="aatm_in大气输入参数文件" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="aatm_in大气输入参数文件"><span class="header-section-number">2.1</span> <code>aatm_in</code>大气输入参数文件</h2>
+<section id="cam_inparm" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="cam_inparm"><span class="header-section-number">2.1.1</span> &amp;cam_inparm</h3>
+<ul>
+<li>bnd_topo：地形文件</li>
+</ul>
+</section>
+<section id="chem_surfvals_nl" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="chem_surfvals_nl"><span class="header-section-number">2.1.2</span> &amp;chem_surfvals_nl</h3>
+<ul>
+<li><p>修改CO2浓度<code>co2vmr</code><strong>加倍</strong></p>
+<blockquote class="blockquote">
+<p>自己的case里的user_nl_cam文件</p>
+</blockquote></li>
+</ul>
+</section>
+</section>
+<section id="lnd_in陆面输入参数文件" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="lnd_in陆面输入参数文件"><span class="header-section-number">2.2</span> <code>lnd_in</code>陆面输入参数文件</h2>
+</section>
+</section>
+<section id="输出文件" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 输出文件</h1>
+<blockquote class="blockquote">
+<p>路径：/work/Benkeke1/output/<case_name>/</case_name></p>
+<p>注：<strong>使用h0数据</strong></p>
+</blockquote>
+<section id="查看nc文件输出变量" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="查看nc文件输出变量"><span class="header-section-number">3.1</span> 查看nc文件输出变量</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ncdump <span class="op">-</span>h output.nc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="clone复制案例" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Clone复制案例</h1>
+<p>当想在一种案例情况下的一个时期复制当前状态，并叠加一个新的变化</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cd <span class="op">~/</span>cesm_1_2_2<span class="op">/</span>scripts<span class="op">/</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>.<span class="op">/</span>create_clone <span class="op">-</span>case <span class="op">&lt;</span>refer_case<span class="op">-</span>clone<span class="op">&gt;</span> <span class="op">-</span>clone <span class="op">&lt;</span>refer_case<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="修改边界场文件文件" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 修改边界场文件文件</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 进入case的配置文件夹</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cd BuildConfig<span class="op">/</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 浏览海温输入数据列表</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>vi docn.input_data_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>内部有<strong>海温</strong>相关文件的绝对路径.</p>
+<ul>
+<li>对边界文件作出修改后，进入<code>BuildConfig</code>文件夹中修改数据绝对路径❌</li>
+<li>在<code>user_nl_ocn</code>或<code>env_run.xml</code>中更改输入文件</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new path</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">/</span>public<span class="op">/</span>home<span class="op">/</span>Benkeke1<span class="op">/</span>xieyx<span class="op">/</span>data<span class="op">/</span>ocn_data<span class="op">/</span>new_sst.nc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="地球轨道参数" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 地球轨道参数</h1>
+<section id="偏心率倾角与岁差" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="偏心率倾角与岁差"><span class="header-section-number">6.1</span> 偏心率，倾角与岁差</h2>
+<ul>
+<li>岁差：摆动周期，影响冬季与夏季的热量分布</li>
+<li>倾角：影响纬向热量分布</li>
+<li>偏心率：调制地球距太阳的距离</li>
+</ul>
+</section>
+<section id="cesm中的地球轨道参数" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="cesm中的地球轨道参数"><span class="header-section-number">6.2</span> CESM中的地球轨道参数</h2>
+<p>在每个case中的<code>output</code>文件中可以找到（输入<strong>coupler</strong>）：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cd <span class="op">/</span>work<span class="op">/</span>Benkeke1<span class="op">/</span>output<span class="op">/</span>T1CO2<span class="op">-</span>xieyx<span class="op">/</span>cpl<span class="op">/</span>logs<span class="op">/</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>vi cpl.log<span class="fl">.230509</span><span class="op">-</span><span class="fl">192856.</span><span class="er">gz</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>在100行左右，可以看到<strong>轨道参数</strong>：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(seq_infodata_print) orb_mode                 <span class="op">=</span> fixed_year</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>(seq_infodata_print) orb_iyear                <span class="op">=</span> <span class="dv">1990</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>(seq_infodata_print) orb_eccen                <span class="op">=</span> <span class="fl">0.16707719799281E-01</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>(seq_infodata_print) orb_obliq                <span class="op">=</span> <span class="fl">23.441068451147</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="更改case中的轨道参数" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="更改case中的轨道参数"><span class="header-section-number">6.3</span> 更改case中的轨道参数</h2>
+<p>新建case后，在<code>user_nl_cpl</code>中对参数进行修改：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>orb_iyear       <span class="op">=</span> <span class="dv">1950</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>orb_iyear_algin <span class="op">=</span> <span class="dv">1950</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>orb_mode        <span class="op">=</span> <span class="st">'fixed_year'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>或者，直接给定<strong>轨道情景</strong>：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>orb_eccen <span class="op">=</span> <span class="fl">0.016724</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>orb_obliq <span class="op">=</span> <span class="fl">23.446</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>orb_mvelp <span class="op">=</span> <span class="fl">102.04</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>orb_mode  <span class="op">=</span> <span class="st">'fixed_parameters'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="地形文件" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 地形文件</h1>
+<p>进入case文件夹下的<strong>CaseDocs/</strong>文件夹，在<strong>atm_in</strong>文件中可以看到</p>
+<p>在user_nl_cam中替换地形文件：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">/</span>public<span class="op">/</span>home<span class="op">/</span>Benkeke1<span class="op">/</span>xieyx<span class="op">/</span>data<span class="op">/</span>lnd_data<span class="op">/</span>new_lnd.nc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="植被文件" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 植被文件</h1>
+<p>植被文件包括：</p>
+<ul>
+<li>地表覆盖</li>
+<li>植被组成分布</li>
+</ul>
+<p>进入<strong>CaseDocs</strong>文件夹下的<strong>lnd_in</strong>文件</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fsurdat <span class="op">=</span> <span class="op">/</span>public<span class="op">/</span>share_data<span class="op">/</span>cesm_inputdata<span class="op">/</span>lnd<span class="op">/</span>clm2<span class="op">/</span>surfdata<span class="op">/</span>surfdata_1<span class="fl">.9</span><span class="er">x2</span><span class="fl">.5</span><span class="er">_simyr1850_c091108</span>.nc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>16种植被类型如下：</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Plant functional type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>desert, ice and ocean</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>needleleaf evergreeen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>needleleaf evergreen boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>needleleaf deeiduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>broadleaf evergreen tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>broadleaf evergreen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>broadleaf deciduous tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>broadleaf deciduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>broadleaf deciduous boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>broadleaf evergreen shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>broadleaf deciduous temperate shrub</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>broadleaf deciduous boreal shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><span class="math inline">\(C_3\)</span> arctic grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><span class="math inline">\(C_3\)</span> non-arctic grass</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><span class="math inline">\(C_4\)</span> grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>corn</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>wheat</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>每个格点所有植被类型比率加和为常数，当更改一个植被类型时，应相应得将其它类型的比率进行调整。</p>
+</blockquote>
+<p>在完成文件修改后，进入case中的<code>user_nl_clm</code>，添加文件：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fsurdat <span class="op">=</span> <span class="st">'new_file.nc'</span> <span class="co"># CaseDOcs文件夹下的lnd_in文件中可以找到该路径</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>finidat <span class="op">=</span> <span class="st">''</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="其它设置" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 其它设置</h1>
+<section id="设置restart文件" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="设置restart文件"><span class="header-section-number">9.1</span> 设置restart文件</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>vi env_run.xml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>大约70行左右</p>
+<ul>
+<li>STOP_OPTION：nyears，每年</li>
+<li>STOP_N：10，从10年停止</li>
+<li>REST_N：2，每2年保留一次文件</li>
+<li>CONTINUE_RUN：TRUE，继续运行</li>
+<li>RESUBMIT：1or2，如果大于0，则在停止实验后继续运行</li>
+</ul>
+</section>
+</section>
+<section id="其它工具" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> 其它工具</h1>
+<ul>
+<li><p>合并文件</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cdo mergetime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>计算气候平均（<strong>气候态</strong>）</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cdo ymonmean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>nc文件做差（<strong>气候效应</strong>）</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ncdiff fileA fileB</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+</section>
+<section id="作业" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> 作业</h1>
+<section id="结课报告6.1718日" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="结课报告6.1718日"><span class="header-section-number">11.1</span> 2023-06-18 结课报告（6.17~18日）</h2>
+<blockquote class="blockquote">
+<p>你的实验，相对参照实验，表现出什么样的气候效应？</p>
+</blockquote>
+<ul>
+<li>一般运行5-10年，前2年为预热期</li>
+</ul>
+<p>温度场，风场，降水场，环流场等。。</p>
+<p>围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Yuxuan Xie</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/cug-xyx">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

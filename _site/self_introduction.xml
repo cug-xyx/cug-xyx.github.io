@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>cug-xyx</title>
+<link>https://cug-xyx.github.io/self_introduction.html</link>
+<atom:link href="https://cug-xyx.github.io/self_introduction.xml" rel="self" type="application/rss+xml"/>
+<description>一个学生</description>
+<image>
+<url>https://cug-xyx.github.io/./image/self_image.png</url>
+<title>cug-xyx</title>
+<link>https://cug-xyx.github.io/self_introduction.html</link>
+<height>170</height>
+<width>144</width>
+</image>
+<generator>quarto-1.3.361</generator>
+<lastBuildDate>Sat, 17 Jun 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>《中国地质大学（武汉）》气候数值模拟笔记</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/clim_sim_notes.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="cesm运行案例的流程" class="level1">
+<h1>CESM运行案例的流程</h1>
+<section id="create_newcase" class="level2">
+<h2 class="anchored" data-anchor-id="create_newcase">create_newcase</h2>
+<ul>
+<li>首先创建一个新的case：</li>
+</ul>
+<pre class="{shell}"><code>cd ~/cesm1_2_2/scripts/
+./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle </code></pre>
+<p>修改<code>env_mach_pes.xml</code>文件中<strong>180</strong>改为<strong>140</strong>（因为28核*5节点=140）</p>
+<ul>
+<li>使用<strong>预先设定的文件</strong></li>
+</ul>
+<pre class="{shell}"><code>cp -r ~/xiangyu/env_mach_pes.xml ./</code></pre>
+<ul>
+<li>拷贝指定<code>Macros</code>文件：</li>
+</ul>
+<pre class="{shell}"><code>cp -r ~/xiangyu/Macros ./</code></pre>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">setup</h2>
+<p>setup：</p>
+<pre class="{shell}"><code># 第一次进行setup
+./cesm_setup
+
+# 清除setup的方法
+./cesm_setup -clean</code></pre>
+</section>
+<section id="修改参数" class="level2">
+<h2 class="anchored" data-anchor-id="修改参数">修改参数</h2>
+<blockquote class="blockquote">
+<p>以修改CO2浓度参数为例</p>
+</blockquote>
+<p>进入<code>user_nl_cam</code>文件，添加参数，如：</p>
+<pre class="{shell}"><code>co2vmr = 280.0e-6</code></pre>
+</section>
+<section id="build" class="level2">
+<h2 class="anchored" data-anchor-id="build">build</h2>
+<pre class="{shell}"><code>./&lt;case_name&gt;.build</code></pre>
+</section>
+<section id="run" class="level2">
+<h2 class="anchored" data-anchor-id="run">run</h2>
+<section id="修改运行时间的参数" class="level4">
+<h4 class="anchored" data-anchor-id="修改运行时间的参数">修改运行时间的参数</h4>
+<ul>
+<li>在<code>env_run.xml</code>文件中修改<code>ndays</code>、<code>5</code></li>
+<li>PS：若第二此运行，修改<code>continue_run</code>参数为<code>TRUE</code></li>
+<li>修改<code>&lt;case_name&gt;.run</code>的运行时长不超过168</li>
+</ul>
+</section>
+<section id="提交任务" class="level4">
+<h4 class="anchored" data-anchor-id="提交任务">提交任务</h4>
+<p>使用<code>qsub</code>提交任务</p>
+<pre class="{shell}"><code>qsub ./&lt;case_name&gt;.run</code></pre>
+<blockquote class="blockquote">
+<p>可以使用<code>qstat</code>查看当前任务提交统计情况</p>
+</blockquote>
+</section>
+<section id="停止任务" class="level4">
+<h4 class="anchored" data-anchor-id="停止任务">停止任务</h4>
+<pre class="{shell}"><code>qdel</code></pre>
+</section>
+<section id="查看当前任务" class="level4">
+<h4 class="anchored" data-anchor-id="查看当前任务">查看当前任务</h4>
+<pre class="{shell}"><code>qstat # 查看任务排队情况
+showq # 啥看计算效率问题</code></pre>
+</section>
+</section>
+</section>
+<section id="in文件" class="level1">
+<h1><code>*_in</code>文件</h1>
+<section id="aatm_in大气输入参数文件" class="level2">
+<h2 class="anchored" data-anchor-id="aatm_in大气输入参数文件"><code>aatm_in</code>大气输入参数文件</h2>
+<section id="cam_inparm" class="level3">
+<h3 class="anchored" data-anchor-id="cam_inparm">&amp;cam_inparm</h3>
+<ul>
+<li>bnd_topo：地形文件</li>
+</ul>
+</section>
+<section id="chem_surfvals_nl" class="level3">
+<h3 class="anchored" data-anchor-id="chem_surfvals_nl">&amp;chem_surfvals_nl</h3>
+<ul>
+<li><p>修改CO2浓度<code>co2vmr</code><strong>加倍</strong></p>
+<blockquote class="blockquote">
+<p>自己的case里的user_nl_cam文件</p>
+</blockquote></li>
+</ul>
+</section>
+</section>
+<section id="lnd_in陆面输入参数文件" class="level2">
+<h2 class="anchored" data-anchor-id="lnd_in陆面输入参数文件"><code>lnd_in</code>陆面输入参数文件</h2>
+</section>
+</section>
+<section id="输出文件" class="level1">
+<h1>输出文件</h1>
+<blockquote class="blockquote">
+<p>路径：/work/Benkeke1/output/<case_name>/</case_name></p>
+<p>注：<strong>使用h0数据</strong></p>
+</blockquote>
+<section id="查看nc文件输出变量" class="level2">
+<h2 class="anchored" data-anchor-id="查看nc文件输出变量">查看nc文件输出变量</h2>
+<pre class="{shell}"><code>ncdump -h output.nc</code></pre>
+</section>
+</section>
+<section id="clone复制案例" class="level1">
+<h1>Clone复制案例</h1>
+<p>当想在一种案例情况下的一个时期复制当前状态，并叠加一个新的变化</p>
+<pre class="{shell}"><code>cd ~/cesm_1_2_2/scripts/
+./create_clone -case &lt;refer_case-clone&gt; -clone &lt;refer_case&gt;</code></pre>
+</section>
+<section id="修改边界场文件文件" class="level1">
+<h1>修改边界场文件文件</h1>
+<pre class="{shell}"><code># 进入case的配置文件夹
+cd BuildConfig/
+
+# 浏览海温输入数据列表
+vi docn.input_data_list</code></pre>
+<p>内部有<strong>海温</strong>相关文件的绝对路径.</p>
+<ul>
+<li>对边界文件作出修改后，进入<code>BuildConfig</code>文件夹中修改数据绝对路径❌</li>
+<li>在<code>user_nl_ocn</code>或<code>env_run.xml</code>中更改输入文件</li>
+</ul>
+<pre class="{shell}"><code># new path
+/public/home/Benkeke1/xieyx/data/ocn_data/new_sst.nc</code></pre>
+</section>
+<section id="地球轨道参数" class="level1">
+<h1>地球轨道参数</h1>
+<section id="偏心率倾角与岁差" class="level2">
+<h2 class="anchored" data-anchor-id="偏心率倾角与岁差">偏心率，倾角与岁差</h2>
+<ul>
+<li>岁差：摆动周期，影响冬季与夏季的热量分布</li>
+<li>倾角：影响纬向热量分布</li>
+<li>偏心率：调制地球距太阳的距离</li>
+</ul>
+</section>
+<section id="cesm中的地球轨道参数" class="level2">
+<h2 class="anchored" data-anchor-id="cesm中的地球轨道参数">CESM中的地球轨道参数</h2>
+<p>在每个case中的<code>output</code>文件中可以找到（输入<strong>coupler</strong>）：</p>
+<pre class="{shell}"><code>cd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/
+vi cpl.log.230509-192856.gz</code></pre>
+<p>在100行左右，可以看到<strong>轨道参数</strong>：</p>
+<pre class="{shell}"><code>(seq_infodata_print) orb_mode                 = fixed_year
+(seq_infodata_print) orb_iyear                = 1990
+(seq_infodata_print) orb_eccen                = 0.16707719799281E-01
+(seq_infodata_print) orb_obliq                = 23.441068451147</code></pre>
+</section>
+<section id="更改case中的轨道参数" class="level2">
+<h2 class="anchored" data-anchor-id="更改case中的轨道参数">更改case中的轨道参数</h2>
+<p>新建case后，在<code>user_nl_cpl</code>中对参数进行修改：</p>
+<pre class="{shell}"><code>orb_iyear       = 1950
+orb_iyear_algin = 1950
+orb_mode        = 'fixed_year'</code></pre>
+<p>或者，直接给定<strong>轨道情景</strong>：</p>
+<pre class="{shell}"><code>orb_eccen = 0.016724
+orb_obliq = 23.446
+orb_mvelp = 102.04
+orb_mode  = 'fixed_parameters'</code></pre>
+</section>
+</section>
+<section id="地形文件" class="level1">
+<h1>地形文件</h1>
+<p>进入case文件夹下的<strong>CaseDocs/</strong>文件夹，在<strong>atm_in</strong>文件中可以看到</p>
+<p>在user_nl_cam中替换地形文件：</p>
+<pre class="{shell}"><code>/public/home/Benkeke1/xieyx/data/lnd_data/new_lnd.nc</code></pre>
+</section>
+<section id="植被文件" class="level1">
+<h1>植被文件</h1>
+<p>植被文件包括：</p>
+<ul>
+<li>地表覆盖</li>
+<li>植被组成分布</li>
+</ul>
+<p>进入<strong>CaseDocs</strong>文件夹下的<strong>lnd_in</strong>文件</p>
+<pre class="{shell}"><code>fsurdat = /public/share_data/cesm_inputdata/lnd/clm2/surfdata/surfdata_1.9x2.5_simyr1850_c091108.nc</code></pre>
+<p>16种植被类型如下：</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Plant functional type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>desert, ice and ocean</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>needleleaf evergreeen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>needleleaf evergreen boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>needleleaf deeiduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>broadleaf evergreen tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>broadleaf evergreen temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>broadleaf deciduous tropical tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>broadleaf deciduous temperate tree</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>broadleaf deciduous boreal tree</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>broadleaf evergreen shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>broadleaf deciduous temperate shrub</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>broadleaf deciduous boreal shrub</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_3"> arctic grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_3"> non-arctic grass</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td><img src="https://latex.codecogs.com/png.latex?C_4"> grass</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>corn</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>wheat</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote class="blockquote">
+<p>每个格点所有植被类型比率加和为常数，当更改一个植被类型时，应相应得将其它类型的比率进行调整。</p>
+</blockquote>
+<p>在完成文件修改后，进入case中的<code>user_nl_clm</code>，添加文件：</p>
+<pre class="{shell}"><code>fsurdat = 'new_file.nc' # CaseDOcs文件夹下的lnd_in文件中可以找到该路径
+finidat = ''</code></pre>
+</section>
+<section id="其它设置" class="level1">
+<h1>其它设置</h1>
+<section id="设置restart文件" class="level2">
+<h2 class="anchored" data-anchor-id="设置restart文件">设置restart文件</h2>
+<pre class="{shell}"><code>vi env_run.xml</code></pre>
+<p>大约70行左右</p>
+<ul>
+<li>STOP_OPTION：nyears，每年</li>
+<li>STOP_N：10，从10年停止</li>
+<li>REST_N：2，每2年保留一次文件</li>
+<li>CONTINUE_RUN：TRUE，继续运行</li>
+<li>RESUBMIT：1or2，如果大于0，则在停止实验后继续运行</li>
+</ul>
+</section>
+</section>
+<section id="其它工具" class="level1">
+<h1>其它工具</h1>
+<ul>
+<li><p>合并文件</p>
+<pre class="{shell}"><code>cdo mergetime</code></pre></li>
+<li><p>计算气候平均（<strong>气候态</strong>）</p>
+<pre class="{shell}"><code>cdo ymonmean</code></pre></li>
+<li><p>nc文件做差（<strong>气候效应</strong>）</p>
+<pre class="{shell}"><code>ncdiff fileA fileB</code></pre></li>
+</ul>
+</section>
+<section id="作业" class="level1">
+<h1>作业</h1>
+<section id="结课报告6.1718日" class="level2">
+<h2 class="anchored" data-anchor-id="结课报告6.1718日">2023-06-18 结课报告（6.17~18日）</h2>
+<blockquote class="blockquote">
+<p>你的实验，相对参照实验，表现出什么样的气候效应？</p>
+</blockquote>
+<ul>
+<li>一般运行5-10年，前2年为预热期</li>
+</ul>
+<p>温度场，风场，降水场，环流场等。。</p>
+<p>围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>CESM</category>
+  <category>Python</category>
+  <guid>https://cug-xyx.github.io/posts/clim_sim_notes.html</guid>
+  <pubDate>Sat, 17 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>post测试</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/test_posts.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>这是一个posts中内容的测试</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cug-xyx.github.io/image/cug_logo.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">CUG logo</figcaption>
+</figure>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <category>ET</category>
+  <category>R</category>
+  <guid>https://cug-xyx.github.io/posts/test_posts.html</guid>
+  <pubDate>Fri, 16 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>post测试2</title>
+  <link>https://cug-xyx.github.io/posts/test_posts2.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>这是另一个posts中内容的测试</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-3"></span>
+<span id="cb1-4">plt.scatter(x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>), y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>))</span>
+<span id="cb1-5">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="https://cug-xyx.github.io/posts/test_posts2_files/figure-html/cell-2-output-1.png" width="558" height="404"></p>
+</div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <guid>https://cug-xyx.github.io/posts/test_posts2.html</guid>
+  <pubDate>Wed, 14 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>post测试3</title>
+  <dc:creator>Yuxuan Xie</dc:creator>
+  <link>https://cug-xyx.github.io/posts/test_posts3.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>这是第三个posts中内容的测试</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(leaflet)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 程辑包'leaflet'是用R版本4.1.3 来建造的</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">leaflet</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">addTiles</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">setView</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">93.65</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42.0285</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">zoom =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">17</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-127199e227ab2ff990ac" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-127199e227ab2ff990ac">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
+  <guid>https://cug-xyx.github.io/posts/test_posts3.html</guid>
+  <pubDate>Tue, 13 Jun 2023 16:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

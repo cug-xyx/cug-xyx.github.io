@@ -1,0 +1,12 @@
+{
+  "hash": "df8d0cf3a4488697ee5a713791e4857e",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Python test in Quarto\"\ndate: \"2023-6-15\"\ncategories: [Python]\n---\n\n这是另一个posts中内容的测试\n\n::: {#b0ae5fec .cell execution_count=1}\n``` {.python .cell-code}\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](02_Python_test_files/figure-html/cell-2-output-1.png){width=558 height=411}\n:::\n:::\n\n\n",
+    "supporting": [
+      "02_Python_test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

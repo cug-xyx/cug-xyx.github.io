@@ -1,9 +1,61 @@
 ---
-title: "cug-xyx"
+title: "Profile"
+subtitle: '个人简介'
+image: "./image/self_image.png"
+description: "An ecohydrology researcher and programming enthusiast"
+author: "Yuxuan Xie 谢宇轩"
+
+date: "2023-6-17"
+date-modified: "2025-10-29"
+
+categories:
+  - Eco-hydrology
+  - Evapotranspiration
+  - R
+  - Python
+  - Julia
+listing:
+  contents: posts
+  sort-ui: [title, date]
+  filter-ui: [title, date]
+  page-size: 5
+  sort: 
+    - "date desc"
+    - "title desc"
+  max-items: 5
+  image-align: left
+  type: default
+  categories: true
+  feed: true
+about:
+  template: solana # jolla
+#   image-width: 10em
+#   image-shape: round
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/cug-xyx
+    - icon: check-circle
+      text: Researchgate
+      href: https://www.researchgate.net/profile/Yuxuan-Xie-6
+    - icon: bell-fill
+      text: Zhihu
+      href: https://www.zhihu.com/people/yang-xue-ji-de-gou
+format:
+  html:
+    css: styles.css
 ---
 
-This is a Quarto website.
+## 👋 About Me
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+I'm Yuxuan Xie, currently a PhD student at Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences. My research focuses on evapotranspiration (ET) and land–atmosphere interactions within the field of eco-hydrology. I'm passionate about scientific programming, especially with R, Python, and Julia, and I enjoy developing efficient packages for data analysis and model simulation.
 
-![cug_logo](image/cug_logo.png)
+## Education
+
+**Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences**, China | *Ph.D. in Physical Geography | Sept 2025 - Now*
+
+**China University of Geosciences (Wuhan)**, China | *M.S in Atmospheric Science | Sept 2022 - June 2025*
+
+**China University of Geosciences (Wuhan)**, China | *B.A in Hydrology and Water Resources Engineering | Sept 2018 - June 2022*
+
+## Blog posts

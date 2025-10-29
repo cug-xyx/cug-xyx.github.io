@@ -1,0 +1,9 @@
+---
+title: "Publications"
+---
+
+1. **Xie, Y.**, Kong, D., Zhang, Y., Zhong, Y., Ma, N., Gong, R., Ci, H., Xiao, M., Gu, X., 2025. Evaluation of the performance of multiple reanalysis forcing data in potential evapotranspiration estimation and its implication for actual evapotranspiration modeling. ***Journal of Hydrology*** 660, 133472. [https://doi.org/10.1016/j.jhydrol.2025.133472](https://doi.org/10.1016/j.jhydrol.2025.133472)
+2. Lu, J., Kong, D., Zhang, Y., **Xie, Y.**, Gu, X., Gulakhmadov, A., 2025. Hotspots of Global Water Resource Changes and Their Causes. ***Earth’s Future*** 13, e2024EF005461. [https://doi.org/10.1029/2024EF005461](https://doi.org/10.1029/2024EF005461)
+3. Kong, D., **Xie, Y.**, Gu, X., Slater, L., Ci, H., Song, H., 2024. Contribution of Anthropogenic Activities to the Intensification of Heat Index-Based Spatiotemporally Contiguous Heatwave Events in China. ***Journal of Geophysical Research: Atmospheres*** 129, e2023JD040004. [https://doi.org/10.1029/2023JD040004](https://doi.org/10.1029/2023JD040004)
+4. Kong, D., McVicar, T.R., Xiao, M., Zhang, Y., Peña-Arancibia, J.L., Filippa, G., **Xie, Y.**, Gu, X., 2022. phenofit: An R package for extracting vegetation phenology from time series remote sensing. ***Methods in Ecology and Evolution*** 13, 1508–1527. [https://doi.org/10.1111/2041-210X.13870](https://doi.org/10.1111/2041-210X.13870)
+

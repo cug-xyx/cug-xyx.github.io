@@ -1,0 +1,138 @@
+---
+title: "Learn DataFrames.jl"
+subtitle: "学习Julia"
+date: 2023-6-19
+categories: [Julia]
+number-sections: true
+jupyter: julia-1.11 # run `jupyter kernelspec list`
+---
+# 导入库
+```{julia}
+using CSV
+using DataFrames
+```
+
+# 读取数据
+```{julia}
+df = CSV.read("../data/203st_idw_interp_0.05deg.csv", DataFrame)
+# df = CSV.read("I:/order_data/Xujw/203st_idw_interp_0.05deg.csv", DataFrame)
+df # copy(df) 复制df
+```
+# 取出某一行
+
+## 方法1
+```{julia}
+df.V # df."V"
+```
+
+## 方法2
+```{julia}
+df[:, :V] # 这种情况下取值更改不会改变之前的数据框内容
+```
+
+# 列名
+```{julia}
+names(df, AbstractString) # 筛选出不同数据类型的列名
+names(df, Float64)
+```
+
+# 创建一个0行但包含全部列名的df
+
+```{julia}
+empty(df) # empty!()直接让目标df清空
+```
+
+# 查看df基本信息
+
+df维度：
+```{julia}
+size(df) # 维度
+nrow(df) # ncol()
+```
+
+统计信息，类似R语言`summary`
+
+```{julia}
+describe(df, cols=4:7)
+```
+
+# 筛选df
+
+```{julia}
+df[:, [:lon, :lat]]
+```
+
+# 条件筛选
+
+# 常规
+```{julia}
+df[:, Not([:site, :lon, :lat])]
+```
+
+
+```{julia}
+df[:, Between(:site, :lat)]
+```
+
+## 正则表达式
+
+```{julia}
+df[:, r"l"]
+```
+
+# 转换函数
+
+共五种方法：
+
+- combine
+
+- select
+
+- transformselect
+
+导入分组统计所需包
+```{julia}
+using Statistics
+```
+
+求`V`的平均值
+```{julia}
+combine(df, :V => mean => :mean_V)
+```
+
+筛选`lon`
+
+```{julia}
+select(df, :lon => mean => :mean_lon)
+```
+
+随便选
+```{julia}
+select(df, r"l", "site", :V)
+```
+
+改列名
+
+```{julia}
+select(df, :lon => :new_lon, :)
+```
+
+# 尝试管道符
+
+参考学习链接：[Comparing dplyr vs DataFrames.jl](https://bkamins.github.io/julialang/2020/07/03/dplyr-vs-df.html)
+
+```{julia}
+using Pipe
+```
+
+
+```{julia}
+@time @pipe df |>
+  combine(_, :V => (x -> x) => :V_mean, :) |>
+  (df -> begin
+    df.new_col = df.V
+    df
+  end) |>
+  filter(:V_mean => v -> v >0, _) |>
+  sort(_, :new_col)
+```

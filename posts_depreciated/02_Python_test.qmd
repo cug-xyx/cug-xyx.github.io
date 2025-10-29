@@ -1,0 +1,15 @@
+---
+title: "Python test in Quarto"
+date: "2023-6-15"
+categories: [Python]
+---
+
+这是另一个posts中内容的测试
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.scatter(x=range(10), y=range(10))
+plt.show()
+```

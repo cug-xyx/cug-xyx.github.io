@@ -1,10 +1,9 @@
 [
   {
-    "listing": "/self_introduction.html",
+    "listing": "/index.html",
     "items": [
-      "/posts/test_posts.html",
-      "/posts/test_posts2.html",
-      "/posts/test_posts3.html"
+      "/posts/02_Zhihu_bookdown.html",
+      "/posts/01_Notes_CESM.html"
     ]
   }
 ]

@@ -1,0 +1,118 @@
+---
+title: "Use bookdown to build your notes"
+subtitle: "使用bookdown搭建你的笔记"
+author: 'Yuxuan Xie'
+image: '../image/bookdown_logo.png'
+description: 'Bookdown入门教程'
+categories: [Bookdown, R]
+date: "2023-6-18"
+execute: 
+  enabled: false
+number-sections: true
+---
+# 利用bookdown轻松将笔记部署到自己的网站
+
+> **问题由来：**
+> 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。
+
+本文将手把手教你如何使用`Rmarkdown`以及R包`bookdown`写“书”，并通过`github`轻松部署到自己的**Github pages**上！
+首先摆出我自己的简单案例：[气候数值模拟笔记](https://cug-xyx.github.io/Climate-Numerical-Simulation/)。他在网站上长这样：
+
+![图1 案例笔记在网站中的呈现情况](../image/profile.png)
+
+## 准备工作
+
+在开始之前，需要确认已经安装好**R**^[[R语言下载链接](https://www.r-project.org/)] 、**Git**^[[Git下载链接](https://git-scm.com/downloads)] 以及**Rstudio**^[[Rstudio下载链接](https://rstudio.com/products/rstudio/download/)]。
+此外，需要安装本文的核心R包`bookdown`，可以通过在R中运行以下代码进行安装：
+
+```r
+install.packages('bookdown')
+
+# 如果想使用开发版本
+# install.packages('pak')
+pak::pak('rstudio/bookdown')
+```
+
+## 创建笔记
+
+### 创建project
+
+在Rstudio中点击`File`->`New Project`->`New Directory`->`Bookproject using bookdown`->`Create Project`
+
+![图2 创建新的项目](../image/new_proj.png)
+![图3 新的文件夹](../image/new_dir.png)
+![图4 创建book项目](../image/new_book.png)
+![图5 创建文件夹](../image/dir_name.png)
+
+在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：
+
+![图6 生成的文件](../image/files.png)
+
+### 修改和预览笔记
+
+在生成的文件中，`index.Rmd`是笔记的**首页**，而其它如`01-intro.Rmd`的文件是笔记的**其它部分**。预览笔记的方式有两种：
+
+- 点击`index.Rmd`脚本上方的`Knit`按钮
+  ![图7 第一种预览方式](../image/knit.png)
+- 点击`Build`->`bookdown::gitbook`
+  ![图8 第二种预览方式](../image/build.png)
+
+我们选择第**二种预览方式**，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。
+
+![图9 示例笔记预览情况](../image/preview.png)
+
+可以看出，除`index.Rmd`中的内容出现在第一页外，笔记其它部分按照**笔记文件排序**出现。
+掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程^[[Rmarkdown官方教程](https://bookdown.org/yihui/rmarkdown/)]。
+
+## 部署到Github pages
+
+### 创建仓库
+
+为了将笔记放置在网上，我们首先在github上新建一个**空仓库**：
+
+![图10 新建仓库](../image/new_repo.png)
+
+### 生成文件
+
+首先，我们需要在`_bookdown.yml`文件中添加一行参数
+
+```
+output_dir: "docs"
+```
+在添加完这行参数后，重新**Build**一下我们的笔记，在项目中就会生成一个`docs`文件夹，里面是我们笔记相关的文件。
+
+### 上传文件
+
+在生成我们需要的文件后，我们需要将这个项目上传至我们在github上**新建的项目**中。
+1. 在本地初始化git环境。在项目文件夹路径下右键`Git Bash Here`，输入以下代码：
+   ```shell
+   git init
+   ```
+2. 链接远程github仓库。输入以下代码：
+   ```shell
+   git remote add origin git@github.com:<your_github_name>/<your_repo_name>.git
+   ```
+3. 上传项目文件。分别输入一下三行代码：
+   ```shell
+   git add --all # 上传全部文件
+   git commit -m '备注信息'
+   git push origin master
+   ```
+做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！
+
+### 部署网页
+
+最后一步，我们需要在仓库中修改一些设置。
+在仓库中点击`Settings`->`Pages`修改branch为**docs文件夹**：
+
+![图11 修改分支](../image/settings.png)
+
+然后回到仓库**code**页面，点击右侧About右方的**设置按钮**，链接网页：
+
+![图12 链接网页](../image/website.png)
+
+当保存这些更改后，等待一段时间，**进入About中显示的网页**，就可以看到我们的笔记了。
+
+## 最后
+
+如果这篇文章对你有帮助，那就点个赞吧~

@@ -6,16 +6,15 @@ theme:
   dark: darkly
 
 website:
-  title: "cug-xyx"
+  title: "Yuxuan Xie"
 
   open-graph: true
-  favicon: image/cug_logo.png
-  # twitter-card:
-  #   creator: "@dragonstyle"
-  #   site: "@rstudio"
-  margin-header: subscribe.html
+  favicon: image/home_logo.png
+
+  # margin-header: subscribe.html # 一个订阅的栏，不知道干啥用的
+  
   # margin-footer: |
-  #   ![CUG](image/cug_logo.png)
+    # ![CUG](image/cug_logo.png)
 
   repo-url: https://github.com/cug-xyx/cug-xyx.github.io
   repo-actions: [edit, issue]
@@ -30,47 +29,50 @@ website:
         href: https://github.com/cug-xyx
 
   navbar:
-    background: secondary # 顶端栏的背景色转为蓝色？
+    background: secondary # 顶端栏的背景色？
     search: true
     left:
-      - href: self_introduction.qmd
-        text: "self-intro"
       - text: 'Tools'
         menu: 
-          - "tools/SMSpy.qmd"
-          - "tools/hydroET.qmd"
-      - text: "Articles"
-        menu:
-          - "./articles/about.qmd"
-          - "./articles/ET_evaluation.qmd"
+          - text: "hydroET"
+            href: "https://github.com/cug-xyx/hydroET"
+          - text: "ggRunoff"
+            href: "https://cug-xyx.github.io/ggRunoff/"
+          - text: "terraExtra"
+            href: "https://github.com/cug-xyx/terraExtra"
+      - text: "Publications"
+        href: "./articles/Publications.qmd"
 
-    # logo: "./image/cug_logo.png"
-    # logo-alt: "CUG logo"
+    logo: "image/home_logo.png"
+    logo-alt: "Home"
 
     tools:
-      - icon: twitter
-        href: https://twitter.com
+      # - icon: twitter
+      #   href: https://twitter.com
       - icon: github
         menu:
-          - text: "github home"
+          - text: "Github home"
             url:  https://github.com/cug-xyx
           - text: "Source Code"
             url:  https://github.com/cug-xyx/cug-xyx.github.io
 
   # ----------------- 侧边栏 ------------------------
   sidebar:
-    - title: "Articles"
+    - title: "Publications"
       background: light
       style: "docked" # floating
       contents:
-        - "./articles/about.qmd"
         - "./articles/ET_evaluation.qmd"
     - title: "Tools"
       background: light
       style: "docked" # floating
       contents:
-        - tools/SMSpy.qmd
-        - "tools/hydroET.qmd"
+        - text: "hydroET"
+          href: "https://github.com/cug-xyx/hydroET"
+        - text: "ggRunoff"
+          href: "https://cug-xyx.github.io/ggRunoff/"
+        - text: "terraExtra"
+          href: "https://github.com/cug-xyx/terraExtra"
 
 execute:
   freeze: auto
@@ -81,6 +83,7 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    page-layout: full
 
 
 

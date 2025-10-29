@@ -1,0 +1,11 @@
+{
+  "hash": "1afa8a86f5ba3b359f5fa47d7832324f",
+  "result": {
+    "markdown": "---\ntitle: \"Python test in Quarto\"\ndate: \"2023-6-15\"\n---\n\n这是另一个posts中内容的测试\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n```\n\n::: {.cell-output .cell-output-display}\n![](Python_test_files/figure-html/cell-2-output-1.png){}\n:::\n:::\n\n\n",
+    "supporting": [
+      "Python_test_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
