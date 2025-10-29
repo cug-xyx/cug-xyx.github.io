@@ -1,31 +1,171 @@
 [
   {
-    "objectID": "articles/ET_evaluation.html",
-    "href": "articles/ET_evaluation.html",
-    "title": "Meteorological forcing indirectly evaluation in China",
+    "objectID": "tools/SMSpy.html",
+    "href": "tools/SMSpy.html",
+    "title": "SMSpy",
     "section": "",
-    "text": "目前还是菜鸟一个 :)\n\n\n\n Back to top"
+    "text": "SMS网站的python与R接口`。\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "posts_depreciated/05_Julia_DataFrames.html",
+    "href": "posts_depreciated/05_Julia_DataFrames.html",
+    "title": "Learn DataFrames.jl",
+    "section": "",
+    "text": "using CSV\nusing DataFrames"
+  },
+  {
+    "objectID": "posts_depreciated/05_Julia_DataFrames.html#方法1",
+    "href": "posts_depreciated/05_Julia_DataFrames.html#方法1",
+    "title": "Learn DataFrames.jl",
+    "section": "3.1 方法1",
+    "text": "3.1 方法1\n\ndf.V # df.\"V\"\n\n203-element Vector{Float64}:\n 0.08\n 0.45\n 0.17\n 0.25\n 0.97\n 0.85369167324573\n 0.06\n 0.590868123957716\n 0.36\n 0.06\n 0.51\n 0.310592788968676\n 0.53\n ⋮\n 0.11\n 0.08\n 0.47\n 0.15\n 0.11\n 0.82\n 0.07\n 0.36\n 0.12\n 0.2\n 0.3\n 0.288668959788242"
+  },
+  {
+    "objectID": "posts_depreciated/05_Julia_DataFrames.html#方法2",
+    "href": "posts_depreciated/05_Julia_DataFrames.html#方法2",
+    "title": "Learn DataFrames.jl",
+    "section": "3.2 方法2",
+    "text": "3.2 方法2\n\ndf[:, :V] # 这种情况下取值更改不会改变之前的数据框内容\n\n203-element Vector{Float64}:\n 0.08\n 0.45\n 0.17\n 0.25\n 0.97\n 0.85369167324573\n 0.06\n 0.590868123957716\n 0.36\n 0.06\n 0.51\n 0.310592788968676\n 0.53\n ⋮\n 0.11\n 0.08\n 0.47\n 0.15\n 0.11\n 0.82\n 0.07\n 0.36\n 0.12\n 0.2\n 0.3\n 0.288668959788242"
+  },
+  {
+    "objectID": "posts_depreciated/05_Julia_DataFrames.html#正则表达式",
+    "href": "posts_depreciated/05_Julia_DataFrames.html#正则表达式",
+    "title": "Learn DataFrames.jl",
+    "section": "9.1 正则表达式",
+    "text": "9.1 正则表达式\n\ndf[:, r\"l\"]\n\n203×2 DataFrame178 rows omitted\n\n\n\nRow\nlon\nlat\n\n\n\nFloat64\nFloat64\n\n\n\n\n1\n111.8\n29.07\n\n\n2\n111.93\n28.94\n\n\n3\n111.95\n28.98\n\n\n4\n111.98\n29.11\n\n\n5\n112.03\n29.04\n\n\n6\n112.07\n29.09\n\n\n7\n112.14\n28.87\n\n\n8\n112.14\n29.0\n\n\n9\n112.2\n29.08\n\n\n10\n112.2\n29.66\n\n\n11\n112.24\n29.27\n\n\n12\n112.26\n29.18\n\n\n13\n112.26\n29.59\n\n\n⋮\n⋮\n⋮\n\n\n192\n113.65\n30.17\n\n\n193\n113.69\n30.09\n\n\n194\n113.7\n30.15\n\n\n195\n113.7\n30.39\n\n\n196\n113.72\n30.05\n\n\n197\n113.75\n30.29\n\n\n198\n113.77\n30.07\n\n\n199\n113.8\n30.1\n\n\n200\n113.84\n30.06\n\n\n201\n113.87\n30.14\n\n\n202\n113.95\n30.17\n\n\n203\n114.0\n30.13"
+  },
+  {
+    "objectID": "posts_depreciated/01_R_test.html",
+    "href": "posts_depreciated/01_R_test.html",
+    "title": "R code test in Quarto",
+    "section": "",
+    "text": "这是第三个posts中内容的测试\n\nlibrary(leaflet)\nleaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)\n\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html",
+    "href": "posts/01_Notes_CESM.html",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./\n\n\n\n\nsetup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean\n\n\n\n\n\n以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6\n\n\n\n\n\n./&lt;case_name&gt;.build\n\n\n\n\n\n\n\n在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#create_newcase",
+    "href": "posts/01_Notes_CESM.html#create_newcase",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#setup",
+    "href": "posts/01_Notes_CESM.html#setup",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "setup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#修改参数",
+    "href": "posts/01_Notes_CESM.html#修改参数",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#build",
+    "href": "posts/01_Notes_CESM.html#build",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "./&lt;case_name&gt;.build"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#run",
+    "href": "posts/01_Notes_CESM.html#run",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "",
+    "text": "在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#aatm_in大气输入参数文件",
+    "href": "posts/01_Notes_CESM.html#aatm_in大气输入参数文件",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "2.1 aatm_in大气输入参数文件",
+    "text": "2.1 aatm_in大气输入参数文件\n\n2.1.1 &cam_inparm\n\nbnd_topo：地形文件\n\n\n\n2.1.2 &chem_surfvals_nl\n\n修改CO2浓度co2vmr加倍\n\n自己的case里的user_nl_cam文件"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#lnd_in陆面输入参数文件",
+    "href": "posts/01_Notes_CESM.html#lnd_in陆面输入参数文件",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "2.2 lnd_in陆面输入参数文件",
+    "text": "2.2 lnd_in陆面输入参数文件"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#查看nc文件输出变量",
+    "href": "posts/01_Notes_CESM.html#查看nc文件输出变量",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "3.1 查看nc文件输出变量",
+    "text": "3.1 查看nc文件输出变量\n\nncdump -h output.nc"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#偏心率倾角与岁差",
+    "href": "posts/01_Notes_CESM.html#偏心率倾角与岁差",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.1 偏心率，倾角与岁差",
+    "text": "6.1 偏心率，倾角与岁差\n\n岁差：摆动周期，影响冬季与夏季的热量分布\n倾角：影响纬向热量分布\n偏心率：调制地球距太阳的距离"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#cesm中的地球轨道参数",
+    "href": "posts/01_Notes_CESM.html#cesm中的地球轨道参数",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.2 CESM中的地球轨道参数",
+    "text": "6.2 CESM中的地球轨道参数\n在每个case中的output文件中可以找到（输入coupler）：\n\ncd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/\nvi cpl.log.230509-192856.gz\n\n在100行左右，可以看到轨道参数：\n\n(seq_infodata_print) orb_mode                 = fixed_year\n(seq_infodata_print) orb_iyear                = 1990\n(seq_infodata_print) orb_eccen                = 0.16707719799281E-01\n(seq_infodata_print) orb_obliq                = 23.441068451147"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#更改case中的轨道参数",
+    "href": "posts/01_Notes_CESM.html#更改case中的轨道参数",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "6.3 更改case中的轨道参数",
+    "text": "6.3 更改case中的轨道参数\n新建case后，在user_nl_cpl中对参数进行修改：\n\norb_iyear       = 1950\norb_iyear_algin = 1950\norb_mode        = 'fixed_year'\n\n或者，直接给定轨道情景：\n\norb_eccen = 0.016724\norb_obliq = 23.446\norb_mvelp = 102.04\norb_mode  = 'fixed_parameters'"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#设置restart文件",
+    "href": "posts/01_Notes_CESM.html#设置restart文件",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "9.1 设置restart文件",
+    "text": "9.1 设置restart文件\n\nvi env_run.xml\n\n大约70行左右\n\nSTOP_OPTION：nyears，每年\nSTOP_N：10，从10年停止\nREST_N：2，每2年保留一次文件\nCONTINUE_RUN：TRUE，继续运行\nRESUBMIT：1or2，如果大于0，则在停止实验后继续运行"
+  },
+  {
+    "objectID": "posts/01_Notes_CESM.html#结课报告6.1718日",
+    "href": "posts/01_Notes_CESM.html#结课报告6.1718日",
+    "title": "Numerical Climate Simulation Notes",
+    "section": "11.1 2023-06-18 结课报告（6.17~18日）",
+    "text": "11.1 2023-06-18 结课报告（6.17~18日）\n\n你的实验，相对参照实验，表现出什么样的气候效应？\n\n\n一般运行5-10年，前2年为预热期\n\n温度场，风场，降水场，环流场等。。\n围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？"
+  },
+  {
+    "objectID": "articles/Publications.html",
+    "href": "articles/Publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Xie, Y., Kong, D., Zhang, Y., Zhong, Y., Ma, N., Gong, R., Ci, H., Xiao, M., Gu, X., 2025. Evaluation of the performance of multiple reanalysis forcing data in potential evapotranspiration estimation and its implication for actual evapotranspiration modeling. Journal of Hydrology 660, 133472. https://doi.org/10.1016/j.jhydrol.2025.133472\nLu, J., Kong, D., Zhang, Y., Xie, Y., Gu, X., Gulakhmadov, A., 2025. Hotspots of Global Water Resource Changes and Their Causes. Earth’s Future 13, e2024EF005461. https://doi.org/10.1029/2024EF005461\nKong, D., Xie, Y., Gu, X., Slater, L., Ci, H., Song, H., 2024. Contribution of Anthropogenic Activities to the Intensification of Heat Index-Based Spatiotemporally Contiguous Heatwave Events in China. Journal of Geophysical Research: Atmospheres 129, e2023JD040004. https://doi.org/10.1029/2023JD040004\nKong, D., McVicar, T.R., Xiao, M., Zhang, Y., Peña-Arancibia, J.L., Filippa, G., Xie, Y., Gu, X., 2022. phenofit: An R package for extracting vegetation phenology from time series remote sensing. Methods in Ecology and Evolution 13, 1508–1527. https://doi.org/10.1111/2041-210X.13870\n\n\n\n\n Back to top"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Profile",
     "section": "",
-    "text": "I’m Yuxuan Xie, and I am currently a postgraduate student at China University of Geosciences (Wuhan). I conduct research in the field of evapotranspiration (ET). I am interested in R, Python programming."
+    "text": "I’m Yuxuan Xie, currently a PhD student at Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences. My research focuses on evapotranspiration (ET) and land–atmosphere interactions within the field of eco-hydrology. I’m passionate about scientific programming, especially with R, Python, and Julia, and I enjoy developing efficient packages for data analysis and model simulation."
   },
   {
-    "objectID": "index.html#about-this-blog",
-    "href": "index.html#about-this-blog",
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
     "title": "Profile",
     "section": "",
-    "text": "I’m Yuxuan Xie, and I am currently a postgraduate student at China University of Geosciences (Wuhan). I conduct research in the field of evapotranspiration (ET). I am interested in R, Python programming."
+    "text": "I’m Yuxuan Xie, currently a PhD student at Institute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences. My research focuses on evapotranspiration (ET) and land–atmosphere interactions within the field of eco-hydrology. I’m passionate about scientific programming, especially with R, Python, and Julia, and I enjoy developing efficient packages for data analysis and model simulation."
   },
   {
     "objectID": "index.html#education",
     "href": "index.html#education",
     "title": "Profile",
     "section": "Education",
-    "text": "Education\nChina University of Geosciences (Wuhan), China | M.S in Atmospheric Science | Sept 2022 - Now\nChina University of Geosciences (Wuhan), China | B.A in Hydrology and Water Resources Engineering | Sept 2018 - June 2022"
+    "text": "Education\nInstitute of Geographic Sciences and Natural Resources Research, Chinese Academy of Sciences, China | Ph.D. in Physical Geography | Sept 2025 - Now\nChina University of Geosciences (Wuhan), China | M.S in Atmospheric Science | Sept 2022 - June 2025\nChina University of Geosciences (Wuhan), China | B.A in Hydrology and Water Resources Engineering | Sept 2018 - June 2022"
   },
   {
     "objectID": "index.html#blog-posts",
@@ -35,186 +175,53 @@
     "text": "Blog posts"
   },
   {
-    "objectID": "posts/01_R_test.html",
-    "href": "posts/01_R_test.html",
-    "title": "R code test in Quarto",
-    "section": "",
-    "text": "这是第三个posts中内容的测试\n\nlibrary(leaflet)\n\nWarning: 程辑包'leaflet'是用R版本4.1.3 来建造的\n\nleaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)\n\n\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "posts/02_Python_test.html",
-    "href": "posts/02_Python_test.html",
-    "title": "Python test in Quarto",
-    "section": "",
-    "text": "这是另一个posts中内容的测试\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n\n\n\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html",
-    "href": "posts/03_Notes_CESM.html",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./\n\n\n\n\nsetup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean\n\n\n\n\n\n以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6\n\n\n\n\n\n./&lt;case_name&gt;.build\n\n\n\n\n\n\n\n在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#create_newcase",
-    "href": "posts/03_Notes_CESM.html#create_newcase",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "首先创建一个新的case：\n\n\ncd ~/cesm1_2_2/scripts/\n./create_newcase -case ~/xieyx/cases/&lt;case_name&gt; -res f19_g16 -compset F1850 -mach sparkle \n\n修改env_mach_pes.xml文件中180改为140（因为28核*5节点=140）\n\n使用预先设定的文件\n\n\ncp -r ~/xiangyu/env_mach_pes.xml ./\n\n\n拷贝指定Macros文件：\n\n\ncp -r ~/xiangyu/Macros ./"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#setup",
-    "href": "posts/03_Notes_CESM.html#setup",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "setup：\n\n# 第一次进行setup\n./cesm_setup\n\n# 清除setup的方法\n./cesm_setup -clean"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#修改参数",
-    "href": "posts/03_Notes_CESM.html#修改参数",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "以修改CO2浓度参数为例\n\n进入user_nl_cam文件，添加参数，如：\n\nco2vmr = 280.0e-6"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#build",
-    "href": "posts/03_Notes_CESM.html#build",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "./&lt;case_name&gt;.build"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#run",
-    "href": "posts/03_Notes_CESM.html#run",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "",
-    "text": "在env_run.xml文件中修改ndays、5\nPS：若第二此运行，修改continue_run参数为TRUE\n修改&lt;case_name&gt;.run的运行时长不超过168\n\n\n\n\n使用qsub提交任务\n\nqsub ./&lt;case_name&gt;.run\n\n\n可以使用qstat查看当前任务提交统计情况\n\n\n\n\n\nqdel\n\n\n\n\n\nqstat # 查看任务排队情况\nshowq # 啥看计算效率问题"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#aatm_in大气输入参数文件",
-    "href": "posts/03_Notes_CESM.html#aatm_in大气输入参数文件",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "2.1 aatm_in大气输入参数文件",
-    "text": "2.1 aatm_in大气输入参数文件\n\n2.1.1 &cam_inparm\n\nbnd_topo：地形文件\n\n\n\n2.1.2 &chem_surfvals_nl\n\n修改CO2浓度co2vmr加倍\n\n自己的case里的user_nl_cam文件"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#lnd_in陆面输入参数文件",
-    "href": "posts/03_Notes_CESM.html#lnd_in陆面输入参数文件",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "2.2 lnd_in陆面输入参数文件",
-    "text": "2.2 lnd_in陆面输入参数文件"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#查看nc文件输出变量",
-    "href": "posts/03_Notes_CESM.html#查看nc文件输出变量",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "3.1 查看nc文件输出变量",
-    "text": "3.1 查看nc文件输出变量\n\nncdump -h output.nc"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#偏心率倾角与岁差",
-    "href": "posts/03_Notes_CESM.html#偏心率倾角与岁差",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "6.1 偏心率，倾角与岁差",
-    "text": "6.1 偏心率，倾角与岁差\n\n岁差：摆动周期，影响冬季与夏季的热量分布\n倾角：影响纬向热量分布\n偏心率：调制地球距太阳的距离"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#cesm中的地球轨道参数",
-    "href": "posts/03_Notes_CESM.html#cesm中的地球轨道参数",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "6.2 CESM中的地球轨道参数",
-    "text": "6.2 CESM中的地球轨道参数\n在每个case中的output文件中可以找到（输入coupler）：\n\ncd /work/Benkeke1/output/T1CO2-xieyx/cpl/logs/\nvi cpl.log.230509-192856.gz\n\n在100行左右，可以看到轨道参数：\n\n(seq_infodata_print) orb_mode                 = fixed_year\n(seq_infodata_print) orb_iyear                = 1990\n(seq_infodata_print) orb_eccen                = 0.16707719799281E-01\n(seq_infodata_print) orb_obliq                = 23.441068451147"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#更改case中的轨道参数",
-    "href": "posts/03_Notes_CESM.html#更改case中的轨道参数",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "6.3 更改case中的轨道参数",
-    "text": "6.3 更改case中的轨道参数\n新建case后，在user_nl_cpl中对参数进行修改：\n\norb_iyear       = 1950\norb_iyear_algin = 1950\norb_mode        = 'fixed_year'\n\n或者，直接给定轨道情景：\n\norb_eccen = 0.016724\norb_obliq = 23.446\norb_mvelp = 102.04\norb_mode  = 'fixed_parameters'"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#设置restart文件",
-    "href": "posts/03_Notes_CESM.html#设置restart文件",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "9.1 设置restart文件",
-    "text": "9.1 设置restart文件\n\nvi env_run.xml\n\n大约70行左右\n\nSTOP_OPTION：nyears，每年\nSTOP_N：10，从10年停止\nREST_N：2，每2年保留一次文件\nCONTINUE_RUN：TRUE，继续运行\nRESUBMIT：1or2，如果大于0，则在停止实验后继续运行"
-  },
-  {
-    "objectID": "posts/03_Notes_CESM.html#结课报告6.1718日",
-    "href": "posts/03_Notes_CESM.html#结课报告6.1718日",
-    "title": "Numerical Climate Simulation Notes",
-    "section": "11.1 2023-06-18 结课报告（6.17~18日）",
-    "text": "11.1 2023-06-18 结课报告（6.17~18日）\n\n你的实验，相对参照实验，表现出什么样的气候效应？\n\n\n一般运行5-10年，前2年为预热期\n\n温度场，风场，降水场，环流场等。。\n围绕什么问题，涉及了什么样的实验，做实验的步骤是（展示整个流程，如果改了植被，植被怎么变化的），核心代码怎么实现的？"
-  },
-  {
-    "objectID": "posts/04_Zhihu_bookdown.html",
-    "href": "posts/04_Zhihu_bookdown.html",
+    "objectID": "posts/02_Zhihu_bookdown.html",
+    "href": "posts/02_Zhihu_bookdown.html",
     "title": "Use bookdown to build your notes",
     "section": "",
     "text": "问题由来： 有时想要将笔记发布到独立的网站上让认识的朋友看，却又不懂如何部署网站，让人非常难受。\n\n本文将手把手教你如何使用Rmarkdown以及R包bookdown写“书”，并通过github轻松部署到自己的Github pages上！ 首先摆出我自己的简单案例：气候数值模拟笔记。他在网站上长这样：\n\n\n\n图1 案例笔记在网站中的呈现情况\n\n\n\n\n在开始之前，需要确认已经安装好R1 、Git2 以及Rstudio3。 此外，需要安装本文的核心R包bookdown，可以通过在R中运行以下代码进行安装：\ninstall.packages('bookdown')\n\n# 如果想使用开发版本\n# install.packages('pak')\npak::pak('rstudio/bookdown')\n\n\n\n\n\n在Rstudio中点击File-&gt;New Project-&gt;New Directory-&gt;Bookproject using bookdown-&gt;Create Project\n   \n在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：\n\n\n\n图6 生成的文件\n\n\n\n\n\n在生成的文件中，index.Rmd是笔记的首页，而其它如01-intro.Rmd的文件是笔记的其它部分。预览笔记的方式有两种：\n\n点击index.Rmd脚本上方的Knit按钮 \n点击Build-&gt;bookdown::gitbook \n\n我们选择第二种预览方式，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。\n\n\n\n图9 示例笔记预览情况\n\n\n可以看出，除index.Rmd中的内容出现在第一页外，笔记其它部分按照笔记文件排序出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程4。\n\n\n\n\n\n\n为了将笔记放置在网上，我们首先在github上新建一个空仓库：\n\n\n\n图10 新建仓库\n\n\n\n\n\n首先，我们需要在_bookdown.yml文件中添加一行参数\noutput_dir: \"docs\"\n在添加完这行参数后，重新Build一下我们的笔记，在项目中就会生成一个docs文件夹，里面是我们笔记相关的文件。\n\n\n\n在生成我们需要的文件后，我们需要将这个项目上传至我们在github上新建的项目中。 1. 在本地初始化git环境。在项目文件夹路径下右键Git Bash Here，输入以下代码： shell    git init 2. 链接远程github仓库。输入以下代码： shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git 3. 上传项目文件。分别输入一下三行代码： shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！\n\n\n\n最后一步，我们需要在仓库中修改一些设置。 在仓库中点击Settings-&gt;Pages修改branch为docs文件夹：\n\n\n\n图11 修改分支\n\n\n然后回到仓库code页面，点击右侧About右方的设置按钮，链接网页：\n\n\n\n图12 链接网页\n\n\n当保存这些更改后，等待一段时间，进入About中显示的网页，就可以看到我们的笔记了。\n\n\n\n\n如果这篇文章对你有帮助，那就点个赞吧~"
   },
   {
-    "objectID": "posts/04_Zhihu_bookdown.html#准备工作",
-    "href": "posts/04_Zhihu_bookdown.html#准备工作",
+    "objectID": "posts/02_Zhihu_bookdown.html#准备工作",
+    "href": "posts/02_Zhihu_bookdown.html#准备工作",
     "title": "Use bookdown to build your notes",
     "section": "",
     "text": "在开始之前，需要确认已经安装好R1 、Git2 以及Rstudio3。 此外，需要安装本文的核心R包bookdown，可以通过在R中运行以下代码进行安装：\ninstall.packages('bookdown')\n\n# 如果想使用开发版本\n# install.packages('pak')\npak::pak('rstudio/bookdown')"
   },
   {
-    "objectID": "posts/04_Zhihu_bookdown.html#创建笔记",
-    "href": "posts/04_Zhihu_bookdown.html#创建笔记",
+    "objectID": "posts/02_Zhihu_bookdown.html#创建笔记",
+    "href": "posts/02_Zhihu_bookdown.html#创建笔记",
     "title": "Use bookdown to build your notes",
     "section": "",
     "text": "在Rstudio中点击File-&gt;New Project-&gt;New Directory-&gt;Bookproject using bookdown-&gt;Create Project\n   \n在进行完上述操作后，我们就进入到新建的book项目中了，生成的文件如下：\n\n\n\n图6 生成的文件\n\n\n\n\n\n在生成的文件中，index.Rmd是笔记的首页，而其它如01-intro.Rmd的文件是笔记的其它部分。预览笔记的方式有两种：\n\n点击index.Rmd脚本上方的Knit按钮 \n点击Build-&gt;bookdown::gitbook \n\n我们选择第二种预览方式，预览以后就可以看到示例笔记了，基本与网页上的呈现方式一致。\n\n\n\n图9 示例笔记预览情况\n\n\n可以看出，除index.Rmd中的内容出现在第一页外，笔记其它部分按照笔记文件排序出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程4。"
   },
   {
-    "objectID": "posts/04_Zhihu_bookdown.html#部署到github-pages",
-    "href": "posts/04_Zhihu_bookdown.html#部署到github-pages",
+    "objectID": "posts/02_Zhihu_bookdown.html#部署到github-pages",
+    "href": "posts/02_Zhihu_bookdown.html#部署到github-pages",
     "title": "Use bookdown to build your notes",
     "section": "",
     "text": "为了将笔记放置在网上，我们首先在github上新建一个空仓库：\n\n\n\n图10 新建仓库\n\n\n\n\n\n首先，我们需要在_bookdown.yml文件中添加一行参数\noutput_dir: \"docs\"\n在添加完这行参数后，重新Build一下我们的笔记，在项目中就会生成一个docs文件夹，里面是我们笔记相关的文件。\n\n\n\n在生成我们需要的文件后，我们需要将这个项目上传至我们在github上新建的项目中。 1. 在本地初始化git环境。在项目文件夹路径下右键Git Bash Here，输入以下代码： shell    git init 2. 链接远程github仓库。输入以下代码： shell    git remote add origin git@github.com:&lt;your_github_name&gt;/&lt;your_repo_name&gt;.git 3. 上传项目文件。分别输入一下三行代码： shell    git add --all # 上传全部文件    git commit -m '备注信息'    git push origin master 做完这些，在网站上刷新你的项目仓库，就可以看到这些文件已经传入仓库中了！\n\n\n\n最后一步，我们需要在仓库中修改一些设置。 在仓库中点击Settings-&gt;Pages修改branch为docs文件夹：\n\n\n\n图11 修改分支\n\n\n然后回到仓库code页面，点击右侧About右方的设置按钮，链接网页：\n\n\n\n图12 链接网页\n\n\n当保存这些更改后，等待一段时间，进入About中显示的网页，就可以看到我们的笔记了。"
   },
   {
-    "objectID": "posts/04_Zhihu_bookdown.html#最后",
-    "href": "posts/04_Zhihu_bookdown.html#最后",
+    "objectID": "posts/02_Zhihu_bookdown.html#最后",
+    "href": "posts/02_Zhihu_bookdown.html#最后",
     "title": "Use bookdown to build your notes",
     "section": "",
     "text": "如果这篇文章对你有帮助，那就点个赞吧~"
   },
   {
-    "objectID": "posts/04_Zhihu_bookdown.html#footnotes",
-    "href": "posts/04_Zhihu_bookdown.html#footnotes",
+    "objectID": "posts/02_Zhihu_bookdown.html#footnotes",
+    "href": "posts/02_Zhihu_bookdown.html#footnotes",
     "title": "Use bookdown to build your notes",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nR语言下载链接↩︎\nGit下载链接↩︎\nRstudio下载链接↩︎\nRmarkdown官方教程↩︎"
   },
   {
-    "objectID": "posts/05_Julia_DataFrames.html",
-    "href": "posts/05_Julia_DataFrames.html",
-    "title": "Learn DataFrames.jl",
+    "objectID": "posts_depreciated/02_Python_test.html",
+    "href": "posts_depreciated/02_Python_test.html",
+    "title": "Python test in Quarto",
     "section": "",
-    "text": "using CSV\nusing DataFrames"
-  },
-  {
-    "objectID": "posts/05_Julia_DataFrames.html#方法1",
-    "href": "posts/05_Julia_DataFrames.html#方法1",
-    "title": "Learn DataFrames.jl",
-    "section": "3.1 方法1",
-    "text": "3.1 方法1\n\ndf.V # df.\"V\"\n\n203-element Vector{Float64}:\n 0.08\n 0.45\n 0.17\n 0.25\n 0.97\n 0.85369167324573\n 0.06\n 0.590868123957716\n 0.36\n 0.06\n 0.51\n 0.310592788968676\n 0.53\n ⋮\n 0.11\n 0.08\n 0.47\n 0.15\n 0.11\n 0.82\n 0.07\n 0.36\n 0.12\n 0.2\n 0.3\n 0.288668959788242"
-  },
-  {
-    "objectID": "posts/05_Julia_DataFrames.html#方法2",
-    "href": "posts/05_Julia_DataFrames.html#方法2",
-    "title": "Learn DataFrames.jl",
-    "section": "3.2 方法2",
-    "text": "3.2 方法2\n\ndf[:, :V] # 这种情况下取值更改不会改变之前的数据框内容\n\n203-element Vector{Float64}:\n 0.08\n 0.45\n 0.17\n 0.25\n 0.97\n 0.85369167324573\n 0.06\n 0.590868123957716\n 0.36\n 0.06\n 0.51\n 0.310592788968676\n 0.53\n ⋮\n 0.11\n 0.08\n 0.47\n 0.15\n 0.11\n 0.82\n 0.07\n 0.36\n 0.12\n 0.2\n 0.3\n 0.288668959788242"
-  },
-  {
-    "objectID": "posts/05_Julia_DataFrames.html#正则表达式",
-    "href": "posts/05_Julia_DataFrames.html#正则表达式",
-    "title": "Learn DataFrames.jl",
-    "section": "9.1 正则表达式",
-    "text": "9.1 正则表达式\n\ndf[:, r\"l\"]\n\n203 rows × 2 columns\n\n\n\n\nlon\nlat\n\n\n\nFloat64\nFloat64\n\n\n\n\n1\n111.8\n29.07\n\n\n2\n111.93\n28.94\n\n\n3\n111.95\n28.98\n\n\n4\n111.98\n29.11\n\n\n5\n112.03\n29.04\n\n\n6\n112.07\n29.09\n\n\n7\n112.14\n28.87\n\n\n8\n112.14\n29.0\n\n\n9\n112.2\n29.08\n\n\n10\n112.2\n29.66\n\n\n11\n112.24\n29.27\n\n\n12\n112.26\n29.18\n\n\n13\n112.26\n29.59\n\n\n14\n112.29\n29.07\n\n\n15\n112.3\n29.77\n\n\n16\n112.3\n29.81\n\n\n17\n112.31\n29.29\n\n\n18\n112.31\n29.32\n\n\n19\n112.31\n29.62\n\n\n20\n112.31\n29.84\n\n\n21\n112.32\n29.67\n\n\n22\n112.33\n29.14\n\n\n23\n112.33\n29.21\n\n\n24\n112.35\n29.05\n\n\n25\n112.35\n29.18\n\n\n26\n112.35\n29.85\n\n\n27\n112.37\n28.96\n\n\n28\n112.38\n29.53\n\n\n29\n112.38\n29.88\n\n\n30\n112.39\n29.66\n\n\n⋮\n⋮\n⋮"
+    "text": "这是另一个posts中内容的测试\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nplt.scatter(x=range(10), y=range(10))\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "tools/hydroET.html",
@@ -264,12 +271,5 @@
     "title": "hydroET",
     "section": "References",
     "text": "References\nNing Ma, 2021, Calibration-Free Complementary Relationship Estimates Terrestrial Evapotranspiration Globally"
-  },
-  {
-    "objectID": "tools/SMSpy.html",
-    "href": "tools/SMSpy.html",
-    "title": "SMSpy",
-    "section": "",
-    "text": "SMS网站的python与R接口`。\n\n\n\n Back to top"
   }
 ]

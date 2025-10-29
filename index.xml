@@ -5,2842 +5,25 @@
       xmlns:dc="http://purl.org/dc/elements/1.1/" 
       version="2.0">
 <channel>
-<title>xyx-Lab</title>
-<link>https://cug-xyx.github.io/index.html</link>
+<title>Yuxuan Xie</title>
+<link>https://cug-xyx.github.io/</link>
 <atom:link href="https://cug-xyx.github.io/index.xml" rel="self" type="application/rss+xml"/>
-<description>An entry-level programming enthusiast</description>
+<description>An ecohydrology researcher and programming enthusiast</description>
 <image>
 <url>https://cug-xyx.github.io/./image/self_image.png</url>
-<title>xyx-Lab</title>
-<link>https://cug-xyx.github.io/index.html</link>
+<title>Yuxuan Xie</title>
+<link>https://cug-xyx.github.io/</link>
 <height>170</height>
 <width>144</width>
 </image>
-<generator>quarto-1.3.361</generator>
-<lastBuildDate>Sun, 18 Jun 2023 16:00:00 GMT</lastBuildDate>
-<item>
-  <title>Learn DataFrames.jl</title>
-  <link>https://cug-xyx.github.io/posts/05_Julia_DataFrames.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="导入库" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 导入库</h1>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">using</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">CSV</span></span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">using</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">DataFrames</span></span></code></pre></div>
-</div>
-</section>
-<section id="读取数据" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 读取数据</h1>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1">df <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> CSV.<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">read</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"../data/203st_idw_interp_0.05deg.csv"</span>, DataFrame)</span>
-<span id="cb2-2"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># df = CSV.read("I:/order_data/Xujw/203st_idw_interp_0.05deg.csv", DataFrame)</span></span>
-<span id="cb2-3">df <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># copy(df) 复制df</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<div class="data-frame"><p>203 rows × 7 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">Eh</th>
-<th data-quarto-table-cell-role="th">V</th>
-<th data-quarto-table-cell-role="th">Ni</th>
-<th data-quarto-table-cell-role="th">Ba</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>19G26</td>
-<td>111.8</td>
-<td>29.07</td>
-<td>33.2</td>
-<td>0.08</td>
-<td>1.55</td>
-<td>126.99</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>22G-80</td>
-<td>111.93</td>
-<td>28.94</td>
-<td>163.6</td>
-<td>0.45</td>
-<td>2.77</td>
-<td>71.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>19G22</td>
-<td>111.95</td>
-<td>28.98</td>
-<td>-48.0</td>
-<td>0.17</td>
-<td>1.18</td>
-<td>161.81</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>22G-83</td>
-<td>111.98</td>
-<td>29.11</td>
-<td>64.8</td>
-<td>0.25</td>
-<td>0.59</td>
-<td>136.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>22G-81</td>
-<td>112.03</td>
-<td>29.04</td>
-<td>143.1</td>
-<td>0.97</td>
-<td>1.83</td>
-<td>124.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>20DT-19G</td>
-<td>112.07</td>
-<td>29.09</td>
-<td>26.0</td>
-<td>0.853692</td>
-<td>1.28</td>
-<td>173.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>19G21</td>
-<td>112.14</td>
-<td>28.87</td>
-<td>143.0</td>
-<td>0.06</td>
-<td>1.16</td>
-<td>5.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>20DT-17G</td>
-<td>112.14</td>
-<td>29.0</td>
-<td>-60.8</td>
-<td>0.590868</td>
-<td>0.7</td>
-<td>258.56</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>22G-82</td>
-<td>112.2</td>
-<td>29.08</td>
-<td>96.1</td>
-<td>0.36</td>
-<td>1.04</td>
-<td>183.63</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>22G-90</td>
-<td>112.2</td>
-<td>29.66</td>
-<td>-88.1</td>
-<td>0.06</td>
-<td>1.8</td>
-<td>167.24</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>22G-88</td>
-<td>112.24</td>
-<td>29.27</td>
-<td>115.5</td>
-<td>0.51</td>
-<td>2.29</td>
-<td>20.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>22G-85</td>
-<td>112.26</td>
-<td>29.18</td>
-<td>90.5</td>
-<td>0.310593</td>
-<td>4.08</td>
-<td>476.34</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>DT02G</td>
-<td>112.26</td>
-<td>29.59</td>
-<td>-29.3</td>
-<td>0.53</td>
-<td>2.16</td>
-<td>234.38</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>18S-38G</td>
-<td>112.29</td>
-<td>29.07</td>
-<td>158.0</td>
-<td>0.08</td>
-<td>0.71</td>
-<td>22.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>18S-25G</td>
-<td>112.3</td>
-<td>29.77</td>
-<td>-88.1</td>
-<td>0.02</td>
-<td>0.22</td>
-<td>112.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>18S-24G</td>
-<td>112.3</td>
-<td>29.81</td>
-<td>-80.0</td>
-<td>0.14</td>
-<td>0.2</td>
-<td>153.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>22G-87</td>
-<td>112.31</td>
-<td>29.29</td>
-<td>40.9</td>
-<td>0.55</td>
-<td>2.34</td>
-<td>421.78</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>DT01G</td>
-<td>112.31</td>
-<td>29.32</td>
-<td>-29.1</td>
-<td>0.24</td>
-<td>2.13</td>
-<td>240.8</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>DT03G</td>
-<td>112.31</td>
-<td>29.62</td>
-<td>81.1</td>
-<td>0.14</td>
-<td>1.59</td>
-<td>404.23</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>18S-23G</td>
-<td>112.31</td>
-<td>29.84</td>
-<td>-103.0</td>
-<td>0.2</td>
-<td>1.0</td>
-<td>210.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>18S-27G</td>
-<td>112.32</td>
-<td>29.67</td>
-<td>97.3386</td>
-<td>0.26</td>
-<td>1.88</td>
-<td>125.25</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>21DT-26G</td>
-<td>112.33</td>
-<td>29.14</td>
-<td>-48.6</td>
-<td>0.191896</td>
-<td>1.70282</td>
-<td>502.1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>21DT-23G</td>
-<td>112.33</td>
-<td>29.21</td>
-<td>-31.0</td>
-<td>0.372661</td>
-<td>2.26989</td>
-<td>904.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>18S-37G</td>
-<td>112.35</td>
-<td>29.05</td>
-<td>-49.0</td>
-<td>0.19</td>
-<td>0.0</td>
-<td>65.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>22G-84</td>
-<td>112.35</td>
-<td>29.18</td>
-<td>122.5</td>
-<td>0.28</td>
-<td>2.35</td>
-<td>257.15</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>18S-22G</td>
-<td>112.35</td>
-<td>29.85</td>
-<td>-120.0</td>
-<td>0.265757</td>
-<td>3.79</td>
-<td>615.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>20DT-29G</td>
-<td>112.37</td>
-<td>28.96</td>
-<td>-88.2</td>
-<td>0.179396</td>
-<td>1.98</td>
-<td>274.92</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>22G-92</td>
-<td>112.38</td>
-<td>29.53</td>
-<td>-35.1</td>
-<td>0.1</td>
-<td>1.93</td>
-<td>111.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>18S-20G</td>
-<td>112.38</td>
-<td>29.88</td>
-<td>-142.0</td>
-<td>0.47</td>
-<td>3.3</td>
-<td>541.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>22G-91</td>
-<td>112.39</td>
-<td>29.66</td>
-<td>177.2</td>
-<td>1.88</td>
-<td>4.19</td>
-<td>164.61</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="取出某一行" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> 取出某一行</h1>
-<section id="方法1" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="方法1"><span class="header-section-number">3.1</span> 方法1</h2>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1">df.V <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># df."V"</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>203-element Vector{Float64}:
- 0.08
- 0.45
- 0.17
- 0.25
- 0.97
- 0.85369167324573
- 0.06
- 0.590868123957716
- 0.36
- 0.06
- 0.51
- 0.310592788968676
- 0.53
- ⋮
- 0.11
- 0.08
- 0.47
- 0.15
- 0.11
- 0.82
- 0.07
- 0.36
- 0.12
- 0.2
- 0.3
- 0.288668959788242</code></pre>
-</div>
-</div>
-</section>
-<section id="方法2" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="方法2"><span class="header-section-number">3.2</span> 方法2</h2>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1">df[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V] <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 这种情况下取值更改不会改变之前的数据框内容</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>203-element Vector{Float64}:
- 0.08
- 0.45
- 0.17
- 0.25
- 0.97
- 0.85369167324573
- 0.06
- 0.590868123957716
- 0.36
- 0.06
- 0.51
- 0.310592788968676
- 0.53
- ⋮
- 0.11
- 0.08
- 0.47
- 0.15
- 0.11
- 0.82
- 0.07
- 0.36
- 0.12
- 0.2
- 0.3
- 0.288668959788242</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="列名" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> 列名</h1>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb7-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">names</span>(df, <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">AbstractString</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 筛选出不同数据类型的列名</span></span>
-<span id="cb7-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">names</span>(df, <span class="dt" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">Float64</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>6-element Vector{String}:
- "lon"
- "lat"
- "Eh"
- "V"
- "Ni"
- "Ba"</code></pre>
-</div>
-</div>
-</section>
-<section id="创建一个0行但包含全部列名的df" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> 创建一个0行但包含全部列名的df</h1>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">empty</span>(df) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># empty!()直接让目标df清空</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div class="data-frame"><p>0 rows × 7 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">Eh</th>
-<th data-quarto-table-cell-role="th">V</th>
-<th data-quarto-table-cell-role="th">Ni</th>
-<th data-quarto-table-cell-role="th">Ba</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="查看df基本信息" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> 查看df基本信息</h1>
-<p>df维度：</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">size</span>(df) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># 维度</span></span>
-<span id="cb10-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nrow</span>(df) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># ncol()</span></span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>203</code></pre>
-</div>
-</div>
-<p>统计信息，类似R语言<code>summary</code></p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">describe</span>(df, cols<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">7</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div class="data-frame"><p>4 rows × 7 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">variable</th>
-<th data-quarto-table-cell-role="th">mean</th>
-<th data-quarto-table-cell-role="th">min</th>
-<th data-quarto-table-cell-role="th">median</th>
-<th data-quarto-table-cell-role="th">max</th>
-<th data-quarto-table-cell-role="th">nmissing</th>
-<th data-quarto-table-cell-role="th">eltype</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Symbol">Symbol</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Int64">Int64</th>
-<th data-quarto-table-cell-role="th" title="DataType">DataType</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Eh</td>
-<td>-54.8574</td>
-<td>-278.3</td>
-<td>-72.2</td>
-<td>177.2</td>
-<td>0</td>
-<td>Float64</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>V</td>
-<td>0.344441</td>
-<td>0.0</td>
-<td>0.259441</td>
-<td>1.88</td>
-<td>0</td>
-<td>Float64</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>Ni</td>
-<td>2.46611</td>
-<td>0.0</td>
-<td>2.14</td>
-<td>8.39</td>
-<td>0</td>
-<td>Float64</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Ba</td>
-<td>253.259</td>
-<td>0.01</td>
-<td>195.07</td>
-<td>1752.0</td>
-<td>0</td>
-<td>Float64</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="筛选df" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> 筛选df</h1>
-<div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1">df[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>, [<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lon, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lat]]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<div class="data-frame"><p>203 rows × 2 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>111.8</td>
-<td>29.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>111.93</td>
-<td>28.94</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>111.95</td>
-<td>28.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>111.98</td>
-<td>29.11</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>112.03</td>
-<td>29.04</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>112.07</td>
-<td>29.09</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>112.14</td>
-<td>28.87</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>112.14</td>
-<td>29.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>112.2</td>
-<td>29.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>112.2</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>112.24</td>
-<td>29.27</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>112.26</td>
-<td>29.18</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>112.26</td>
-<td>29.59</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>112.29</td>
-<td>29.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>112.3</td>
-<td>29.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>112.3</td>
-<td>29.81</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>112.31</td>
-<td>29.29</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>112.31</td>
-<td>29.32</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>112.31</td>
-<td>29.62</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>112.31</td>
-<td>29.84</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>112.32</td>
-<td>29.67</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>112.33</td>
-<td>29.14</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>112.33</td>
-<td>29.21</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>112.35</td>
-<td>29.05</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>112.35</td>
-<td>29.18</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>112.35</td>
-<td>29.85</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>112.37</td>
-<td>28.96</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>112.38</td>
-<td>29.53</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>112.38</td>
-<td>29.88</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>112.39</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="条件筛选" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> 条件筛选</h1>
-</section>
-<section id="常规" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> 常规</h1>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1">df[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Not</span>([<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>site, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lon, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lat])]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<div class="data-frame"><p>203 rows × 4 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Eh</th>
-<th data-quarto-table-cell-role="th">V</th>
-<th data-quarto-table-cell-role="th">Ni</th>
-<th data-quarto-table-cell-role="th">Ba</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>33.2</td>
-<td>0.08</td>
-<td>1.55</td>
-<td>126.99</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>163.6</td>
-<td>0.45</td>
-<td>2.77</td>
-<td>71.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-48.0</td>
-<td>0.17</td>
-<td>1.18</td>
-<td>161.81</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>64.8</td>
-<td>0.25</td>
-<td>0.59</td>
-<td>136.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>143.1</td>
-<td>0.97</td>
-<td>1.83</td>
-<td>124.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>26.0</td>
-<td>0.853692</td>
-<td>1.28</td>
-<td>173.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>143.0</td>
-<td>0.06</td>
-<td>1.16</td>
-<td>5.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>-60.8</td>
-<td>0.590868</td>
-<td>0.7</td>
-<td>258.56</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>96.1</td>
-<td>0.36</td>
-<td>1.04</td>
-<td>183.63</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>-88.1</td>
-<td>0.06</td>
-<td>1.8</td>
-<td>167.24</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>115.5</td>
-<td>0.51</td>
-<td>2.29</td>
-<td>20.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>90.5</td>
-<td>0.310593</td>
-<td>4.08</td>
-<td>476.34</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>-29.3</td>
-<td>0.53</td>
-<td>2.16</td>
-<td>234.38</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>158.0</td>
-<td>0.08</td>
-<td>0.71</td>
-<td>22.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>-88.1</td>
-<td>0.02</td>
-<td>0.22</td>
-<td>112.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>-80.0</td>
-<td>0.14</td>
-<td>0.2</td>
-<td>153.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>40.9</td>
-<td>0.55</td>
-<td>2.34</td>
-<td>421.78</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>-29.1</td>
-<td>0.24</td>
-<td>2.13</td>
-<td>240.8</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>81.1</td>
-<td>0.14</td>
-<td>1.59</td>
-<td>404.23</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>-103.0</td>
-<td>0.2</td>
-<td>1.0</td>
-<td>210.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>97.3386</td>
-<td>0.26</td>
-<td>1.88</td>
-<td>125.25</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>-48.6</td>
-<td>0.191896</td>
-<td>1.70282</td>
-<td>502.1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>-31.0</td>
-<td>0.372661</td>
-<td>2.26989</td>
-<td>904.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>-49.0</td>
-<td>0.19</td>
-<td>0.0</td>
-<td>65.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>122.5</td>
-<td>0.28</td>
-<td>2.35</td>
-<td>257.15</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>-120.0</td>
-<td>0.265757</td>
-<td>3.79</td>
-<td>615.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>-88.2</td>
-<td>0.179396</td>
-<td>1.98</td>
-<td>274.92</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>-35.1</td>
-<td>0.1</td>
-<td>1.93</td>
-<td>111.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>-142.0</td>
-<td>0.47</td>
-<td>3.3</td>
-<td>541.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>177.2</td>
-<td>1.88</td>
-<td>4.19</td>
-<td>164.61</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1">df[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">Between</span>(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>site, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lat)]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<div class="data-frame"><p>203 rows × 3 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>19G26</td>
-<td>111.8</td>
-<td>29.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>22G-80</td>
-<td>111.93</td>
-<td>28.94</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>19G22</td>
-<td>111.95</td>
-<td>28.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>22G-83</td>
-<td>111.98</td>
-<td>29.11</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>22G-81</td>
-<td>112.03</td>
-<td>29.04</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>20DT-19G</td>
-<td>112.07</td>
-<td>29.09</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>19G21</td>
-<td>112.14</td>
-<td>28.87</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>20DT-17G</td>
-<td>112.14</td>
-<td>29.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>22G-82</td>
-<td>112.2</td>
-<td>29.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>22G-90</td>
-<td>112.2</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>22G-88</td>
-<td>112.24</td>
-<td>29.27</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>22G-85</td>
-<td>112.26</td>
-<td>29.18</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>DT02G</td>
-<td>112.26</td>
-<td>29.59</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>18S-38G</td>
-<td>112.29</td>
-<td>29.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>18S-25G</td>
-<td>112.3</td>
-<td>29.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>18S-24G</td>
-<td>112.3</td>
-<td>29.81</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>22G-87</td>
-<td>112.31</td>
-<td>29.29</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>DT01G</td>
-<td>112.31</td>
-<td>29.32</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>DT03G</td>
-<td>112.31</td>
-<td>29.62</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>18S-23G</td>
-<td>112.31</td>
-<td>29.84</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>18S-27G</td>
-<td>112.32</td>
-<td>29.67</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>21DT-26G</td>
-<td>112.33</td>
-<td>29.14</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>21DT-23G</td>
-<td>112.33</td>
-<td>29.21</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>18S-37G</td>
-<td>112.35</td>
-<td>29.05</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>22G-84</td>
-<td>112.35</td>
-<td>29.18</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>18S-22G</td>
-<td>112.35</td>
-<td>29.85</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>20DT-29G</td>
-<td>112.37</td>
-<td>28.96</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>22G-92</td>
-<td>112.38</td>
-<td>29.53</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>18S-20G</td>
-<td>112.38</td>
-<td>29.88</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>22G-91</td>
-<td>112.39</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<section id="正则表达式" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="正则表达式"><span class="header-section-number">9.1</span> 正则表达式</h2>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1">df[<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">r"l"</span>]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<div class="data-frame"><p>203 rows × 2 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>111.8</td>
-<td>29.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>111.93</td>
-<td>28.94</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>111.95</td>
-<td>28.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>111.98</td>
-<td>29.11</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>112.03</td>
-<td>29.04</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>112.07</td>
-<td>29.09</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>112.14</td>
-<td>28.87</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>112.14</td>
-<td>29.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>112.2</td>
-<td>29.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>112.2</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>112.24</td>
-<td>29.27</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>112.26</td>
-<td>29.18</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>112.26</td>
-<td>29.59</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>112.29</td>
-<td>29.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>112.3</td>
-<td>29.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>112.3</td>
-<td>29.81</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>112.31</td>
-<td>29.29</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>112.31</td>
-<td>29.32</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>112.31</td>
-<td>29.62</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>112.31</td>
-<td>29.84</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>112.32</td>
-<td>29.67</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>112.33</td>
-<td>29.14</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>112.33</td>
-<td>29.21</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>112.35</td>
-<td>29.05</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>112.35</td>
-<td>29.18</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>112.35</td>
-<td>29.85</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>112.37</td>
-<td>28.96</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>112.38</td>
-<td>29.53</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>112.38</td>
-<td>29.88</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>112.39</td>
-<td>29.66</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="转换函数" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> 转换函数</h1>
-<p>共五种方法：</p>
-<ul>
-<li><p>combine</p></li>
-<li><p>select</p></li>
-<li><p>transformselect</p></li>
-</ul>
-<p>导入分组统计所需包</p>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">using</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">Statistics</span></span></code></pre></div>
-</div>
-<p>求<code>V</code>的平均值</p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb18-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">combine</span>(df, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> mean <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>mean_V)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<div class="data-frame"><p>1 rows × 1 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mean_V</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.344441</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>筛选<code>lon</code></p>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb19-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(df, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lon <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> mean <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>mean_lon)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<div class="data-frame"><p>203 rows × 1 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">mean_lon</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>112.868</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>112.868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>随便选</p>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb20-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(df, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">r"l"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"site"</span>, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<div class="data-frame"><p>203 rows × 4 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">V</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>111.8</td>
-<td>29.07</td>
-<td>19G26</td>
-<td>0.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>111.93</td>
-<td>28.94</td>
-<td>22G-80</td>
-<td>0.45</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>111.95</td>
-<td>28.98</td>
-<td>19G22</td>
-<td>0.17</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>111.98</td>
-<td>29.11</td>
-<td>22G-83</td>
-<td>0.25</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>112.03</td>
-<td>29.04</td>
-<td>22G-81</td>
-<td>0.97</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>112.07</td>
-<td>29.09</td>
-<td>20DT-19G</td>
-<td>0.853692</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>112.14</td>
-<td>28.87</td>
-<td>19G21</td>
-<td>0.06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>112.14</td>
-<td>29.0</td>
-<td>20DT-17G</td>
-<td>0.590868</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>112.2</td>
-<td>29.08</td>
-<td>22G-82</td>
-<td>0.36</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>112.2</td>
-<td>29.66</td>
-<td>22G-90</td>
-<td>0.06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>112.24</td>
-<td>29.27</td>
-<td>22G-88</td>
-<td>0.51</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>112.26</td>
-<td>29.18</td>
-<td>22G-85</td>
-<td>0.310593</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>112.26</td>
-<td>29.59</td>
-<td>DT02G</td>
-<td>0.53</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>112.29</td>
-<td>29.07</td>
-<td>18S-38G</td>
-<td>0.08</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>112.3</td>
-<td>29.77</td>
-<td>18S-25G</td>
-<td>0.02</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>112.3</td>
-<td>29.81</td>
-<td>18S-24G</td>
-<td>0.14</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>112.31</td>
-<td>29.29</td>
-<td>22G-87</td>
-<td>0.55</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>112.31</td>
-<td>29.32</td>
-<td>DT01G</td>
-<td>0.24</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>112.31</td>
-<td>29.62</td>
-<td>DT03G</td>
-<td>0.14</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>112.31</td>
-<td>29.84</td>
-<td>18S-23G</td>
-<td>0.2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>112.32</td>
-<td>29.67</td>
-<td>18S-27G</td>
-<td>0.26</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>112.33</td>
-<td>29.14</td>
-<td>21DT-26G</td>
-<td>0.191896</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>112.33</td>
-<td>29.21</td>
-<td>21DT-23G</td>
-<td>0.372661</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>112.35</td>
-<td>29.05</td>
-<td>18S-37G</td>
-<td>0.19</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>112.35</td>
-<td>29.18</td>
-<td>22G-84</td>
-<td>0.28</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>112.35</td>
-<td>29.85</td>
-<td>18S-22G</td>
-<td>0.265757</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>112.37</td>
-<td>28.96</td>
-<td>20DT-29G</td>
-<td>0.179396</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>112.38</td>
-<td>29.53</td>
-<td>22G-92</td>
-<td>0.1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>112.38</td>
-<td>29.88</td>
-<td>18S-20G</td>
-<td>0.47</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>112.39</td>
-<td>29.66</td>
-<td>22G-91</td>
-<td>1.88</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-<p>改列名</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb21-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(df, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>lon <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>new_lon, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<div class="data-frame"><p>203 rows × 8 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">new_lon</th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">Eh</th>
-<th data-quarto-table-cell-role="th">V</th>
-<th data-quarto-table-cell-role="th">Ni</th>
-<th data-quarto-table-cell-role="th">Ba</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>111.8</td>
-<td>19G26</td>
-<td>111.8</td>
-<td>29.07</td>
-<td>33.2</td>
-<td>0.08</td>
-<td>1.55</td>
-<td>126.99</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>111.93</td>
-<td>22G-80</td>
-<td>111.93</td>
-<td>28.94</td>
-<td>163.6</td>
-<td>0.45</td>
-<td>2.77</td>
-<td>71.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>111.95</td>
-<td>19G22</td>
-<td>111.95</td>
-<td>28.98</td>
-<td>-48.0</td>
-<td>0.17</td>
-<td>1.18</td>
-<td>161.81</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>111.98</td>
-<td>22G-83</td>
-<td>111.98</td>
-<td>29.11</td>
-<td>64.8</td>
-<td>0.25</td>
-<td>0.59</td>
-<td>136.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>112.03</td>
-<td>22G-81</td>
-<td>112.03</td>
-<td>29.04</td>
-<td>143.1</td>
-<td>0.97</td>
-<td>1.83</td>
-<td>124.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>112.07</td>
-<td>20DT-19G</td>
-<td>112.07</td>
-<td>29.09</td>
-<td>26.0</td>
-<td>0.853692</td>
-<td>1.28</td>
-<td>173.21</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>112.14</td>
-<td>19G21</td>
-<td>112.14</td>
-<td>28.87</td>
-<td>143.0</td>
-<td>0.06</td>
-<td>1.16</td>
-<td>5.54</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>112.14</td>
-<td>20DT-17G</td>
-<td>112.14</td>
-<td>29.0</td>
-<td>-60.8</td>
-<td>0.590868</td>
-<td>0.7</td>
-<td>258.56</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>112.2</td>
-<td>22G-82</td>
-<td>112.2</td>
-<td>29.08</td>
-<td>96.1</td>
-<td>0.36</td>
-<td>1.04</td>
-<td>183.63</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>112.2</td>
-<td>22G-90</td>
-<td>112.2</td>
-<td>29.66</td>
-<td>-88.1</td>
-<td>0.06</td>
-<td>1.8</td>
-<td>167.24</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>112.24</td>
-<td>22G-88</td>
-<td>112.24</td>
-<td>29.27</td>
-<td>115.5</td>
-<td>0.51</td>
-<td>2.29</td>
-<td>20.98</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>112.26</td>
-<td>22G-85</td>
-<td>112.26</td>
-<td>29.18</td>
-<td>90.5</td>
-<td>0.310593</td>
-<td>4.08</td>
-<td>476.34</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>112.26</td>
-<td>DT02G</td>
-<td>112.26</td>
-<td>29.59</td>
-<td>-29.3</td>
-<td>0.53</td>
-<td>2.16</td>
-<td>234.38</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>112.29</td>
-<td>18S-38G</td>
-<td>112.29</td>
-<td>29.07</td>
-<td>158.0</td>
-<td>0.08</td>
-<td>0.71</td>
-<td>22.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>112.3</td>
-<td>18S-25G</td>
-<td>112.3</td>
-<td>29.77</td>
-<td>-88.1</td>
-<td>0.02</td>
-<td>0.22</td>
-<td>112.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>112.3</td>
-<td>18S-24G</td>
-<td>112.3</td>
-<td>29.81</td>
-<td>-80.0</td>
-<td>0.14</td>
-<td>0.2</td>
-<td>153.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>112.31</td>
-<td>22G-87</td>
-<td>112.31</td>
-<td>29.29</td>
-<td>40.9</td>
-<td>0.55</td>
-<td>2.34</td>
-<td>421.78</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>112.31</td>
-<td>DT01G</td>
-<td>112.31</td>
-<td>29.32</td>
-<td>-29.1</td>
-<td>0.24</td>
-<td>2.13</td>
-<td>240.8</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>112.31</td>
-<td>DT03G</td>
-<td>112.31</td>
-<td>29.62</td>
-<td>81.1</td>
-<td>0.14</td>
-<td>1.59</td>
-<td>404.23</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>112.31</td>
-<td>18S-23G</td>
-<td>112.31</td>
-<td>29.84</td>
-<td>-103.0</td>
-<td>0.2</td>
-<td>1.0</td>
-<td>210.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>112.32</td>
-<td>18S-27G</td>
-<td>112.32</td>
-<td>29.67</td>
-<td>97.3386</td>
-<td>0.26</td>
-<td>1.88</td>
-<td>125.25</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>112.33</td>
-<td>21DT-26G</td>
-<td>112.33</td>
-<td>29.14</td>
-<td>-48.6</td>
-<td>0.191896</td>
-<td>1.70282</td>
-<td>502.1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>112.33</td>
-<td>21DT-23G</td>
-<td>112.33</td>
-<td>29.21</td>
-<td>-31.0</td>
-<td>0.372661</td>
-<td>2.26989</td>
-<td>904.77</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>112.35</td>
-<td>18S-37G</td>
-<td>112.35</td>
-<td>29.05</td>
-<td>-49.0</td>
-<td>0.19</td>
-<td>0.0</td>
-<td>65.6</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>112.35</td>
-<td>22G-84</td>
-<td>112.35</td>
-<td>29.18</td>
-<td>122.5</td>
-<td>0.28</td>
-<td>2.35</td>
-<td>257.15</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>112.35</td>
-<td>18S-22G</td>
-<td>112.35</td>
-<td>29.85</td>
-<td>-120.0</td>
-<td>0.265757</td>
-<td>3.79</td>
-<td>615.0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>112.37</td>
-<td>20DT-29G</td>
-<td>112.37</td>
-<td>28.96</td>
-<td>-88.2</td>
-<td>0.179396</td>
-<td>1.98</td>
-<td>274.92</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>112.38</td>
-<td>22G-92</td>
-<td>112.38</td>
-<td>29.53</td>
-<td>-35.1</td>
-<td>0.1</td>
-<td>1.93</td>
-<td>111.83</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>112.38</td>
-<td>18S-20G</td>
-<td>112.38</td>
-<td>29.88</td>
-<td>-142.0</td>
-<td>0.47</td>
-<td>3.3</td>
-<td>541.0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>112.39</td>
-<td>22G-91</td>
-<td>112.39</td>
-<td>29.66</td>
-<td>177.2</td>
-<td>1.88</td>
-<td>4.19</td>
-<td>164.61</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
-<section id="尝试管道符" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> 尝试管道符</h1>
-<p>参考学习链接：<a href="https://bkamins.github.io/julialang/2020/07/03/dplyr-vs-df.html">Comparing dplyr vs DataFrames.jl</a></p>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb22-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">using</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">Pipe</span></span></code></pre></div>
-</div>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb23-1"><span class="pp" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">@time</span> <span class="pp" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">@pipe</span> df <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb23-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">combine</span>(_, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> (x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> x) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V_mean, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb23-3">  (df <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">begin</span></span>
-<span id="cb23-4">    df.new_col <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> df.V</span>
-<span id="cb23-5">    df</span>
-<span id="cb23-6">  <span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">end</span>) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb23-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>V_mean <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=&gt;</span> v <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-&gt;</span> v <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&gt;</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, _) <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb23-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sort</span>(_, <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span>new_col)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  0.973227 seconds (3.08 M allocations: 205.192 MiB, 5.03% gc time, 99.52% compilation time)</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="20">
-<div class="data-frame"><p>193 rows × 9 columns</p>
-<table class="data-frame table table-sm table-striped small" data-quarto-postprocess="true">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">V_mean</th>
-<th data-quarto-table-cell-role="th">site</th>
-<th data-quarto-table-cell-role="th">lon</th>
-<th data-quarto-table-cell-role="th">lat</th>
-<th data-quarto-table-cell-role="th">Eh</th>
-<th data-quarto-table-cell-role="th">V</th>
-<th data-quarto-table-cell-role="th">Ni</th>
-<th data-quarto-table-cell-role="th">Ba</th>
-<th data-quarto-table-cell-role="th">new_col</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="String15">String15</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-<th data-quarto-table-cell-role="th" title="Float64">Float64</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.01</td>
-<td>12JH093</td>
-<td>112.85</td>
-<td>29.94</td>
-<td>-218.5</td>
-<td>0.01</td>
-<td>2.09</td>
-<td>184.509</td>
-<td>0.01</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2</td>
-<td>0.02</td>
-<td>18S-25G</td>
-<td>112.3</td>
-<td>29.77</td>
-<td>-88.1</td>
-<td>0.02</td>
-<td>0.22</td>
-<td>112.0</td>
-<td>0.02</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3</td>
-<td>0.04</td>
-<td>12JH076</td>
-<td>112.58</td>
-<td>30.29</td>
-<td>-90.0</td>
-<td>0.04</td>
-<td>2.47</td>
-<td>170.86</td>
-<td>0.04</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4</td>
-<td>0.04</td>
-<td>18G-05</td>
-<td>113.51</td>
-<td>29.84</td>
-<td>87.5</td>
-<td>0.04</td>
-<td>0.31</td>
-<td>59.45</td>
-<td>0.04</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">5</td>
-<td>0.05</td>
-<td>22G-86</td>
-<td>112.43</td>
-<td>29.39</td>
-<td>-7.6</td>
-<td>0.05</td>
-<td>1.47</td>
-<td>160.13</td>
-<td>0.05</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">6</td>
-<td>0.05</td>
-<td>22G-73</td>
-<td>112.81</td>
-<td>29.42</td>
-<td>-78.5</td>
-<td>0.05</td>
-<td>3.49</td>
-<td>120.7</td>
-<td>0.05</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">7</td>
-<td>0.05</td>
-<td>18G-11</td>
-<td>113.26</td>
-<td>29.61</td>
-<td>-83.2</td>
-<td>0.05</td>
-<td>0.06</td>
-<td>275.26</td>
-<td>0.05</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">8</td>
-<td>0.0558746</td>
-<td>22G-70</td>
-<td>113.56</td>
-<td>29.88</td>
-<td>-50.4</td>
-<td>0.0558746</td>
-<td>8.39</td>
-<td>58.55</td>
-<td>0.0558746</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9</td>
-<td>0.06</td>
-<td>19G21</td>
-<td>112.14</td>
-<td>28.87</td>
-<td>143.0</td>
-<td>0.06</td>
-<td>1.16</td>
-<td>5.54</td>
-<td>0.06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">10</td>
-<td>0.06</td>
-<td>22G-90</td>
-<td>112.2</td>
-<td>29.66</td>
-<td>-88.1</td>
-<td>0.06</td>
-<td>1.8</td>
-<td>167.24</td>
-<td>0.06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">11</td>
-<td>0.06</td>
-<td>19G14</td>
-<td>112.69</td>
-<td>29.15</td>
-<td>-81.0</td>
-<td>0.06</td>
-<td>0.99</td>
-<td>120.31</td>
-<td>0.06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">12</td>
-<td>0.07</td>
-<td>18G-19</td>
-<td>112.63</td>
-<td>29.78</td>
-<td>-14.3</td>
-<td>0.07</td>
-<td>0.45</td>
-<td>510.65</td>
-<td>0.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">13</td>
-<td>0.07</td>
-<td>18G-25</td>
-<td>112.64</td>
-<td>29.95</td>
-<td>-72.0</td>
-<td>0.07</td>
-<td>1.31</td>
-<td>58.46</td>
-<td>0.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">14</td>
-<td>0.07</td>
-<td>18G-26</td>
-<td>112.68</td>
-<td>29.97</td>
-<td>-103.0</td>
-<td>0.07</td>
-<td>0.52</td>
-<td>34.09</td>
-<td>0.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">15</td>
-<td>0.07</td>
-<td>18G-28</td>
-<td>112.72</td>
-<td>29.96</td>
-<td>-104.0</td>
-<td>0.07</td>
-<td>0.8</td>
-<td>63.87</td>
-<td>0.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">16</td>
-<td>0.07</td>
-<td>12JH163</td>
-<td>113.02</td>
-<td>29.55</td>
-<td>-135.8</td>
-<td>0.07</td>
-<td>3.62</td>
-<td>430.359</td>
-<td>0.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">17</td>
-<td>0.07</td>
-<td>18G-03</td>
-<td>113.61</td>
-<td>29.94</td>
-<td>-42.7</td>
-<td>0.07</td>
-<td>1.62</td>
-<td>289.92</td>
-<td>0.07</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">18</td>
-<td>0.07</td>
-<td>11JH183</td>
-<td>113.77</td>
-<td>30.07</td>
-<td>-54.8787</td>
-<td>0.07</td>
-<td>0.44</td>
-<td>155.31</td>
-<td>0.07</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">19</td>
-<td>0.08</td>
-<td>19G26</td>
-<td>111.8</td>
-<td>29.07</td>
-<td>33.2</td>
-<td>0.08</td>
-<td>1.55</td>
-<td>126.99</td>
-<td>0.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">20</td>
-<td>0.08</td>
-<td>18S-38G</td>
-<td>112.29</td>
-<td>29.07</td>
-<td>158.0</td>
-<td>0.08</td>
-<td>0.71</td>
-<td>22.6</td>
-<td>0.08</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">21</td>
-<td>0.08</td>
-<td>19G18</td>
-<td>112.65</td>
-<td>28.98</td>
-<td>55.0</td>
-<td>0.08</td>
-<td>0.49</td>
-<td>70.17</td>
-<td>0.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">22</td>
-<td>0.08</td>
-<td>22G-74</td>
-<td>112.78</td>
-<td>29.29</td>
-<td>-64.1</td>
-<td>0.08</td>
-<td>4.06</td>
-<td>412.63</td>
-<td>0.08</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">23</td>
-<td>0.08</td>
-<td>11JH164</td>
-<td>113.39</td>
-<td>30.07</td>
-<td>-77.5002</td>
-<td>0.08</td>
-<td>0.59</td>
-<td>157.01</td>
-<td>0.08</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">24</td>
-<td>0.08</td>
-<td>11JH161</td>
-<td>113.69</td>
-<td>30.09</td>
-<td>-54.3</td>
-<td>0.08</td>
-<td>0.63</td>
-<td>213.16</td>
-<td>0.08</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">25</td>
-<td>0.09</td>
-<td>18G-27</td>
-<td>112.72</td>
-<td>29.92</td>
-<td>-75.6</td>
-<td>0.09</td>
-<td>0.09</td>
-<td>39.12</td>
-<td>0.09</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">26</td>
-<td>0.09</td>
-<td>22G-20</td>
-<td>112.97</td>
-<td>29.52</td>
-<td>-124.0</td>
-<td>0.09</td>
-<td>7.03</td>
-<td>370.84</td>
-<td>0.09</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">27</td>
-<td>0.09</td>
-<td>22G-12</td>
-<td>113.06</td>
-<td>29.96</td>
-<td>-86.4</td>
-<td>0.09</td>
-<td>3.28</td>
-<td>180.59</td>
-<td>0.09</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">28</td>
-<td>0.09</td>
-<td>11JH162</td>
-<td>113.64</td>
-<td>30.09</td>
-<td>-72.7851</td>
-<td>0.09</td>
-<td>0.59</td>
-<td>100.8</td>
-<td>0.09</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">29</td>
-<td>0.1</td>
-<td>22G-92</td>
-<td>112.38</td>
-<td>29.53</td>
-<td>-35.1</td>
-<td>0.1</td>
-<td>1.93</td>
-<td>111.83</td>
-<td>0.1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">30</td>
-<td>0.1</td>
-<td>19G19</td>
-<td>112.75</td>
-<td>28.91</td>
-<td>78.5</td>
-<td>0.1</td>
-<td>0.45</td>
-<td>15.27</td>
-<td>0.1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
-  <category>Julia</category>
-  <guid>https://cug-xyx.github.io/posts/05_Julia_DataFrames.html</guid>
-  <pubDate>Sun, 18 Jun 2023 16:00:00 GMT</pubDate>
-</item>
+<generator>quarto-1.8.25</generator>
+<lastBuildDate>Sat, 17 Jun 2023 16:00:00 GMT</lastBuildDate>
 <item>
   <title>Use bookdown to build your notes</title>
   <dc:creator>Yuxuan Xie</dc:creator>
-  <link>https://cug-xyx.github.io/posts/04_Zhihu_bookdown.html</link>
+  <link>https://cug-xyx.github.io/posts/02_Zhihu_bookdown.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2853,13 +36,13 @@ font-style: inherit;">:</span>new_col)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/profile.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图1 案例笔记在网站中的呈现情况</figcaption>
+<figcaption>图1 案例笔记在网站中的呈现情况</figcaption>
 </figure>
 </div>
 <section id="准备工作" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="准备工作"><span class="header-section-number">1.1</span> 准备工作</h2>
 <p>在开始之前，需要确认已经安装好<strong>R</strong><sup>1</sup> 、<strong>Git</strong><sup>2</sup> 以及<strong>Rstudio</strong><sup>3</sup>。 此外，需要安装本文的核心R包<code>bookdown</code>，可以通过在R中运行以下代码进行安装：</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -2877,7 +60,7 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">pak</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
+font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div></div>
 </section>
 <section id="创建笔记" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="创建笔记"><span class="header-section-number">1.2</span> 创建笔记</h2>
@@ -2889,7 +72,7 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/files.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图6 生成的文件</figcaption>
+<figcaption>图6 生成的文件</figcaption>
 </figure>
 </div>
 </section>
@@ -2904,7 +87,7 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/preview.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图9 示例笔记预览情况</figcaption>
+<figcaption>图9 示例笔记预览情况</figcaption>
 </figure>
 </div>
 <p>可以看出，除<code>index.Rmd</code>中的内容出现在第一页外，笔记其它部分按照<strong>笔记文件排序</strong>出现。 掌握基本的操作以后，我们就可以利用markdown性质进行编辑你的笔记了！文章末尾附Rmarkdown教程<sup>4</sup>。</p>
@@ -2918,7 +101,7 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/new_repo.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图10 新建仓库</figcaption>
+<figcaption>图10 新建仓库</figcaption>
 </figure>
 </div>
 </section>
@@ -2938,14 +121,14 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/settings.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图11 修改分支</figcaption>
+<figcaption>图11 修改分支</figcaption>
 </figure>
 </div>
 <p>然后回到仓库<strong>code</strong>页面，点击右侧About右方的<strong>设置按钮</strong>，链接网页：</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://cug-xyx.github.io/image/website.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">图12 链接网页</figcaption>
+<figcaption>图12 链接网页</figcaption>
 </figure>
 </div>
 <p>当保存这些更改后，等待一段时间，<strong>进入About中显示的网页</strong>，就可以看到我们的笔记了。</p>
@@ -2971,15 +154,16 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 </section></div> ]]></description>
   <category>Bookdown</category>
   <category>R</category>
-  <guid>https://cug-xyx.github.io/posts/04_Zhihu_bookdown.html</guid>
+  <guid>https://cug-xyx.github.io/posts/02_Zhihu_bookdown.html</guid>
   <pubDate>Sat, 17 Jun 2023 16:00:00 GMT</pubDate>
   <media:content url="https://cug-xyx.github.io/image/bookdown_logo.png" medium="image" type="image/png" height="166" width="144"/>
 </item>
 <item>
   <title>Numerical Climate Simulation Notes</title>
   <dc:creator>Yuxuan Xie</dc:creator>
-  <link>https://cug-xyx.github.io/posts/03_Notes_CESM.html</link>
+  <link>https://cug-xyx.github.io/posts/01_Notes_CESM.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2990,8 +174,8 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div>
 <ul>
 <li>首先创建一个新的case：</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">cd <span class="op" style="color: #5E5E5E;
+<div id="07414d60" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~/</span>cesm1_2_2<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3016,14 +200,14 @@ font-style: inherit;">-</span>res f19_g16 <span class="op" style="color: #5E5E5E
 background-color: null;
 font-style: inherit;">-</span>compset F1850 <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span>mach sparkle </span></code></pre></div>
+font-style: inherit;">-</span>mach sparkle </span></code></pre></div></div>
 </div>
 <p>修改<code>env_mach_pes.xml</code>文件中<strong>180</strong>改为<strong>140</strong>（因为28核*5节点=140）</p>
 <ul>
 <li>使用<strong>预先设定的文件</strong></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">cp <span class="op" style="color: #5E5E5E;
+<div id="401ddda0" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">cp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3031,13 +215,13 @@ font-style: inherit;">~/</span>xiangyu<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>env_mach_pes.xml .<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span></span></code></pre></div>
+font-style: inherit;">/</span></span></code></pre></div></div>
 </div>
 <ul>
 <li>拷贝指定<code>Macros</code>文件：</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cp <span class="op" style="color: #5E5E5E;
+<div id="6278ec85" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3045,14 +229,14 @@ font-style: inherit;">~/</span>xiangyu<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>Macros .<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span></span></code></pre></div>
+font-style: inherit;">/</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="setup" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.2</span> setup</h2>
 <p>setup：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
+<div id="3dc8c264" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 第一次进行setup</span></span>
 <span id="cb4-2">.<span class="op" style="color: #5E5E5E;
@@ -3066,7 +250,7 @@ font-style: inherit;"># 清除setup的方法</span></span>
 background-color: null;
 font-style: inherit;">/</span>cesm_setup <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span>clean</span></code></pre></div>
+font-style: inherit;">-</span>clean</span></code></pre></div></div>
 </div>
 </section>
 <section id="修改参数" class="level2" data-number="1.3">
@@ -3075,22 +259,22 @@ font-style: inherit;">-</span>clean</span></code></pre></div>
 <p>以修改CO2浓度参数为例</p>
 </blockquote>
 <p>进入<code>user_nl_cam</code>文件，添加参数，如：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">co2vmr <span class="op" style="color: #5E5E5E;
+<div id="81cbb174" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">co2vmr <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">280.0e-6</span></span></code></pre></div>
+font-style: inherit;">280.0e-6</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="build" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="build"><span class="header-section-number">1.4</span> build</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">.<span class="op" style="color: #5E5E5E;
+<div id="cd6b0c75" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">.<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&gt;</span>.build</span></code></pre></div>
+font-style: inherit;">&gt;</span>.build</span></code></pre></div></div>
 </div>
 </section>
 <section id="run" class="level2" data-number="1.5">
@@ -3106,12 +290,12 @@ font-style: inherit;">&gt;</span>.build</span></code></pre></div>
 <section id="提交任务" class="level4" data-number="1.5.0.2">
 <h4 data-number="1.5.0.2" class="anchored" data-anchor-id="提交任务"><span class="header-section-number">1.5.0.2</span> 提交任务</h4>
 <p>使用<code>qsub</code>提交任务</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">qsub .<span class="op" style="color: #5E5E5E;
+<div id="b8dddd1d" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">qsub .<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&gt;</span>.run</span></code></pre></div>
+font-style: inherit;">&gt;</span>.run</span></code></pre></div></div>
 </div>
 <blockquote class="blockquote">
 <p>可以使用<code>qstat</code>查看当前任务提交统计情况</p>
@@ -3119,19 +303,19 @@ font-style: inherit;">&gt;</span>.run</span></code></pre></div>
 </section>
 <section id="停止任务" class="level4" data-number="1.5.0.3">
 <h4 data-number="1.5.0.3" class="anchored" data-anchor-id="停止任务"><span class="header-section-number">1.5.0.3</span> 停止任务</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">qdel</span></code></pre></div>
+<div id="3267fd36" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">qdel</span></code></pre></div></div>
 </div>
 </section>
 <section id="查看当前任务" class="level4" data-number="1.5.0.4">
 <h4 data-number="1.5.0.4" class="anchored" data-anchor-id="查看当前任务"><span class="header-section-number">1.5.0.4</span> 查看当前任务</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">qstat <span class="co" style="color: #5E5E5E;
+<div id="3cb952f7" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">qstat <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 查看任务排队情况</span></span>
 <span id="cb9-2">showq <span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;"># 啥看计算效率问题</span></span></code></pre></div>
+font-style: inherit;"># 啥看计算效率问题</span></span></code></pre></div></div>
 </div>
 </section>
 </section>
@@ -3168,18 +352,18 @@ font-style: inherit;"># 啥看计算效率问题</span></span></code></pre></div
 </blockquote>
 <section id="查看nc文件输出变量" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="查看nc文件输出变量"><span class="header-section-number">3.1</span> 查看nc文件输出变量</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">ncdump <span class="op" style="color: #5E5E5E;
+<div id="6a89105b" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">ncdump <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">-</span>h output.nc</span></code></pre></div>
+font-style: inherit;">-</span>h output.nc</span></code></pre></div></div>
 </div>
 </section>
 </section>
 <section id="clone复制案例" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Clone复制案例</h1>
 <p>当想在一种案例情况下的一个时期复制当前状态，并叠加一个新的变化</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">cd <span class="op" style="color: #5E5E5E;
+<div id="1d911541" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~/</span>cesm_1_2_2<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3202,13 +386,13 @@ font-style: inherit;">-</span>clone <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>refer_case<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">&gt;</span></span></code></pre></div>
+font-style: inherit;">&gt;</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="修改边界场文件文件" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> 修改边界场文件文件</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+<div id="bcefe019" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 进入case的配置文件夹</span></span>
 <span id="cb12-2">cd BuildConfig<span class="op" style="color: #5E5E5E;
@@ -3218,15 +402,15 @@ font-style: inherit;">/</span></span>
 <span id="cb12-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 浏览海温输入数据列表</span></span>
-<span id="cb12-5">vi docn.input_data_list</span></code></pre></div>
+<span id="cb12-5">vi docn.input_data_list</span></code></pre></div></div>
 </div>
 <p>内部有<strong>海温</strong>相关文件的绝对路径.</p>
 <ul>
 <li>对边界文件作出修改后，进入<code>BuildConfig</code>文件夹中修改数据绝对路径❌</li>
 <li>在<code>user_nl_ocn</code>或<code>env_run.xml</code>中更改输入文件</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+<div id="875f95fc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># new path</span></span>
 <span id="cb13-2"><span class="op" style="color: #5E5E5E;
@@ -3243,7 +427,7 @@ font-style: inherit;">/</span>data<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>ocn_data<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span>new_sst.nc</span></code></pre></div>
+font-style: inherit;">/</span>new_sst.nc</span></code></pre></div></div>
 </div>
 </section>
 <section id="地球轨道参数" class="level1" data-number="6">
@@ -3259,8 +443,8 @@ font-style: inherit;">/</span>new_sst.nc</span></code></pre></div>
 <section id="cesm中的地球轨道参数" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="cesm中的地球轨道参数"><span class="header-section-number">6.2</span> CESM中的地球轨道参数</h2>
 <p>在每个case中的<code>output</code>文件中可以找到（输入<strong>coupler</strong>）：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">cd <span class="op" style="color: #5E5E5E;
+<div id="c6cb9880" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>work<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3285,11 +469,11 @@ font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">192856.</span><span class="er" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">gz</span></span></code></pre></div>
+font-style: inherit;">gz</span></span></code></pre></div></div>
 </div>
 <p>在100行左右，可以看到<strong>轨道参数</strong>：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">(seq_infodata_print) orb_mode                 <span class="op" style="color: #5E5E5E;
+<div id="073a07cc" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">(seq_infodata_print) orb_mode                 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> fixed_year</span>
 <span id="cb15-2">(seq_infodata_print) orb_iyear                <span class="op" style="color: #5E5E5E;
@@ -3306,14 +490,14 @@ font-style: inherit;">0.16707719799281E-01</span></span>
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">23.441068451147</span></span></code></pre></div>
+font-style: inherit;">23.441068451147</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="更改case中的轨道参数" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="更改case中的轨道参数"><span class="header-section-number">6.3</span> 更改case中的轨道参数</h2>
 <p>新建case后，在<code>user_nl_cpl</code>中对参数进行修改：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">orb_iyear       <span class="op" style="color: #5E5E5E;
+<div id="d1c62720" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">orb_iyear       <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3327,11 +511,11 @@ font-style: inherit;">1950</span></span>
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'fixed_year'</span></span></code></pre></div>
+font-style: inherit;">'fixed_year'</span></span></code></pre></div></div>
 </div>
 <p>或者，直接给定<strong>轨道情景</strong>：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">orb_eccen <span class="op" style="color: #5E5E5E;
+<div id="de778738" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">orb_eccen <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -3350,7 +534,7 @@ font-style: inherit;">102.04</span></span>
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'fixed_parameters'</span></span></code></pre></div>
+font-style: inherit;">'fixed_parameters'</span></span></code></pre></div></div>
 </div>
 </section>
 </section>
@@ -3358,8 +542,8 @@ font-style: inherit;">'fixed_parameters'</span></span></code></pre></div>
 <h1 data-number="7"><span class="header-section-number">7</span> 地形文件</h1>
 <p>进入case文件夹下的<strong>CaseDocs/</strong>文件夹，在<strong>atm_in</strong>文件中可以看到</p>
 <p>在user_nl_cam中替换地形文件：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="op" style="color: #5E5E5E;
+<div id="957e3e69" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>public<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3373,7 +557,7 @@ font-style: inherit;">/</span>data<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>lnd_data<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">/</span>new_lnd.nc</span></code></pre></div>
+font-style: inherit;">/</span>new_lnd.nc</span></code></pre></div></div>
 </div>
 </section>
 <section id="植被文件" class="level1" data-number="8">
@@ -3384,8 +568,8 @@ font-style: inherit;">/</span>new_lnd.nc</span></code></pre></div>
 <li>植被组成分布</li>
 </ul>
 <p>进入<strong>CaseDocs</strong>文件夹下的<strong>lnd_in</strong>文件</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">fsurdat <span class="op" style="color: #5E5E5E;
+<div id="7778c951" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">fsurdat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3409,10 +593,10 @@ font-style: inherit;">x2</span><span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">.5</span><span class="er" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">_simyr1850_c091108</span>.nc</span></code></pre></div>
+font-style: inherit;">_simyr1850_c091108</span>.nc</span></code></pre></div></div>
 </div>
 <p>16种植被类型如下：</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Index</th>
@@ -3512,8 +696,8 @@ font-style: inherit;">_simyr1850_c091108</span>.nc</span></code></pre></div>
 <p>每个格点所有植被类型比率加和为常数，当更改一个植被类型时，应相应得将其它类型的比率进行调整。</p>
 </blockquote>
 <p>在完成文件修改后，进入case中的<code>user_nl_clm</code>，添加文件：</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">fsurdat <span class="op" style="color: #5E5E5E;
+<div id="bf4179df" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">fsurdat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -3524,15 +708,15 @@ font-style: inherit;"># CaseDOcs文件夹下的lnd_in文件中可以找到该路
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">''</span></span></code></pre></div>
+font-style: inherit;">''</span></span></code></pre></div></div>
 </div>
 </section>
 <section id="其它设置" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> 其它设置</h1>
 <section id="设置restart文件" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="设置restart文件"><span class="header-section-number">9.1</span> 设置restart文件</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">vi env_run.xml</span></code></pre></div>
+<div id="8d83f1a3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">vi env_run.xml</span></code></pre></div></div>
 </div>
 <p>大约70行左右</p>
 <ul>
@@ -3548,16 +732,16 @@ font-style: inherit;">''</span></span></code></pre></div>
 <h1 data-number="10"><span class="header-section-number">10</span> 其它工具</h1>
 <ul>
 <li><p>合并文件</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">cdo mergetime</span></code></pre></div>
+<div id="77b38765" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">cdo mergetime</span></code></pre></div></div>
 </div></li>
 <li><p>计算气候平均（<strong>气候态</strong>）</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">cdo ymonmean</span></code></pre></div>
+<div id="c589a68f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">cdo ymonmean</span></code></pre></div></div>
 </div></li>
 <li><p>nc文件做差（<strong>气候效应</strong>）</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">ncdiff fileA fileB</span></code></pre></div>
+<div id="0401c71f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">ncdiff fileA fileB</span></code></pre></div></div>
 </div></li>
 </ul>
 </section>
@@ -3580,104 +764,8 @@ font-style: inherit;">''</span></span></code></pre></div>
 
 <a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
   <category>CESM</category>
-  <guid>https://cug-xyx.github.io/posts/03_Notes_CESM.html</guid>
+  <guid>https://cug-xyx.github.io/posts/01_Notes_CESM.html</guid>
   <pubDate>Sat, 17 Jun 2023 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Python test in Quarto</title>
-  <link>https://cug-xyx.github.io/posts/02_Python_test.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>这是另一个posts中内容的测试</p>
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> plt</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> np</span>
-<span id="cb1-3"></span>
-<span id="cb1-4">plt.scatter(x<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>), y<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span>))</span>
-<span id="cb1-5">plt.show()</span></code></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="https://cug-xyx.github.io/posts/02_Python_test_files/figure-html/cell-2-output-1.png" width="558" height="404"></p>
-</div>
-</div>
-
-
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
-  <category>Python</category>
-  <guid>https://cug-xyx.github.io/posts/02_Python_test.html</guid>
-  <pubDate>Wed, 14 Jun 2023 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>R code test in Quarto</title>
-  <dc:creator>Yuxuan Xie</dc:creator>
-  <link>https://cug-xyx.github.io/posts/01_R_test.html</link>
-  <description><![CDATA[ 
-
-
-
-<p>这是第三个posts中内容的测试</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(leaflet)</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: 程辑包'leaflet'是用R版本4.1.3 来建造的</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">leaflet</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">addTiles</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">setView</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">93.65</span>, <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">42.0285</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">zoom =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">17</span>)</span></code></pre></div>
-<div class="cell-output-display">
-<div id="htmlwidget-c4babc89628bbdd1e44b" style="width:100%;height:464px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c4babc89628bbdd1e44b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-
-
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a> ]]></description>
-  <category>R</category>
-  <guid>https://cug-xyx.github.io/posts/01_R_test.html</guid>
-  <pubDate>Tue, 13 Jun 2023 16:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
