@@ -174,7 +174,7 @@ font-style: inherit;">'rstudio/bookdown'</span>)</span></code></pre></div></div>
 <ul>
 <li>首先创建一个新的case：</li>
 </ul>
-<div id="07414d60" class="cell">
+<div id="9bd65142" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~/</span>cesm1_2_2<span class="op" style="color: #5E5E5E;
@@ -206,7 +206,7 @@ font-style: inherit;">-</span>mach sparkle </span></code></pre></div></div>
 <ul>
 <li>使用<strong>预先设定的文件</strong></li>
 </ul>
-<div id="401ddda0" class="cell">
+<div id="7fc88c73" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">cp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
@@ -220,7 +220,7 @@ font-style: inherit;">/</span></span></code></pre></div></div>
 <ul>
 <li>拷贝指定<code>Macros</code>文件：</li>
 </ul>
-<div id="6278ec85" class="cell">
+<div id="5b40e837" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">cp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>r <span class="op" style="color: #5E5E5E;
@@ -235,7 +235,7 @@ font-style: inherit;">/</span></span></code></pre></div></div>
 <section id="setup" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">1.2</span> setup</h2>
 <p>setup：</p>
-<div id="3dc8c264" class="cell">
+<div id="28adf3ca" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 第一次进行setup</span></span>
@@ -259,7 +259,7 @@ font-style: inherit;">-</span>clean</span></code></pre></div></div>
 <p>以修改CO2浓度参数为例</p>
 </blockquote>
 <p>进入<code>user_nl_cam</code>文件，添加参数，如：</p>
-<div id="81cbb174" class="cell">
+<div id="d41f877c" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">co2vmr <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
@@ -269,7 +269,7 @@ font-style: inherit;">280.0e-6</span></span></code></pre></div></div>
 </section>
 <section id="build" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="build"><span class="header-section-number">1.4</span> build</h2>
-<div id="cd6b0c75" class="cell">
+<div id="e1bfedb8" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">.<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
@@ -290,7 +290,7 @@ font-style: inherit;">&gt;</span>.build</span></code></pre></div></div>
 <section id="提交任务" class="level4" data-number="1.5.0.2">
 <h4 data-number="1.5.0.2" class="anchored" data-anchor-id="提交任务"><span class="header-section-number">1.5.0.2</span> 提交任务</h4>
 <p>使用<code>qsub</code>提交任务</p>
-<div id="b8dddd1d" class="cell">
+<div id="fbaf2e11" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">qsub .<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/&lt;</span>case_name<span class="op" style="color: #5E5E5E;
@@ -303,13 +303,13 @@ font-style: inherit;">&gt;</span>.run</span></code></pre></div></div>
 </section>
 <section id="停止任务" class="level4" data-number="1.5.0.3">
 <h4 data-number="1.5.0.3" class="anchored" data-anchor-id="停止任务"><span class="header-section-number">1.5.0.3</span> 停止任务</h4>
-<div id="3267fd36" class="cell">
+<div id="e347e029" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">qdel</span></code></pre></div></div>
 </div>
 </section>
 <section id="查看当前任务" class="level4" data-number="1.5.0.4">
 <h4 data-number="1.5.0.4" class="anchored" data-anchor-id="查看当前任务"><span class="header-section-number">1.5.0.4</span> 查看当前任务</h4>
-<div id="3cb952f7" class="cell">
+<div id="3373d207" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">qstat <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 查看任务排队情况</span></span>
@@ -352,7 +352,7 @@ font-style: inherit;"># 啥看计算效率问题</span></span></code></pre></div
 </blockquote>
 <section id="查看nc文件输出变量" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="查看nc文件输出变量"><span class="header-section-number">3.1</span> 查看nc文件输出变量</h2>
-<div id="6a89105b" class="cell">
+<div id="a10d5ed7" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">ncdump <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>h output.nc</span></code></pre></div></div>
@@ -362,7 +362,7 @@ font-style: inherit;">-</span>h output.nc</span></code></pre></div></div>
 <section id="clone复制案例" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Clone复制案例</h1>
 <p>当想在一种案例情况下的一个时期复制当前状态，并叠加一个新的变化</p>
-<div id="1d911541" class="cell">
+<div id="c047ac7f" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">~/</span>cesm_1_2_2<span class="op" style="color: #5E5E5E;
@@ -391,7 +391,7 @@ font-style: inherit;">&gt;</span></span></code></pre></div></div>
 </section>
 <section id="修改边界场文件文件" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> 修改边界场文件文件</h1>
-<div id="bcefe019" class="cell">
+<div id="e0c6a809" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># 进入case的配置文件夹</span></span>
@@ -409,7 +409,7 @@ font-style: inherit;"># 浏览海温输入数据列表</span></span>
 <li>对边界文件作出修改后，进入<code>BuildConfig</code>文件夹中修改数据绝对路径❌</li>
 <li>在<code>user_nl_ocn</code>或<code>env_run.xml</code>中更改输入文件</li>
 </ul>
-<div id="875f95fc" class="cell">
+<div id="eb716641" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># new path</span></span>
@@ -443,7 +443,7 @@ font-style: inherit;">/</span>new_sst.nc</span></code></pre></div></div>
 <section id="cesm中的地球轨道参数" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="cesm中的地球轨道参数"><span class="header-section-number">6.2</span> CESM中的地球轨道参数</h2>
 <p>在每个case中的<code>output</code>文件中可以找到（输入<strong>coupler</strong>）：</p>
-<div id="c6cb9880" class="cell">
+<div id="e7ff0e80" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">cd <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>work<span class="op" style="color: #5E5E5E;
@@ -472,7 +472,7 @@ background-color: null;
 font-style: inherit;">gz</span></span></code></pre></div></div>
 </div>
 <p>在100行左右，可以看到<strong>轨道参数</strong>：</p>
-<div id="073a07cc" class="cell">
+<div id="e8468ed0" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">(seq_infodata_print) orb_mode                 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> fixed_year</span>
@@ -496,7 +496,7 @@ font-style: inherit;">23.441068451147</span></span></code></pre></div></div>
 <section id="更改case中的轨道参数" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="更改case中的轨道参数"><span class="header-section-number">6.3</span> 更改case中的轨道参数</h2>
 <p>新建case后，在<code>user_nl_cpl</code>中对参数进行修改：</p>
-<div id="d1c62720" class="cell">
+<div id="2396bee8" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">orb_iyear       <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -514,7 +514,7 @@ background-color: null;
 font-style: inherit;">'fixed_year'</span></span></code></pre></div></div>
 </div>
 <p>或者，直接给定<strong>轨道情景</strong>：</p>
-<div id="de778738" class="cell">
+<div id="a872e650" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">orb_eccen <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
@@ -542,7 +542,7 @@ font-style: inherit;">'fixed_parameters'</span></span></code></pre></div></div>
 <h1 data-number="7"><span class="header-section-number">7</span> 地形文件</h1>
 <p>进入case文件夹下的<strong>CaseDocs/</strong>文件夹，在<strong>atm_in</strong>文件中可以看到</p>
 <p>在user_nl_cam中替换地形文件：</p>
-<div id="957e3e69" class="cell">
+<div id="5977cc78" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>public<span class="op" style="color: #5E5E5E;
@@ -568,7 +568,7 @@ font-style: inherit;">/</span>new_lnd.nc</span></code></pre></div></div>
 <li>植被组成分布</li>
 </ul>
 <p>进入<strong>CaseDocs</strong>文件夹下的<strong>lnd_in</strong>文件</p>
-<div id="7778c951" class="cell">
+<div id="26935453" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">fsurdat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="op" style="color: #5E5E5E;
@@ -696,7 +696,7 @@ font-style: inherit;">_simyr1850_c091108</span>.nc</span></code></pre></div></di
 <p>每个格点所有植被类型比率加和为常数，当更改一个植被类型时，应相应得将其它类型的比率进行调整。</p>
 </blockquote>
 <p>在完成文件修改后，进入case中的<code>user_nl_clm</code>，添加文件：</p>
-<div id="bf4179df" class="cell">
+<div id="71d5732d" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">fsurdat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
@@ -715,7 +715,7 @@ font-style: inherit;">''</span></span></code></pre></div></div>
 <h1 data-number="9"><span class="header-section-number">9</span> 其它设置</h1>
 <section id="设置restart文件" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="设置restart文件"><span class="header-section-number">9.1</span> 设置restart文件</h2>
-<div id="8d83f1a3" class="cell">
+<div id="3b73361f" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">vi env_run.xml</span></code></pre></div></div>
 </div>
 <p>大约70行左右</p>
@@ -732,15 +732,15 @@ font-style: inherit;">''</span></span></code></pre></div></div>
 <h1 data-number="10"><span class="header-section-number">10</span> 其它工具</h1>
 <ul>
 <li><p>合并文件</p>
-<div id="77b38765" class="cell">
+<div id="e8308337" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">cdo mergetime</span></code></pre></div></div>
 </div></li>
 <li><p>计算气候平均（<strong>气候态</strong>）</p>
-<div id="c589a68f" class="cell">
+<div id="094efc28" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">cdo ymonmean</span></code></pre></div></div>
 </div></li>
 <li><p>nc文件做差（<strong>气候效应</strong>）</p>
-<div id="0401c71f" class="cell">
+<div id="67aad61a" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">ncdiff fileA fileB</span></code></pre></div></div>
 </div></li>
 </ul>
