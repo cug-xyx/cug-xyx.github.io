@@ -38,6 +38,8 @@ website:
             href: "https://github.com/cug-xyx/hydroET"
           - text: "ggRunoff"
             href: "https://cug-xyx.github.io/ggRunoff/"
+          - text: "Junimo.jl"
+            href: "https://cug-xyx.github.io/Junimo.jl/dev/"
           - text: "terraExtra"
             href: "https://github.com/cug-xyx/terraExtra"
       - text: "Publications"
